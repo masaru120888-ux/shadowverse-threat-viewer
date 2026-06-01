@@ -257,6 +257,10 @@ input {
   background: rgba(102, 68, 30, 0.5);
 }
 
+.combo-card {
+  grid-template-columns: minmax(92px, 148px) minmax(0, 1fr) minmax(82px, auto);
+}
+
 .threat-art {
   width: 62px;
   height: 100%;
@@ -264,6 +268,26 @@ input {
   object-fit: contain;
   object-position: center;
   border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.combo-art-strip {
+  height: 100%;
+  min-height: 96px;
+  display: flex;
+  gap: 4px;
+  align-items: stretch;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.combo-art {
+  width: 42px;
+  min-width: 42px;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 5px;
   background: rgba(0, 0, 0, 0.25);
 }
 
@@ -319,8 +343,52 @@ input {
   text-transform: uppercase;
 }
 
+.damage-breakdown {
+  display: grid;
+  gap: 1px;
+  color: var(--gold);
+  font-size: 1.08rem;
+  font-weight: 900;
+}
+
+.damage-breakdown small {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
 .damage-line.token {
   color: var(--blue);
+}
+
+.combo-damage-list {
+  margin: 6px 0 8px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+
+.combo-damage-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: baseline;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.combo-damage-list span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.combo-damage-list strong {
+  color: var(--gold);
+  font-size: 0.84rem;
 }
 
 .empty-threat {
@@ -362,9 +430,22 @@ input {
     padding: 10px;
   }
 
+  .combo-card {
+    grid-template-columns: minmax(78px, 112px) minmax(0, 1fr) 88px;
+  }
+
   .threat-art {
     width: 54px;
     min-height: 104px;
+  }
+
+  .combo-art-strip {
+    min-height: 104px;
+  }
+
+  .combo-art {
+    width: 36px;
+    min-width: 36px;
   }
 
   .threat-card strong {
@@ -381,5 +462,18 @@ input {
 
   .damage-line {
     font-size: 0.92rem;
+  }
+
+  .damage-breakdown {
+    font-size: 0.92rem;
+  }
+
+  .damage-breakdown small {
+    font-size: 0.68rem;
+  }
+
+  .combo-damage-list li {
+    grid-template-columns: 1fr;
+    gap: 1px;
   }
 }

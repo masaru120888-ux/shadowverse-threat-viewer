@@ -50,6 +50,7 @@ async function fetchClass(classId, lang) {
   const byId = new Map();
   const mainIds = new Set();
   const relatedById = new Map();
+  const specificById = new Map();
   let offset = 0;
   let count = Infinity;
 
@@ -64,23 +65,46 @@ async function fetchClass(classId, lang) {
 
     for (const [cardId, relation] of Object.entries(data.cards || {})) {
       relatedById.set(String(cardId), (relation.related_card_ids || []).map(String));
+      const specificIds = (relation.specific_effect_card_ids || []).map(String);
+      if (specificIds.length > 0) {
+        relatedById.set(String(cardId), [
+          ...(relatedById.get(String(cardId)) || []),
+          ...specificIds,
+        ]);
+      }
+    }
+
+    for (const [effectId, effect] of Object.entries(data.specific_effect_card_info || {})) {
+      specificById.set(String(effectId), {
+        card_id: Number(effectId),
+        name: "Crest / Specific Effect",
+        skill_text: effect.skill_text || "",
+        card_image_hash: "",
+        cost: effect.cost || 0,
+        atk: 0,
+        life: 0,
+        type: effect.specific_effect_type || 4,
+        is_specific_effect: true,
+      });
     }
 
     for (const [cardId, detail] of Object.entries(data.card_details || {})) {
       if (!detail?.common) continue;
+      detail.common.evo_skill_text = detail.evo?.skill_text || "";
       byId.set(String(cardId), detail.common);
     }
 
     for (const cardId of data.sort_card_id_list) {
       const detail = data.card_details[String(cardId)];
       if (!detail?.common) continue;
+      detail.common.evo_skill_text = detail.evo?.skill_text || "";
       byId.set(String(cardId), detail.common);
     }
 
     offset += data.sort_card_id_list.length || 30;
   }
 
-  return { byId, mainIds, relatedById };
+  return { byId, mainIds, relatedById, specificById };
 }
 
 function firstNumber(pattern, text) {
@@ -110,7 +134,77 @@ function enhanceCost(text) {
   );
 }
 
-function inferThreat(card, enText, jaText) {
+function repeatedSegments(text) {
+  return [...text.matchAll(/Do this (\d+) times:\s*"([^"]+)"/gi)].map((match) => ({
+    count: Number(match[1]),
+    text: match[2],
+  }));
+}
+
+function removeSuperEvolveText(text) {
+  return text
+    .replace(/Super-Evolve:.*$/gi, "")
+    .replace(/【超進化時】.*$/g, "");
+}
+
+function directLeaderDamage(text, includeYourLeader = false) {
+  const leaderPatterns = [
+    /enemy leader[^.。"]*?(\d+) damage/gi,
+    /(\d+) damage to a random enemy(?! follower)/gi,
+    /Deal (\d+) damage to all enemies/gi,
+    /Deal (\d+) damage split between all enemies/gi,
+    /相手のリーダーに(\d+)ダメージ/g,
+    /相手の場のフォロワーか相手のリーダーからランダム\d*枚に(\d+)ダメージ/g,
+    /相手すべてに(\d+)ダメージ/g,
+    /相手すべてに(?:割りふって)?(\d+)ダメージ/g,
+  ];
+  if (includeYourLeader) {
+    leaderPatterns.push(/your leader[^.。"]*?(\d+) damage/gi);
+    leaderPatterns.push(/自分のリーダーに(\d+)ダメージ/g);
+  }
+
+  const fixedDamage = Math.max(0, ...leaderPatterns.map((pattern) => maxNumber(pattern, text)));
+  const crestVariableDamage =
+    /Deal X damage split between all enemies[\s\S]{0,180}X is the number of crests you have/i.test(text) ||
+    /相手すべてにXダメージ[\s\S]{0,180}Xは自分のクレストの数/.test(text)
+      ? 1
+      : 0;
+
+  return Math.max(fixedDamage, crestVariableDamage);
+}
+
+function givesOpponentCrest(text) {
+  return (
+    /give your opponent[^.。]*Crest/i.test(text) ||
+    /opponent[^.。]*Crest/i.test(text) ||
+    /相手[^。]*クレスト/.test(text)
+  );
+}
+
+function crestRequiresEvolve(text) {
+  return (
+    /(?:Evolve|Super-Evolve)[^.。]*Crest/i.test(text) ||
+    /if this follower is (?:super-)?evolved[^.。]*Crest/i.test(text) ||
+    /(?:進化時|超進化時|進化後)[^。]*クレスト/.test(text)
+  );
+}
+
+function attackMultiplier(text) {
+  return Math.max(
+    1,
+    firstNumber(/Can attack (\d+) times per turn/i, text),
+    firstNumber(/1ターンに(\d+)回攻撃できる/, text),
+  );
+}
+
+function givesStormToSummonedCards(text) {
+  return (
+    /Summon [^.。]* and give (?:it|them) [^.。]*Storm/i.test(text) ||
+    /場に出す。それは[^。]*疾走/.test(text)
+  );
+}
+
+function inferThreat(card, enText, jaText, options = {}) {
   const text = `${enText} ${jaText}`;
   const baseCost = Number(card.cost || 0);
   const atk = Number(card.atk || 0);
@@ -118,10 +212,12 @@ function inferThreat(card, enText, jaText) {
   const combo = comboTurn(text);
   const enhance = enhanceCost(text);
   const superEvolve = /Super-Evolve|超進化時/.test(text);
+  const superSkyboundArt = /Super Skybound Art|解放奥義/.test(text);
   const rally = /Rally\s*\((\d+)\)|連携[_\s]*(\d+)/i.test(text);
 
   let unlockTurn = Math.max(1, baseCost, combo);
   if (superEvolve) unlockTurn = Math.max(unlockTurn, 6);
+  if (superSkyboundArt) unlockTurn = Math.max(unlockTurn, 10);
   if (rally) unlockTurn = Math.max(unlockTurn, 5);
 
   let effectiveCost = baseCost;
@@ -129,10 +225,13 @@ function inferThreat(card, enText, jaText) {
     effectiveCost = Math.max(effectiveCost, enhance);
   }
 
-  let burnDamage = Math.max(
-    maxNumber(/enemy leader[^.。]*?(\d+) damage/gi, text),
-    maxNumber(/相手のリーダーに(\d+)ダメージ/g, text),
-  );
+  let burnDamage = directLeaderDamage(text, options.includeYourLeader);
+  for (const segment of repeatedSegments(text)) {
+    burnDamage = Math.max(
+      burnDamage,
+      segment.count * directLeaderDamage(segment.text, options.includeYourLeader),
+    );
+  }
   if (burnDamage > 0 && /instead|ではなく/.test(text)) {
     burnDamage = Math.max(
       burnDamage,
@@ -141,11 +240,19 @@ function inferThreat(card, enText, jaText) {
     );
   }
 
-  const hasStorm = /Storm|疾走/.test(text);
-  let stormDamage = hasStorm && isFollower ? atk : 0;
-  if (hasStorm && /all copies|すべて/.test(text)) {
-    stormDamage = Math.max(stormDamage, atk * 2);
+  const selfPing = Math.max(
+    maxNumber(/whenever this follower takes damage[^.]*?deal (\d+) damage to the enemy leader/gi, text),
+    maxNumber(/これがダメージを受けた.*?相手のリーダーに(\d+)ダメージ/g, text),
+  );
+  if (selfPing > 0) {
+    const selfDamageCount = repeatedSegments(text)
+      .filter((segment) => /all followers|フォロワーすべて/.test(segment.text))
+      .reduce((total, segment) => total + segment.count, 0);
+    burnDamage = Math.max(burnDamage, selfDamageCount * selfPing);
   }
+
+  const hasStorm = /Storm|疾走/.test(text) && !givesStormToSummonedCards(text);
+  const stormDamage = hasStorm && isFollower ? atk * attackMultiplier(text) : 0;
 
   const tokenDamage = Math.max(
     maxNumber(/(\d+) damage to (?:a |an |the |random )?enemy follower/gi, text),
@@ -159,22 +266,68 @@ function inferThreat(card, enText, jaText) {
     leaderDamage,
     stormDamage,
     burnDamage,
+    hasStorm,
     effectiveCost,
     unlockTurn,
     condition: [
       combo ? `Combo ${combo}` : "",
       enhance ? `Enhance ${enhance}` : "",
       superEvolve ? "Super-evolve" : "",
+      superSkyboundArt ? "Super Skybound Art" : "",
       rally ? "Rally" : "",
       hasStorm ? "Storm" : "",
     ].filter(Boolean).join(" / ") || "Base",
   };
 }
 
+function summonedStormThreat(enText, jaText, enRelated = [], jaRelated = []) {
+  const text = `${enText} ${jaText}`;
+  if (!givesStormToSummonedCards(text)) {
+    return { leaderDamage: 0, stormDamage: 0, displayCard: null, condition: "" };
+  }
+
+  for (const [index, related] of enRelated.entries()) {
+    const relatedJa = jaRelated[index] || related;
+    const enName = stripMarkup(related.name).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const jaName = stripMarkup(relatedJa.name).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const count = Math.max(
+      firstNumber(new RegExp(`Summon (\\d+) copies of ${enName}[^.。]*give them[^.。]*Storm`, "i"), text),
+      firstNumber(new RegExp(`『${jaName}』(\\d+)枚[^。]*場に出す。それは[^。]*疾走`), text),
+    );
+    if (count > 0 && Number(related.type) === 1) {
+      const damage = count * Number(related.atk || 0);
+      return {
+        leaderDamage: damage,
+        stormDamage: damage,
+        displayCard: {
+          ja: {
+            name: stripMarkup(relatedJa.name),
+            imageHash: relatedJa.card_image_hash,
+          },
+          en: {
+            name: stripMarkup(related.name),
+            imageHash: related.card_image_hash,
+          },
+        },
+        condition: `Summons ${count} Storm ${stripMarkup(related.name)}`,
+      };
+    }
+  }
+
+  return { leaderDamage: 0, stormDamage: 0, displayCard: null, condition: "" };
+}
+
 function buildCard(classKey, id, ja, en, jaRelated = [], enRelated = []) {
   const jaText = stripMarkup(ja.skill_text);
   const enText = stripMarkup(en.skill_text);
-  const inferred = inferThreat(en, enText, jaText);
+  const jaEvoText = stripMarkup(ja.evo_skill_text);
+  const enEvoText = stripMarkup(en.evo_skill_text);
+  const inferred = inferThreat(en, removeSuperEvolveText(enText), removeSuperEvolveText(jaText));
+  const evoInferred = inferThreat(en, enEvoText, jaEvoText);
+  const parentText = `${enText} ${jaText}`;
+  const superEvolveGrantsStorm = /Super-Evolve[\s\S]*Storm|超進化時[\s\S]*疾走/.test(`${enText} ${jaText}`);
+  const evolveEffectLeaderDamage =
+    evoInferred.leaderDamage + (superEvolveGrantsStorm && evoInferred.hasStorm ? 3 : 0);
   const relatedThreats = enRelated.map((related, index) => {
     const relatedJa = jaRelated[index] || related;
     const relatedJaText = stripMarkup(relatedJa.skill_text);
@@ -189,25 +342,46 @@ function buildCard(classKey, id, ja, en, jaRelated = [], enRelated = []) {
         imageHash: related.card_image_hash,
       },
       name: stripMarkup(related.name),
-      ...inferThreat(related, relatedEnText, relatedJaText),
+      ...inferThreat(related, relatedEnText, relatedJaText, {
+        includeYourLeader: Boolean(related.is_specific_effect && givesOpponentCrest(parentText)),
+      }),
     };
   });
   const bestRelatedLeader = relatedThreats.reduce(
     (best, related) => (related.leaderDamage > best.leaderDamage ? related : best),
     { leaderDamage: 0, stormDamage: 0, burnDamage: 0, tokenDamage: 0, condition: "" },
   );
-  const leaderDamage = Math.max(inferred.leaderDamage, bestRelatedLeader.leaderDamage);
+  const summonedStorm = summonedStormThreat(enText, jaText, enRelated, jaRelated);
+  const leaderDamage = Math.max(
+    inferred.leaderDamage,
+    bestRelatedLeader.leaderDamage,
+    summonedStorm.leaderDamage,
+  );
+  const relatedRequiresEvolve =
+    bestRelatedLeader.leaderDamage > inferred.leaderDamage &&
+    crestRequiresEvolve(parentText);
+  const directRequiresEvolve =
+    inferred.leaderDamage === 0 &&
+    evoInferred.leaderDamage > inferred.leaderDamage &&
+    /Evolve|進化時|Super-Evolve|超進化時/.test(`${enEvoText} ${jaEvoText} ${enText} ${jaText}`);
   const relatedCondition =
     bestRelatedLeader.leaderDamage > inferred.leaderDamage
-      ? `Creates ${bestRelatedLeader.name}`
+      ? `${relatedRequiresEvolve ? "Evolve / " : ""}Creates ${bestRelatedLeader.name}`
+      : "";
+  const summonedStormCondition =
+    summonedStorm.leaderDamage > Math.max(inferred.leaderDamage, bestRelatedLeader.leaderDamage)
+      ? summonedStorm.condition
       : "";
   const displayCard =
-    bestRelatedLeader.leaderDamage > inferred.leaderDamage
-      ? {
+    summonedStorm.leaderDamage > Math.max(inferred.leaderDamage, bestRelatedLeader.leaderDamage)
+      ? summonedStorm.displayCard
+      : bestRelatedLeader.leaderDamage > inferred.leaderDamage
+        ? {
           ja: bestRelatedLeader.ja,
           en: bestRelatedLeader.en,
         }
-      : null;
+        : null;
+  const stormDamage = Math.max(inferred.stormDamage, bestRelatedLeader.stormDamage, summonedStorm.stormDamage);
 
   return {
     id,
@@ -216,11 +390,14 @@ function buildCard(classKey, id, ja, en, jaRelated = [], enRelated = []) {
     isRotation: Boolean(en.is_include_rotation || ja.is_include_rotation),
     effectiveCost: inferred.effectiveCost,
     unlockTurn: inferred.unlockTurn,
+    requiresEvolve: relatedRequiresEvolve || directRequiresEvolve,
+    evolveLeaderBonus: stormDamage > 0 ? 2 : 0,
+    evolveEffectLeaderDamage,
     tokenDamage: Math.max(inferred.tokenDamage, bestRelatedLeader.tokenDamage),
     leaderDamage,
-    stormDamage: Math.max(inferred.stormDamage, bestRelatedLeader.stormDamage),
+    stormDamage,
     burnDamage: Math.max(inferred.burnDamage, bestRelatedLeader.burnDamage),
-    condition: [inferred.condition, relatedCondition].filter(Boolean).join(" / "),
+    condition: [inferred.condition, relatedCondition, summonedStormCondition].filter(Boolean).join(" / "),
     displayCard,
     ja: {
       name: stripMarkup(ja.name),
@@ -249,8 +426,12 @@ for (const classId of CLASS_IDS) {
     if (!en) continue;
     const relatedIds = enCards.relatedById.get(id) || jaCards.relatedById.get(id) || [];
     const filteredRelatedIds = relatedIds.filter((relatedId) => relatedId !== id);
-    const jaRelated = filteredRelatedIds.map((relatedId) => jaCards.byId.get(relatedId)).filter(Boolean);
-    const enRelated = filteredRelatedIds.map((relatedId) => enCards.byId.get(relatedId)).filter(Boolean);
+    const jaRelated = filteredRelatedIds
+      .map((relatedId) => jaCards.byId.get(relatedId) || jaCards.specificById.get(relatedId))
+      .filter(Boolean);
+    const enRelated = filteredRelatedIds
+      .map((relatedId) => enCards.byId.get(relatedId) || enCards.specificById.get(relatedId))
+      .filter(Boolean);
     allCards.push(buildCard(classKey, id, ja, en, jaRelated, enRelated));
   }
 }

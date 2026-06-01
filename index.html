@@ -55,6 +55,14 @@
           <div class="class-buttons" id="format-buttons"></div>
         </section>
 
+        <section class="class-control" aria-labelledby="damage-mode-title">
+          <div>
+            <h2 id="damage-mode-title" data-i18n="damageModeControl">ダメージ表示</h2>
+            <p data-i18n="damageModeHelp">単体カードまたはPP内の複数カード最大打点を表示します。</p>
+          </div>
+          <div class="class-buttons" id="damage-mode-buttons"></div>
+        </section>
+
         <section class="turn-control" aria-labelledby="turn-control-title">
           <div>
             <h2 id="turn-control-title" data-i18n="turnControl">経過ターンを調整</h2>
@@ -74,6 +82,17 @@
           <div class="turn-input-wrap">
             <input id="health-input" type="range" min="1" max="20" value="20" />
             <output id="health-output" for="health-input">20</output>
+          </div>
+        </section>
+
+        <section class="turn-control" aria-labelledby="evolve-control-title">
+          <div>
+            <h2 id="evolve-control-title" data-i18n="evolveControl">相手の進化権</h2>
+            <p data-i18n="evolveHelp">進化が必要なカードと疾走フォロワーの進化後打点に使います。</p>
+          </div>
+          <div class="turn-input-wrap">
+            <input id="evolve-input" type="range" min="0" max="3" value="2" />
+            <output id="evolve-output" for="evolve-input">2</output>
           </div>
         </section>
 
