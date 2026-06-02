@@ -23,19 +23,19 @@
         <header class="match-header">
           <div>
             <span class="label" data-i18n="turnsPlayed">経過ターン</span>
-            <strong id="turn-number">4</strong>
+            <strong id="turn-number"></strong>
           </div>
           <div>
             <span class="label" data-i18n="enemyClass">相手クラス</span>
-            <strong id="enemy-class">エルフ</strong>
+            <strong id="enemy-class"></strong>
           </div>
           <div>
             <span class="label" data-i18n="enemyMaxPp">相手の最大PP</span>
-            <strong id="pp-display">4</strong>
+            <strong id="pp-display"></strong>
           </div>
           <div>
             <span class="label" data-i18n="visibleThreats">表示中の脅威</span>
-            <strong id="visible-threat-count">0</strong>
+            <strong id="visible-threat-count"></strong>
           </div>
         </header>
 
@@ -69,8 +69,8 @@
             <p data-i18n="turnHelp">このターン数までに相手が到達したPPとコンボ条件で判定します。</p>
           </div>
           <div class="turn-input-wrap">
-            <input id="turn-input" type="range" min="1" max="10" value="4" />
-            <output id="turn-output" for="turn-input">4</output>
+            <input id="turn-input" type="range" min="1" max="10" value="1" />
+            <output id="turn-output" for="turn-input">1</output>
           </div>
         </section>
 
@@ -85,40 +85,29 @@
           </div>
         </section>
 
-        <section class="turn-control" aria-labelledby="evolve-control-title">
-          <div>
-            <h2 id="evolve-control-title" data-i18n="evolveControl">相手の進化権</h2>
-            <p data-i18n="evolveHelp">進化が必要なカードと疾走フォロワーの進化後打点に使います。</p>
-          </div>
-          <div class="turn-input-wrap">
-            <input id="evolve-input" type="range" min="0" max="3" value="2" />
-            <output id="evolve-output" for="evolve-input">2</output>
-          </div>
-        </section>
-
         <section class="lethal-panel" aria-label="combat summary">
           <article>
             <span class="label" data-i18n="stormDamage">相手の疾走/攻撃打点</span>
-            <strong id="storm-damage">0</strong>
+            <strong id="storm-damage"></strong>
           </article>
           <article>
             <span class="label" data-i18n="burnDamage">相手のバーン打点</span>
-            <strong id="burn-damage">0</strong>
+            <strong id="burn-damage"></strong>
           </article>
           <article>
             <span class="label" data-i18n="maxThreat">最大単体打点</span>
-            <strong id="max-threat">0</strong>
+            <strong id="max-threat"></strong>
           </article>
           <article>
             <span class="label" data-i18n="enemyLethal">相手リーサル候補</span>
-            <strong id="enemy-lethal">なし</strong>
+            <strong id="enemy-lethal"></strong>
           </article>
         </section>
 
         <section class="threat-panel" aria-labelledby="enemy-threat-title">
           <div class="zone-title">
             <h2 id="enemy-threat-title" data-i18n="enemyThreatPreview">脅威カード</h2>
-            <span id="enemy-threat-total">0 damage</span>
+            <span id="enemy-threat-total"></span>
           </div>
           <div class="threat-row" id="enemy-threats"></div>
         </section>

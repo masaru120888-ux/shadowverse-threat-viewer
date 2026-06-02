@@ -2,7 +2,7 @@ let lang = "ja";
 let enemyClass = "forest";
 let format = "rotation";
 let damageMode = "single";
-let turnsPlayed = 4;
+let turnsPlayed = 1;
 let currentHealth = 20;
 let evolvePoints = 2;
 
@@ -102,8 +102,6 @@ const fields = {
   turnOutput: document.querySelector("#turn-output"),
   healthInput: document.querySelector("#health-input"),
   healthOutput: document.querySelector("#health-output"),
-  evolveInput: document.querySelector("#evolve-input"),
-  evolveOutput: document.querySelector("#evolve-output"),
   classButtons: document.querySelector("#class-buttons"),
   formatButtons: document.querySelector("#format-buttons"),
   damageModeButtons: document.querySelector("#damage-mode-buttons"),
@@ -133,6 +131,7 @@ function hasLeaderDamage(card) {
 }
 
 function baseThreats() {
+  if (turnsPlayed == null) return [];
   const enemyMaxPp = Math.min(10, turnsPlayed);
   return cardData.cards
     .filter((card) => card.classKey === enemyClass || card.classKey === "neutral")
@@ -219,6 +218,7 @@ function threatVariants(card) {
 }
 
 function comboThreats(cards) {
+  if (turnsPlayed == null) return [];
   const maxPp = Math.min(10, turnsPlayed);
   const maxEvolve = Math.max(0, evolvePoints);
   const table = Array.from({ length: maxPp + 1 }, () =>
@@ -395,7 +395,8 @@ function render() {
   const text = ui[lang];
   const singleThreats = damageMode === "combo" ? baseThreats() : availableThreats();
   const threats = damageMode === "combo" ? comboThreats(singleThreats) : singleThreats;
-  const enemyMaxPp = Math.min(10, turnsPlayed);
+  const inputComplete = turnsPlayed != null && currentHealth != null;
+  const enemyMaxPp = inputComplete ? Math.min(10, turnsPlayed) : 0;
   const stormDamage = Math.max(0, ...threats.map((card) => card.stormDamage));
   const burnDamage = Math.max(0, ...threats.map((card) => card.burnDamage));
   const visibleLeaderDamage = Math.max(0, ...threats.map((card) => card.leaderDamage));
@@ -406,22 +407,25 @@ function render() {
   });
 
   fields.language.textContent = text.languageButton;
-  fields.turnNumber.textContent = turnsPlayed;
-  fields.turnInput.value = String(turnsPlayed);
-  fields.turnOutput.textContent = turnsPlayed;
-  fields.healthInput.value = String(currentHealth);
-  fields.healthOutput.textContent = currentHealth;
-  fields.evolveInput.value = String(evolvePoints);
-  fields.evolveOutput.textContent = evolvePoints;
+  fields.turnNumber.textContent = inputComplete ? turnsPlayed : "";
+  fields.turnInput.value = inputComplete ? String(turnsPlayed) : "";
+  fields.turnOutput.textContent = inputComplete ? turnsPlayed : "";
+  fields.healthInput.value = inputComplete ? String(currentHealth) : "";
+  fields.healthOutput.textContent = inputComplete ? currentHealth : "";
   fields.enemyClass.textContent = cardData.classes[enemyClass]?.[lang] || "-";
-  fields.pp.textContent = enemyMaxPp;
-  fields.visibleThreatCount.textContent = threats.length;
-  fields.stormDamage.textContent = formatDamage(stormDamage);
-  fields.burnDamage.textContent = formatDamage(burnDamage);
-  fields.maxThreat.textContent = formatDamage(visibleLeaderDamage);
-  fields.enemyLethal.textContent =
-    visibleLeaderDamage >= currentHealth ? `${text.lethal}: ${formatDamage(visibleLeaderDamage)}` : text.none;
-  fields.enemyThreatTotal.textContent = `${text.leaderDamage}: ${formatDamage(visibleLeaderDamage)} / HP ${currentHealth}`;
+  fields.pp.textContent = inputComplete ? enemyMaxPp : "";
+  fields.visibleThreatCount.textContent = inputComplete ? threats.length : "";
+  fields.stormDamage.textContent = inputComplete ? formatDamage(stormDamage) : "";
+  fields.burnDamage.textContent = inputComplete ? formatDamage(burnDamage) : "";
+  fields.maxThreat.textContent = inputComplete ? formatDamage(visibleLeaderDamage) : "";
+  fields.enemyLethal.textContent = inputComplete
+    ? visibleLeaderDamage >= currentHealth
+      ? `${text.lethal}: ${formatDamage(visibleLeaderDamage)}`
+      : text.none
+    : "";
+  fields.enemyThreatTotal.textContent = inputComplete
+    ? `${text.leaderDamage}: ${formatDamage(visibleLeaderDamage)} / HP ${currentHealth}`
+    : "";
   fields.enemyThreats.innerHTML =
     threats.length > 0
       ? threats.map(damageMode === "combo" ? renderCombo : renderThreatCard).join("")
@@ -439,11 +443,6 @@ fields.turnInput.addEventListener("input", (event) => {
 
 fields.healthInput.addEventListener("input", (event) => {
   currentHealth = Number(event.target.value);
-  render();
-});
-
-fields.evolveInput.addEventListener("input", (event) => {
-  evolvePoints = Number(event.target.value);
   render();
 });
 
