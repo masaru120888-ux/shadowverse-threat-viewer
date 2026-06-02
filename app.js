@@ -11,7 +11,7 @@ const cardData = window.SHADOWVERSE_CARD_DATA || { classes: {}, cards: [] };
 const ui = {
   ja: {
     introEyebrow: "相手リーサル確認",
-    title: "リーダー打点カード",
+    title: "リーサルチェッカー",
     introBody:
       "公式カード一覧から、相手リーダーへダメージを出せるカードだけを表示します。経過ターン数と自分の体力で候補が変わります。",
     turnsPlayed: "経過ターン",
