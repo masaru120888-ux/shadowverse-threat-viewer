@@ -276,7 +276,7 @@ input {
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(70, 34, 35, 0.45);
+  background: var(--panel-2);
   display: grid;
   grid-template-columns: 62px minmax(0, 1fr) minmax(82px, auto);
   gap: 14px;

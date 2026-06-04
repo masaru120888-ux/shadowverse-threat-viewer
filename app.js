@@ -329,10 +329,15 @@ function renderThreatCard(card) {
   const selectedCard = card[lang];
   const imageLabel = card.displayCard?.[lang]?.name || selectedCard.name;
   const damageBreakdown = renderDamageBreakdown(card);
+  
+  const totalLeaderDamage = card.leaderDamage + (card.crestDamage || 0);
+  const isLethal = totalLeaderDamage >= currentHealth;
+  const displayDamage = isLethal ? totalLeaderDamage : card.leaderDamage;
+  
   const damageMarkup = damageBreakdown ||
-    `<span class="damage-line leader"><small>${ui[lang].leaderDamage}</small>${formatDamage(card.leaderDamage)}</span>`;
+    `<span class="damage-line leader"><small>${ui[lang].leaderDamage}</small>${formatDamage(displayDamage)}</span>`;
   return `
-    <article class="threat-card ${card.leaderDamage >= currentHealth ? "is-lethal" : ""}">
+    <article class="threat-card ${isLethal ? "is-lethal" : ""}">
       <img class="threat-art" src="${cardImageUrl(card)}" alt="${imageLabel}" loading="lazy" />
       <div class="threat-copy">
         <strong>${selectedCard.name}</strong>
@@ -342,7 +347,7 @@ function renderThreatCard(card) {
           <span>${ui[lang].condition}: ${card.condition}</span>
         </div>
       </div>
-      <div class="threat-damage" aria-label="${ui[lang].leaderDamage} ${card.leaderDamage}">
+      <div class="threat-damage" aria-label="${ui[lang].leaderDamage} ${displayDamage}">
         ${damageMarkup}
       </div>
     </article>
@@ -353,20 +358,26 @@ function renderCombo(combo) {
   const names = combo.cards.map((card) => card[lang].name).join(" + ");
   let runningDamage = 0;
   const runningRows = combo.cards.map((card) => {
-    runningDamage += card.leaderDamage;
+    const cardDamage = card.leaderDamage + (card.crestDamage || 0);
+    runningDamage += cardDamage;
     const label = card.variant === "super-evolve"
       ? (lang === "ja" ? "超進化" : "SE")
       : card.variant === "evolve"
         ? (lang === "ja" ? "進化" : "EV")
         : "";
-    return `<li><span>${card[lang].name}${label ? ` (${label})` : ""}</span><strong>+${card.leaderDamage} = ${runningDamage}</strong></li>`;
+    return `<li><span>${card[lang].name}${label ? ` (${label})` : ""}</span><strong>+${cardDamage} = ${runningDamage}</strong></li>`;
   }).join("");
   const cardImages = combo.cards.map((card) => {
     const imageLabel = card.displayCard?.[lang]?.name || card[lang].name;
     return `<img class="combo-art" src="${cardImageUrl(card)}" alt="${imageLabel}" loading="lazy" />`;
   }).join("");
+  
+  const totalComboDamage = combo.leaderDamage + combo.cards.reduce((sum, card) => sum + (card.crestDamage || 0), 0);
+  const isLethal = totalComboDamage >= currentHealth;
+  const displayDamage = isLethal ? totalComboDamage : combo.leaderDamage;
+  
   return `
-    <article class="threat-card combo-card ${combo.leaderDamage >= currentHealth ? "is-lethal" : ""}">
+    <article class="threat-card combo-card ${isLethal ? "is-lethal" : ""}">
       <div class="combo-art-strip" aria-label="${names}">
         ${cardImages}
       </div>
@@ -380,8 +391,8 @@ function renderCombo(combo) {
           <span>${ui[lang].cost}: ${combo.cost}</span>
         </div>
       </div>
-      <div class="threat-damage" aria-label="${ui[lang].leaderDamage} ${combo.leaderDamage}">
-        <span class="damage-line leader"><small>${ui[lang].leaderDamage}</small>${formatDamage(combo.leaderDamage)}</span>
+      <div class="threat-damage" aria-label="${ui[lang].leaderDamage} ${displayDamage}">
+        <span class="damage-line leader"><small>${ui[lang].leaderDamage}</small>${formatDamage(displayDamage)}</span>
       </div>
     </article>
   `;
