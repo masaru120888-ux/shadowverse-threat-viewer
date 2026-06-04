@@ -232,6 +232,10 @@ input {
 }
 
 .lethal-panel article:nth-child(4) strong {
+  color: var(--text);
+}
+
+.lethal-panel article:nth-child(4).is-lethal strong {
   color: var(--red);
 }
 
@@ -270,7 +274,7 @@ input {
 .threat-card {
   min-height: 92px;
   padding: 12px;
-  border: 1px solid rgba(221, 113, 104, 0.62);
+  border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(70, 34, 35, 0.45);
   display: grid;
@@ -369,7 +373,7 @@ input {
 .damage-line {
   display: grid;
   gap: 1px;
-  color: var(--red);
+  color: var(--gold);
   font-size: 1.08rem;
   font-weight: 900;
 }

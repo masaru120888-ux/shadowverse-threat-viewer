@@ -428,6 +428,14 @@ function render() {
       ? `${text.lethal}: ${formatDamage(visibleLeaderDamage)}`
       : text.none
     : "";
+  
+  const hasLethal = inputComplete && visibleLeaderDamage >= currentHealth;
+  if (hasLethal) {
+    fields.enemyLethal.parentElement.classList.add("is-lethal");
+  } else {
+    fields.enemyLethal.parentElement.classList.remove("is-lethal");
+  }
+  
   fields.enemyThreatTotal.textContent = inputComplete
     ? `${text.leaderDamage}: ${formatDamage(visibleLeaderDamage)} / HP ${currentHealth}`
     : "";
