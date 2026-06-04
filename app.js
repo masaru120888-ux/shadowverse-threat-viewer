@@ -1,5 +1,6 @@
 let lang = "ja";
-let enemyClass = "forest";
+let theme = "dark";
+let enemyClass = null;
 let format = "rotation";
 let damageMode = "single";
 let turnsPlayed = 1;
@@ -49,6 +50,7 @@ const ui = {
     noThreats: "この条件で表示できるリーダー打点カードはありません。",
     none: "なし",
     lethal: "リーサル",
+    themeButton: "☀️",
     languageButton: "English",
   },
   en: {
@@ -91,12 +93,14 @@ const ui = {
     noThreats: "No leader-damage cards are visible for this condition.",
     none: "None",
     lethal: "Lethal",
+    themeButton: "🌙",
     languageButton: "日本語",
   },
 };
 
 const fields = {
   language: document.querySelector("#language-button"),
+  theme: document.querySelector("#theme-button"),
   turnNumber: document.querySelector("#turn-number"),
   turnInput: document.querySelector("#turn-input"),
   turnOutput: document.querySelector("#turn-output"),
@@ -385,7 +389,7 @@ function renderCombo(combo) {
 
 function ensureSelectedClassHasCards() {
   const visibleClasses = classEntries();
-  if (!visibleClasses.some(([key]) => key === enemyClass) && visibleClasses.length > 0) {
+  if (enemyClass != null && !visibleClasses.some(([key]) => key === enemyClass) && visibleClasses.length > 0) {
     enemyClass = visibleClasses[0][0];
   }
 }
@@ -407,12 +411,13 @@ function render() {
   });
 
   fields.language.textContent = text.languageButton;
+  fields.theme.textContent = theme === "light" ? ui[lang].themeButton : "🌙";
   fields.turnNumber.textContent = inputComplete ? turnsPlayed : "";
   fields.turnInput.value = inputComplete ? String(turnsPlayed) : "";
   fields.turnOutput.textContent = inputComplete ? turnsPlayed : "";
   fields.healthInput.value = inputComplete ? String(currentHealth) : "";
   fields.healthOutput.textContent = inputComplete ? currentHealth : "";
-  fields.enemyClass.textContent = cardData.classes[enemyClass]?.[lang] || "-";
+  fields.enemyClass.textContent = enemyClass ? cardData.classes[enemyClass]?.[lang] || "" : "";
   fields.pp.textContent = inputComplete ? enemyMaxPp : "";
   fields.visibleThreatCount.textContent = inputComplete ? threats.length : "";
   fields.stormDamage.textContent = inputComplete ? formatDamage(stormDamage) : "";
@@ -469,6 +474,17 @@ fields.damageModeButtons.addEventListener("click", (event) => {
 
 fields.language.addEventListener("click", () => {
   lang = lang === "ja" ? "en" : "ja";
+  render();
+});
+
+fields.theme.addEventListener("click", () => {
+  theme = theme === "dark" ? "light" : "dark";
+  if (theme === "light") {
+    document.documentElement.classList.add("light-mode");
+  } else {
+    document.documentElement.classList.remove("light-mode");
+  }
+  fields.theme.textContent = theme === "light" ? ui[lang].themeButton : "🌙";
   render();
 });
 
