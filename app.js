@@ -93,7 +93,6 @@ const ui = {
 const fields = {
   language: document.querySelector("#language-button"),
   theme: document.querySelector("#theme-button"),
-  turnNumber: document.querySelector("#turn-number"),
   turnInput: document.querySelector("#turn-input"),
   turnOutput: document.querySelector("#turn-output"),
   healthInput: document.querySelector("#health-input"),
@@ -101,9 +100,6 @@ const fields = {
   classButtons: document.querySelector("#class-buttons"),
   formatButtons: document.querySelector("#format-buttons"),
   damageModeButtons: document.querySelector("#damage-mode-buttons"),
-  enemyClass: document.querySelector("#enemy-class"),
-  pp: document.querySelector("#pp-display"),
-  visibleThreatCount: document.querySelector("#visible-threat-count"),
   stormDamage: document.querySelector("#storm-damage"),
   burnDamage: document.querySelector("#burn-damage"),
   maxThreat: document.querySelector("#max-threat"),
@@ -418,14 +414,10 @@ function render() {
 
   fields.language.textContent = text.languageButton;
   fields.theme.textContent = theme === "light" ? ui[lang].themeButton : "🌙";
-  fields.turnNumber.textContent = inputComplete ? turnsPlayed : "";
   fields.turnInput.value = inputComplete ? String(turnsPlayed) : "";
   fields.turnOutput.textContent = inputComplete ? turnsPlayed : "";
   fields.healthInput.value = inputComplete ? String(currentHealth) : "";
   fields.healthOutput.textContent = inputComplete ? currentHealth : "";
-  fields.enemyClass.textContent = enemyClass ? cardData.classes[enemyClass]?.[lang] || "" : "";
-  fields.pp.textContent = inputComplete ? enemyMaxPp : "";
-  fields.visibleThreatCount.textContent = inputComplete ? threats.length : "";
   fields.stormDamage.textContent = inputComplete ? formatDamage(stormDamage) : "";
   fields.burnDamage.textContent = inputComplete ? formatDamage(burnDamage) : "";
   fields.maxThreat.textContent = inputComplete ? formatDamage(visibleLeaderDamage) : "";
