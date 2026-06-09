@@ -333,6 +333,7 @@ function renderDamageModeButtons() {
 
 function renderThreatCard(card) {
   const selectedCard = card[lang];
+  const displayName = card.displayCard?.[lang]?.name || selectedCard.name;
   const imageLabel = card.displayCard?.[lang]?.name || selectedCard.name;
   const damageBreakdown = renderDamageBreakdown(card);
   const isLethal = card.leaderDamage >= currentHealth;
@@ -345,7 +346,7 @@ function renderThreatCard(card) {
     <article class="threat-card ${isLethal ? "is-lethal" : ""}">
       <img class="threat-art" src="${cardImageUrl(card)}" alt="${imageLabel}" loading="lazy" />
       <div class="threat-copy">
-        <strong>${selectedCard.name}</strong>
+        <strong>${displayName}</strong>
         <p>${selectedCard.effect}</p>
         <div class="threat-meta">
           <span>${ui[lang].cost}: ${card.cost}</span>
@@ -361,16 +362,17 @@ function renderThreatCard(card) {
 }
 
 function renderCombo(combo) {
-  const names = combo.cards.map((card) => card[lang].name).join(" + ");
+  const names = combo.cards.map((card) => card.displayCard?.[lang]?.name || card[lang].name).join(" + ");
   let runningDamage = 0;
   const runningRows = combo.cards.map((card) => {
+    const cardName = card.displayCard?.[lang]?.name || card[lang].name;
     runningDamage += card.leaderDamage;
     const label = card.variant === "super-evolve"
       ? (lang === "ja" ? "超進化" : "SE")
       : card.variant === "evolve"
         ? (lang === "ja" ? "進化" : "EV")
         : "";
-    return `<li><span>${card[lang].name}${label ? ` (${label})` : ""}</span><strong>+${card.leaderDamage} = ${runningDamage}</strong></li>`;
+    return `<li><span>${cardName}${label ? ` (${label})` : ""}</span><strong>+${card.leaderDamage} = ${runningDamage}</strong></li>`;
   }).join("");
   const cardImages = combo.cards.map((card) => {
     const imageLabel = card.displayCard?.[lang]?.name || card[lang].name;
