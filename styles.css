@@ -442,33 +442,23 @@ input {
   background: rgba(0, 0, 0, 0.12);
 }
 
-@media (max-width: 760px) {
-  .app {
-    width: min(100% - 18px, 980px);
-    padding-top: 16px;
-  }
+.app-footer {
+    margin: 24px auto 0;
+    width: min(980px, calc(100% - 24px));
+    color: var(--muted);
+    text-align: center;
+    font-size: 0.95rem;
+}
 
-  .intro h1 {
-    font-size: clamp(2rem, 13vw, 3.2rem);
-  }
+.app-footer a {
+    color: var(--gold);
+    text-decoration: none;
+}
 
-  .match {
-    padding: 10px;
-  }
-
-  .match-header,
-  .lethal-panel {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .turn-control,
-  .class-control {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .threat-card {
-    grid-template-columns: 54px minmax(0, 1fr) 88px;
+.app-footer a:hover,
+.app-footer a:focus {
+    text-decoration: underline;
+}
     gap: 10px;
     padding: 10px;
   }
