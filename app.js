@@ -144,6 +144,7 @@ function baseThreats() {
 }
 
 function availableThreats() {
+  const seenNames = new Set();
   return baseThreats()
     .map(resolveThreatDamage)
     .filter(Boolean)
@@ -152,6 +153,12 @@ function availableThreats() {
       if (a.effectiveCost !== b.effectiveCost) return a.effectiveCost - b.effectiveCost;
       if (a.cost !== b.cost) return a.cost - b.cost;
       return a[lang].name.localeCompare(b[lang].name);
+    })
+    .filter((card) => {
+      const name = card[lang]?.name || card.en?.name || "";
+      if (seenNames.has(name)) return false;
+      seenNames.add(name);
+      return true;
     });
 }
 
