@@ -351,6 +351,10 @@ function buildCard(classKey, id, ja, en, jaRelated = [], enRelated = []) {
     (best, related) => (related.leaderDamage > best.leaderDamage ? related : best),
     { leaderDamage: 0, stormDamage: 0, burnDamage: 0, tokenDamage: 0, condition: "" },
   );
+  const bestRelatedToken = relatedThreats.reduce(
+    (best, related) => (related.tokenDamage > best.tokenDamage ? related : best),
+    { tokenDamage: 0 },
+  );
   const summonedStorm = summonedStormThreat(enText, jaText, enRelated, jaRelated);
   const leaderDamage = Math.max(
     inferred.leaderDamage,
@@ -367,7 +371,9 @@ function buildCard(classKey, id, ja, en, jaRelated = [], enRelated = []) {
   const relatedCondition =
     bestRelatedLeader.leaderDamage > inferred.leaderDamage
       ? `${relatedRequiresEvolve ? "Evolve / " : ""}Creates ${bestRelatedLeader.name}`
-      : "";
+      : bestRelatedToken.tokenDamage > 0
+        ? `Creates ${bestRelatedToken.name}`
+        : "";
   const summonedStormCondition =
     summonedStorm.leaderDamage > Math.max(inferred.leaderDamage, bestRelatedLeader.leaderDamage)
       ? summonedStorm.condition
@@ -380,7 +386,12 @@ function buildCard(classKey, id, ja, en, jaRelated = [], enRelated = []) {
           ja: bestRelatedLeader.ja,
           en: bestRelatedLeader.en,
         }
-        : null;
+        : bestRelatedToken.tokenDamage > 0
+          ? {
+            ja: bestRelatedToken.ja,
+            en: bestRelatedToken.en,
+          }
+          : null;
   const stormDamage = Math.max(inferred.stormDamage, bestRelatedLeader.stormDamage, summonedStorm.stormDamage);
 
   return {
@@ -393,7 +404,7 @@ function buildCard(classKey, id, ja, en, jaRelated = [], enRelated = []) {
     requiresEvolve: relatedRequiresEvolve || directRequiresEvolve,
     evolveLeaderBonus: stormDamage > 0 ? 2 : 0,
     evolveEffectLeaderDamage,
-    tokenDamage: Math.max(inferred.tokenDamage, bestRelatedLeader.tokenDamage),
+    tokenDamage: Math.max(inferred.tokenDamage, bestRelatedLeader.tokenDamage, bestRelatedToken.tokenDamage),
     leaderDamage,
     stormDamage,
     burnDamage: Math.max(inferred.burnDamage, bestRelatedLeader.burnDamage),
