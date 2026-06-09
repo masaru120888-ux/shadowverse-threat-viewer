@@ -11,15 +11,8 @@ const cardData = window.SHADOWVERSE_CARD_DATA || { classes: {}, cards: [] };
 
 const ui = {
   ja: {
-    title: "リーサルチェッカー",
-    introBody:
-      "自分の体力と相手の使えるPPの値を入力してください。脅威となりえるカードを一覧表示します。リーサル候補は枠が赤くなります",
-    turnsPlayed: "経過ターン",
-    enemyClass: "相手クラス",
-    enemyMaxPp: "相手の最大PP",
-    visibleThreats: "表示中の打点",
+    title: "逆リーサルチェッカー",
     classControl: "相手クラス",
-    classHelp: "表示する相手クラスを切り替えます。",
     formatControl: "フォーマット",
     formatHelp: "ローテーションまたはアンリミテッドで絞り込みます。",
     rotation: "ローテーション",
@@ -28,8 +21,8 @@ const ui = {
     damageModeHelp: "単体カードまたはPP内の複数カード最大打点を表示します。",
     single: "単体カード",
     combo: "複数カード",
-    turnControl: "経過ターンを調整",
-    turnHelp: "このターン数までに相手が到達したPPと条件で判定します。",
+    turnControl: "相手が使えるPP",
+    turnHelp: "コスト内で脅威となるカードを探します",
     healthControl: "自分の体力",
     healthHelp: "相手のリーダー打点がこの体力以上ならリーサル候補として表示します。",
     evolveControl: "相手の進化権",
