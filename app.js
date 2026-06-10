@@ -44,6 +44,9 @@ const ui = {
     lethal: "リーサル",
     themeButton: "☀️",
     languageButton: "English",
+    introEyebrow: "相手リーサル確認",
+    introBody: "経過ターン数を変えると、相手が使えるPPと条件に合わせて表示される脅威カードが変わります。",
+    classHelp: "表示する相手クラスを切り替えます。",
   },
   en: {
     introEyebrow: "Enemy lethal check",
@@ -100,6 +103,8 @@ const fields = {
   classButtons: document.querySelector("#class-buttons"),
   formatButtons: document.querySelector("#format-buttons"),
   damageModeButtons: document.querySelector("#damage-mode-buttons"),
+  evolveInput: document.querySelector("#evolve-input"),
+  evolveOutput: document.querySelector("#evolve-output"),
   stormDamage: document.querySelector("#storm-damage"),
   burnDamage: document.querySelector("#burn-damage"),
   maxThreat: document.querySelector("#max-threat"),
@@ -184,7 +189,7 @@ function threatVariants(card) {
 
   const evolveBonus = card.evolveLeaderBonus || 0;
   const evolveEffectDamage = card.evolveEffectLeaderDamage || 0;
-  const hasEvolveDamage = card.requiresEvolve || evolveBonus > 0 || evolveEffectDamage > card.leaderDamage;
+  const hasEvolveDamage = card.requiresEvolve || evolveBonus > 0 || evolveEffectDamage > 0;
 
   if (evolvePoints > 0 && hasEvolveDamage) {
     variants.push({
@@ -194,7 +199,7 @@ function threatVariants(card) {
       variant: "evolve",
       leaderDamage: Math.max(card.leaderDamage + evolveBonus, evolveEffectDamage),
       stormDamage: card.stormDamage + evolveBonus,
-      burnDamage: Math.max(card.burnDamage, evolveEffectDamage),
+      burnDamage: card.stormDamage > 0 ? card.burnDamage : Math.max(card.burnDamage, evolveEffectDamage),
       condition: variantCondition(card, lang === "ja" ? "進化" : "Evolve"),
     });
   }
@@ -413,11 +418,13 @@ function render() {
   });
 
   fields.language.textContent = text.languageButton;
-  fields.theme.textContent = theme === "light" ? ui[lang].themeButton : "🌙";
+  fields.theme.textContent = theme === "dark" ? "☀️" : "🌙";
   fields.turnInput.value = inputComplete ? String(turnsPlayed) : "";
   fields.turnOutput.textContent = inputComplete ? turnsPlayed : "";
   fields.healthInput.value = inputComplete ? String(currentHealth) : "";
   fields.healthOutput.textContent = inputComplete ? currentHealth : "";
+  fields.evolveInput.value = String(evolvePoints);
+  fields.evolveOutput.textContent = evolvePoints;
   fields.stormDamage.textContent = inputComplete ? formatDamage(stormDamage) : "";
   fields.burnDamage.textContent = inputComplete ? formatDamage(burnDamage) : "";
   fields.maxThreat.textContent = inputComplete ? formatDamage(visibleLeaderDamage) : "";
@@ -457,6 +464,11 @@ fields.healthInput.addEventListener("input", (event) => {
   render();
 });
 
+fields.evolveInput.addEventListener("input", (event) => {
+  evolvePoints = Number(event.target.value);
+  render();
+});
+
 fields.classButtons.addEventListener("click", (event) => {
   const button = event.target.closest("[data-class]");
   if (!button) return;
@@ -490,7 +502,6 @@ fields.theme.addEventListener("click", () => {
   } else {
     document.documentElement.classList.remove("light-mode");
   }
-  fields.theme.textContent = theme === "light" ? ui[lang].themeButton : "🌙";
   render();
 });
 

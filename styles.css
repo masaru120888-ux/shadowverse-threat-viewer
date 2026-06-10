@@ -124,31 +124,18 @@ input {
   background: rgba(25, 29, 36, 0.92);
 }
 
-.match-header,
 .lethal-panel {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
 }
 
-.match-header > div,
 .lethal-panel > article,
 .turn-control,
 .class-control {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel-2);
-}
-
-.match-header > div {
-  min-height: 82px;
-  padding: 14px;
-  display: grid;
-  align-content: space-between;
-}
-
-.match-header strong {
-  font-size: 1.9rem;
 }
 
 .turn-control,
@@ -232,11 +219,7 @@ input {
   font-size: 1.1rem;
 }
 
-.lethal-panel article:nth-child(4) strong {
-  color: var(--text);
-}
-
-.lethal-panel article:nth-child(4).is-lethal strong {
+.lethal-panel article.is-lethal strong {
   color: var(--red);
 }
 
@@ -401,10 +384,6 @@ input {
   text-transform: uppercase;
 }
 
-.damage-line.token {
-  color: var(--damage);
-}
-
 .combo-damage-list {
   margin: 6px 0 8px;
   padding: 0;
@@ -459,6 +438,9 @@ input {
 .app-footer a:focus {
     text-decoration: underline;
 }
+
+@media (max-width: 640px) {
+  .threat-card {
     gap: 10px;
     padding: 10px;
   }
