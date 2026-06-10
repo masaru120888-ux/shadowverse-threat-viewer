@@ -103,8 +103,6 @@ const fields = {
   classButtons: document.querySelector("#class-buttons"),
   formatButtons: document.querySelector("#format-buttons"),
   damageModeButtons: document.querySelector("#damage-mode-buttons"),
-  evolveInput: document.querySelector("#evolve-input"),
-  evolveOutput: document.querySelector("#evolve-output"),
   stormDamage: document.querySelector("#storm-damage"),
   burnDamage: document.querySelector("#burn-damage"),
   maxThreat: document.querySelector("#max-threat"),
@@ -423,8 +421,6 @@ function render() {
   fields.turnOutput.textContent = inputComplete ? turnsPlayed : "";
   fields.healthInput.value = inputComplete ? String(currentHealth) : "";
   fields.healthOutput.textContent = inputComplete ? currentHealth : "";
-  fields.evolveInput.value = String(evolvePoints);
-  fields.evolveOutput.textContent = evolvePoints;
   fields.stormDamage.textContent = inputComplete ? formatDamage(stormDamage) : "";
   fields.burnDamage.textContent = inputComplete ? formatDamage(burnDamage) : "";
   fields.maxThreat.textContent = inputComplete ? formatDamage(visibleLeaderDamage) : "";
@@ -461,11 +457,6 @@ fields.turnInput.addEventListener("input", (event) => {
 
 fields.healthInput.addEventListener("input", (event) => {
   currentHealth = Number(event.target.value);
-  render();
-});
-
-fields.evolveInput.addEventListener("input", (event) => {
-  evolvePoints = Number(event.target.value);
   render();
 });
 
