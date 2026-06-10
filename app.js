@@ -44,6 +44,9 @@ const ui = {
     lethal: "リーサル",
     themeButton: "☀️",
     languageButton: "English",
+    introEyebrow: "相手リーサル確認",
+    introBody: "経過ターン数を変えると、相手が使えるPPと条件に合わせて表示される脅威カードが変わります。",
+    classHelp: "表示する相手クラスを切り替えます。",
   },
   en: {
     introEyebrow: "Enemy lethal check",
@@ -184,7 +187,7 @@ function threatVariants(card) {
 
   const evolveBonus = card.evolveLeaderBonus || 0;
   const evolveEffectDamage = card.evolveEffectLeaderDamage || 0;
-  const hasEvolveDamage = card.requiresEvolve || evolveBonus > 0 || evolveEffectDamage > card.leaderDamage;
+  const hasEvolveDamage = card.requiresEvolve || evolveBonus > 0 || evolveEffectDamage > 0;
 
   if (evolvePoints > 0 && hasEvolveDamage) {
     variants.push({
@@ -194,7 +197,7 @@ function threatVariants(card) {
       variant: "evolve",
       leaderDamage: Math.max(card.leaderDamage + evolveBonus, evolveEffectDamage),
       stormDamage: card.stormDamage + evolveBonus,
-      burnDamage: Math.max(card.burnDamage, evolveEffectDamage),
+      burnDamage: card.stormDamage > 0 ? card.burnDamage : Math.max(card.burnDamage, evolveEffectDamage),
       condition: variantCondition(card, lang === "ja" ? "進化" : "Evolve"),
     });
   }
@@ -413,7 +416,7 @@ function render() {
   });
 
   fields.language.textContent = text.languageButton;
-  fields.theme.textContent = theme === "light" ? ui[lang].themeButton : "🌙";
+  fields.theme.textContent = theme === "dark" ? "☀️" : "🌙";
   fields.turnInput.value = inputComplete ? String(turnsPlayed) : "";
   fields.turnOutput.textContent = inputComplete ? turnsPlayed : "";
   fields.healthInput.value = inputComplete ? String(currentHealth) : "";
@@ -490,7 +493,6 @@ fields.theme.addEventListener("click", () => {
   } else {
     document.documentElement.classList.remove("light-mode");
   }
-  fields.theme.textContent = theme === "light" ? ui[lang].themeButton : "🌙";
   render();
 });
 
