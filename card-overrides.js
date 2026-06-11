@@ -13,8 +13,10 @@ window.SHADOWVERSE_CARD_OVERRIDES = [
   { id: "10754120", leaderDamage: 3, burnDamage: 3, evolveEffectLeaderDamage: 6, superEvolveKillDamage: 1, condition: "ネクロ10 / 超進化" },
   // カルギデンスラ — 天晶の深淵は打点未知数
   { id: "10634120", xDamage: true },
-  // アラ — スペルブースト後0コスト。壮麗なる隼最大4点
-  { id: "10534120", effectiveCost: 0, unlockTurn: 0, condition: "スペルブースト後0コスト" },
+  // アラ — スペルブースト後0コスト。壮麗なる隼として扱わずアラ自身の画像・名前で表示。最大打点5/4
+  { id: "10534120", effectiveCost: 0, unlockTurn: 0, condition: "スペルブースト後0コスト", displayCard: null, stormBreakdownMax: [5, 5, 4] },
+  // 干絶の甘露（ギルネリーゼ）— ターン10以上でのみ表示
+  { id: "10304120", unlockTurn: 10 },
   // ラブリーマスターピース — 超進化コピー込み最大6点 + 除去1 = 7
   { id: "10734120", evolveEffectLeaderDamage: 6, superEvolveKillDamage: 1, condition: "ラストワード / 超進化" },
   // カリオストロ — アルス・マグナで2点
