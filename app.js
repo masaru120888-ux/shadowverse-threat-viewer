@@ -9,6 +9,11 @@ let evolvePoints = 2;
 
 const cardData = window.SHADOWVERSE_CARD_DATA || { classes: {}, cards: [] };
 
+for (const ov of window.SHADOWVERSE_CARD_OVERRIDES || []) {
+  const c = cardData.cards.find((c) => c.id === ov.id);
+  if (c) Object.assign(c, ov);
+}
+
 // displayCard名 → そのカードが有効になる最低PP（カードデータのeffectiveCostより優先）
 const displayCardPPOverride = new Map([
   ["イクシードアーティファクトΩ", 10],
@@ -27,8 +32,8 @@ const ui = {
     damageModeHelp: "単体カードまたはPP内の複数カード最大打点を表示します。",
     single: "単体カード",
     combo: "複数カード",
-    turnControl: "相手が使えるPP",
-    turnHelp: "コスト内で脅威となるカードを探します",
+    turnControl: "現在のターン数",
+    turnHelp: "コスト内で脅威となるカードを探します。EXPPがある場合は+1",
     healthControl: "自分の体力",
     healthHelp: "相手のリーダー打点がこの体力以上ならリーサル候補として表示します。",
     evolveControl: "相手の進化権",
@@ -129,7 +134,7 @@ function formatAllows(card) {
 }
 
 function hasLeaderDamage(card) {
-  return card.leaderDamage > 0 || card.evolveEffectLeaderDamage > 0;
+  return card.leaderDamage > 0 || card.evolveEffectLeaderDamage > 0 || !!card.xDamage;
 }
 
 function baseThreats() {
@@ -153,14 +158,20 @@ function availableThreats() {
     .map(resolveThreatDamage)
     .filter(Boolean)
     .sort((a, b) => {
+      const aL = !a.xDamage && a.leaderDamage >= currentHealth;
+      const bL = !b.xDamage && b.leaderDamage >= currentHealth;
+      if (bL !== aL) return (bL ? 1 : 0) - (aL ? 1 : 0);
+      if (!!b.xDamage !== !!a.xDamage) return (b.xDamage ? 1 : 0) - (a.xDamage ? 1 : 0);
       if (b.leaderDamage !== a.leaderDamage) return b.leaderDamage - a.leaderDamage;
       if (a.effectiveCost !== b.effectiveCost) return a.effectiveCost - b.effectiveCost;
       if (a.cost !== b.cost) return a.cost - b.cost;
       return a[lang].name.localeCompare(b[lang].name);
     })
     .filter((card) => {
-      const name = (card.displayCard?.[lang]?.name || card.displayCard?.en?.name)
-                || (card[lang]?.name || card.en?.name) || "";
+      const dcHasImage = card.displayCard?.ja?.imageHash || card.displayCard?.en?.imageHash;
+      const name = dcHasImage
+        ? (card.displayCard?.[lang]?.name || card.displayCard?.en?.name)
+        : (card[lang]?.name || card.en?.name) || "";
       if (seenNames.has(name)) return false;
       seenNames.add(name);
       return true;
@@ -176,6 +187,14 @@ function canSuperEvolve() {
 }
 
 function stormDamageBreakdown(card) {
+  if (card.stormBreakdownMax) {
+    return {
+      superEvolve: card.stormBreakdownMax[0],
+      evolve: card.stormBreakdownMax[1],
+      base: card.stormBreakdownMax[2],
+      min: card.stormBreakdownMin,
+    };
+  }
   if (card.stormDamage <= 0) return null;
   const base = card.baseLeaderDamage ?? card.leaderDamage;
   return {
@@ -293,7 +312,8 @@ function pruneCombos(combos, limit) {
 }
 
 function cardImageUrl(card) {
-  const imageCard = card.displayCard || card;
+  const hasDisplayImage = card.displayCard?.ja?.imageHash || card.displayCard?.en?.imageHash;
+  const imageCard = hasDisplayImage ? card.displayCard : card;
   const localized = imageCard[lang];
   const fallback = imageCard.en;
   const imageHash = localized.imageHash || fallback.imageHash;
@@ -308,8 +328,12 @@ function formatDamage(value) {
 function renderDamageBreakdown(card) {
   const breakdown = stormDamageBreakdown(card);
   if (!breakdown) return "";
-  const values = [breakdown.superEvolve, breakdown.evolve, breakdown.base].join("/");
-  return `<span class="damage-breakdown"><small>${ui[lang].damageBreakdown}</small>${values}</span>`;
+  const max = [breakdown.superEvolve, breakdown.evolve, breakdown.base].join("/");
+  if (breakdown.min) {
+    const minStr = breakdown.min.join("/");
+    return `<span class="damage-breakdown"><small>${ui[lang].damageBreakdown}</small>${max}~${minStr}</span>`;
+  }
+  return `<span class="damage-breakdown"><small>${ui[lang].damageBreakdown}</small>${max}</span>`;
 }
 
 function renderKillDamageBreakdown(card) {
@@ -347,15 +371,18 @@ function renderDamageModeButtons() {
 
 function renderThreatCard(card) {
   const selectedCard = card[lang];
-  const displayName = card.displayCard?.[lang]?.name || selectedCard.name;
-  const imageLabel = card.displayCard?.[lang]?.name || selectedCard.name;
-  const damageBreakdown = renderKillDamageBreakdown(card) || renderDamageBreakdown(card);
-  const isLethal = card.leaderDamage >= currentHealth;
-  const crestDamageMarkup = isLethal && card.crestDamage
-    ? `<span class="damage-line"><small>${lang === "ja" ? "クレスト" : "Crest"}</small>${formatDamage(card.crestDamage)}</span>`
+  const dcHasImage = card.displayCard?.ja?.imageHash || card.displayCard?.en?.imageHash;
+  const displayName = dcHasImage ? (card.displayCard?.[lang]?.name || selectedCard.name) : selectedCard.name;
+  const imageLabel = displayName;
+  const isLethal = !card.xDamage && card.leaderDamage >= currentHealth;
+  const primaryDamage = card.crestBreakdown
+    ? `<span class="damage-breakdown"><small>${lang === "ja" ? "クレスト" : "Crest"}</small>${card.crestBreakdown}</span>`
+    : renderKillDamageBreakdown(card) || renderDamageBreakdown(card)
+      || `<span class="damage-line leader"><small>${ui[lang].leaderDamage}</small>${formatDamage(card.leaderDamage)}</span>`;
+  const xDamageMarkup = card.xDamage
+    ? `<span class="damage-line leader"><small>${ui[lang].leaderDamage}</small>X${card.killDamage ? ` (+${card.killDamage})` : ""}</span>`
     : "";
-  const damageMarkup = damageBreakdown ||
-    `<span class="damage-line leader"><small>${ui[lang].leaderDamage}</small>${formatDamage(card.leaderDamage)}</span>`;
+  const damageMarkup = card.xDamage ? xDamageMarkup : primaryDamage;
   return `
     <article class="threat-card ${isLethal ? "is-lethal" : ""}">
       <img class="threat-art" src="${cardImageUrl(card)}" alt="${imageLabel}" loading="lazy" />
@@ -369,7 +396,6 @@ function renderThreatCard(card) {
       </div>
       <div class="threat-damage" aria-label="${ui[lang].leaderDamage} ${card.leaderDamage}">
         ${damageMarkup}
-        ${crestDamageMarkup}
       </div>
     </article>
   `;
