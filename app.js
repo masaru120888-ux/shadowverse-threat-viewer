@@ -9,6 +9,12 @@ let evolvePoints = 2;
 
 const cardData = window.SHADOWVERSE_CARD_DATA || { classes: {}, cards: [] };
 
+// displayCard名 → そのカードが有効になる最低PP（カードデータのeffectiveCostより優先）
+const displayCardPPOverride = new Map([
+  ["イクシードアーティファクトΩ", 10],
+  ["Masterwork Artifact Ω", 10],
+]);
+
 const ui = {
   ja: {
     title: "逆リーサルチェッカー",
@@ -45,14 +51,13 @@ const ui = {
     themeButton: "☀️",
     languageButton: "English",
     introEyebrow: "相手リーサル確認",
-    introBody: "経過ターン数を変えると、相手が使えるPPと条件に合わせて表示される脅威カードが変わります。",
+    introBody: "相手が使えるPPと条件に合わせた脅威カードを提示します。リーサルカードは赤く表示されます。",
     classHelp: "表示する相手クラスを切り替えます。",
   },
   en: {
     introEyebrow: "Enemy lethal check",
     title: "Leader Damage Cards",
-    introBody:
-      "Only cards inferred to damage the enemy leader are shown from the official card library. Turns played and your health change the visible candidates.",
+    introBody: "Shows threat cards matching the available PP and conditions. Lethal candidates are highlighted in red.",
     turnsPlayed: "Turns Played",
     enemyClass: "Enemy Class",
     enemyMaxPp: "Enemy Max PP",
@@ -132,7 +137,12 @@ function baseThreats() {
     .filter((card) => card.classKey === enemyClass || card.classKey === "neutral")
     .filter(formatAllows)
     .filter(hasLeaderDamage)
-    .filter((card) => card.effectiveCost <= enemyMaxPp && card.unlockTurn <= turnsPlayed);
+    .filter((card) => {
+      if (card.unlockTurn > turnsPlayed) return false;
+      const displayName = card.displayCard?.ja?.name || card.displayCard?.en?.name;
+      const requiredPP = displayName ? (displayCardPPOverride.get(displayName) ?? card.effectiveCost) : card.effectiveCost;
+      return requiredPP <= enemyMaxPp;
+    });
 }
 
 function availableThreats() {
@@ -147,7 +157,8 @@ function availableThreats() {
       return a[lang].name.localeCompare(b[lang].name);
     })
     .filter((card) => {
-      const name = card[lang]?.name || card.en?.name || "";
+      const name = (card.displayCard?.[lang]?.name || card.displayCard?.en?.name)
+                || (card[lang]?.name || card.en?.name) || "";
       if (seenNames.has(name)) return false;
       seenNames.add(name);
       return true;

@@ -256,13 +256,13 @@ input {
 }
 
 .threat-card {
-  min-height: 92px;
+  min-height: 110px;
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel-2);
   display: grid;
-  grid-template-columns: 62px minmax(0, 1fr) minmax(82px, auto);
+  grid-template-columns: 72px minmax(0, 1fr) minmax(82px, auto);
   gap: 14px;
   align-items: stretch;
 }
@@ -288,9 +288,9 @@ input {
 }
 
 .threat-art {
-  width: 62px;
+  width: 72px;
   height: 100%;
-  min-height: 96px;
+  min-height: 110px;
   object-fit: contain;
   object-position: center;
   border-radius: 6px;
@@ -456,8 +456,8 @@ input {
   }
 
   .threat-art {
-    width: 54px;
-    min-height: 104px;
+    width: 62px;
+    min-height: 116px;
   }
 
   .combo-art-strip {
