@@ -41,6 +41,7 @@ const ui = {
     comboCards: "カード枚数",
     accumulatedDamage: "累積打点",
     damageBreakdown: "超進化/進化/通常",
+    killBreakdown: "除去込み/素打点",
     cost: "コスト",
     condition: "条件",
     damage: "ダメージ",
@@ -86,6 +87,7 @@ const ui = {
     comboCards: "Cards",
     accumulatedDamage: "Running damage",
     damageBreakdown: "Super/Evolve/Base",
+    killBreakdown: "w/ kill / base",
     cost: "Cost",
     condition: "Condition",
     damage: "damage",
@@ -201,12 +203,15 @@ function threatVariants(card) {
   const hasEvolveDamage = card.requiresEvolve || evolveBonus > 0 || evolveEffectDamage > 0;
 
   if (evolvePoints > 0 && hasEvolveDamage) {
+    const killBonus = card.superEvolveKillDamage || 0;
+    const confirmedDamage = Math.max(card.leaderDamage + evolveBonus, evolveEffectDamage);
     variants.push({
       ...card,
       baseLeaderDamage: card.leaderDamage,
       evolveCost: 1,
       variant: "evolve",
-      leaderDamage: Math.max(card.leaderDamage + evolveBonus, evolveEffectDamage),
+      leaderDamage: confirmedDamage + killBonus,
+      killDamage: killBonus,
       stormDamage: card.stormDamage + evolveBonus,
       burnDamage: card.stormDamage > 0 ? card.burnDamage : Math.max(card.burnDamage, evolveEffectDamage),
       condition: variantCondition(card, lang === "ja" ? "進化" : "Evolve"),
@@ -307,6 +312,12 @@ function renderDamageBreakdown(card) {
   return `<span class="damage-breakdown"><small>${ui[lang].damageBreakdown}</small>${values}</span>`;
 }
 
+function renderKillDamageBreakdown(card) {
+  if (!card.killDamage) return "";
+  const base = card.leaderDamage - card.killDamage;
+  return `<span class="damage-breakdown"><small>${ui[lang].killBreakdown}</small>${card.leaderDamage}/${base}</span>`;
+}
+
 function renderClassButtons() {
   fields.classButtons.innerHTML = classEntries()
     .map(([key, names]) => {
@@ -338,7 +349,7 @@ function renderThreatCard(card) {
   const selectedCard = card[lang];
   const displayName = card.displayCard?.[lang]?.name || selectedCard.name;
   const imageLabel = card.displayCard?.[lang]?.name || selectedCard.name;
-  const damageBreakdown = renderDamageBreakdown(card);
+  const damageBreakdown = renderKillDamageBreakdown(card) || renderDamageBreakdown(card);
   const isLethal = card.leaderDamage >= currentHealth;
   const crestDamageMarkup = isLethal && card.crestDamage
     ? `<span class="damage-line"><small>${lang === "ja" ? "クレスト" : "Crest"}</small>${formatDamage(card.crestDamage)}</span>`

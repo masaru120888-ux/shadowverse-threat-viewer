@@ -18135,6 +18135,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": true,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 3,
+      "superEvolveKillDamage": 1,
       "tokenDamage": 0,
       "leaderDamage": 0,
       "stormDamage": 0,
