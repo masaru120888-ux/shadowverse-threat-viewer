@@ -3,8 +3,8 @@
 window.SHADOWVERSE_CARD_OVERRIDES = [
   // カミシラ — 超進化3バーン + 除去1
   { id: "10674110", requiresEvolve: true, evolveEffectLeaderDamage: 3, superEvolveKillDamage: 1, condition: "超進化" },
-  // シャクドウ — 超進化で能力2回発動16点 + 除去1
-  { id: "10554120", evolveEffectLeaderDamage: 16, superEvolveKillDamage: 1, condition: "超進化" },
+  // シャクドウ — 超進化17 / 進化16 / 通常8
+  { id: "10554120", evolveEffectLeaderDamage: 16, superEvolveKillDamage: 1, stormBreakdownMax: [17, 16, 8], condition: "超進化" },
   // クルーエルウォー・ラウラ — 自身疾走不可、他フォロワーに疾走付与(X) + 除去1
   { id: "10253110", xDamage: true, leaderDamage: 0, burnDamage: 0, evolveEffectLeaderDamage: 0, superEvolveKillDamage: 1, requiresEvolve: true, condition: "超進化" },
   // ノクターンジェネラル・エクセラ — 能力による攻撃力変動 8/7/4〜4/3/1

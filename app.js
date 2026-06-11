@@ -377,8 +377,10 @@ function renderThreatCard(card) {
   const isLethal = !card.xDamage && card.leaderDamage >= currentHealth;
   const primaryDamage = card.crestBreakdown
     ? `<span class="damage-breakdown"><small>${lang === "ja" ? "クレスト" : "Crest"}</small>${card.crestBreakdown}</span>`
-    : renderKillDamageBreakdown(card) || renderDamageBreakdown(card)
-      || `<span class="damage-line leader"><small>${ui[lang].leaderDamage}</small>${formatDamage(card.leaderDamage)}</span>`;
+    : card.stormBreakdownMax
+      ? renderDamageBreakdown(card)
+      : renderKillDamageBreakdown(card) || renderDamageBreakdown(card)
+        || `<span class="damage-line leader"><small>${ui[lang].leaderDamage}</small>${formatDamage(card.leaderDamage)}</span>`;
   const xDamageMarkup = card.xDamage
     ? `<span class="damage-line leader"><small>${ui[lang].leaderDamage}</small>X${card.killDamage ? ` (+${card.killDamage})` : ""}</span>`
     : "";
