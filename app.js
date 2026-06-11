@@ -59,6 +59,11 @@ const ui = {
     introEyebrow: "相手リーサル確認",
     introBody: "相手が使えるPPと条件に合わせた脅威カードを提示します。リーサルカードは赤く表示されます。",
     classHelp: "表示する相手クラスを切り替えます。",
+    tabLethal: "リーサルチェッカー",
+    tabHeal: "ヒールチェッカー",
+    tabBoard: "盤面脅威チェッカー",
+    tabSoon: "近日登場",
+    experimental: "実験的",
   },
   en: {
     introEyebrow: "Enemy lethal check",
@@ -102,6 +107,11 @@ const ui = {
     lethal: "Lethal",
     themeButton: "🌙",
     languageButton: "日本語",
+    tabLethal: "Lethal Checker",
+    tabHeal: "Heal Checker",
+    tabBoard: "Board Threats",
+    tabSoon: "Coming Soon",
+    experimental: "Experimental",
   },
 };
 
@@ -364,7 +374,10 @@ function renderDamageModeButtons() {
   fields.damageModeButtons.innerHTML = ["single", "combo"]
     .map((key) => {
       const pressed = key === damageMode ? "true" : "false";
-      return `<button class="class-button" type="button" data-damage-mode="${key}" aria-pressed="${pressed}">${ui[lang][key]}</button>`;
+      const badge = key === "combo"
+        ? ` <span class="mode-badge">${ui[lang].experimental}</span>`
+        : "";
+      return `<button class="class-button" type="button" data-damage-mode="${key}" aria-pressed="${pressed}">${ui[lang][key]}${badge}</button>`;
     })
     .join("");
 }
