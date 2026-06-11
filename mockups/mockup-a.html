@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mockup A — Visual Grid</title>
+<style>
+  :root{
+    --bg:#101216; --panel:#191d24; --panel2:#222833; --text:#f5f7fb;
+    --muted:#aab3c2; --line:#343c49; --gold:#d8b45e; --red:#dd7168;
+    --blue:#5dbfd4; --damage:#FFD700;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+    color:var(--text);
+    background:
+      linear-gradient(135deg,rgba(216,180,94,.12),transparent 34%),
+      linear-gradient(315deg,rgba(93,191,212,.12),transparent 32%),
+      var(--bg);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{padding:16px 14px 28px;}
+  .eyebrow{margin:0;color:var(--gold);font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;}
+  h1{margin:4px 0 2px;font-size:1.7rem;line-height:1.05;letter-spacing:-.01em;}
+  .sub{margin:0 0 14px;color:var(--muted);font-size:.82rem;}
+  .topbar{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;}
+  .hp{
+    flex:none;display:grid;place-items:center;gap:1px;
+    min-width:64px;padding:8px 12px;border:1px solid var(--line);
+    border-radius:12px;background:var(--panel2);
+  }
+  .hp small{color:var(--muted);font-size:.6rem;font-weight:800;text-transform:uppercase;}
+  .hp b{font-size:1.25rem;color:var(--red);}
+  .controls{
+    display:flex;gap:8px;margin:14px 0 6px;flex-wrap:wrap;
+  }
+  .chip-ctrl{
+    padding:7px 12px;border:1px solid var(--line);border-radius:999px;
+    background:rgba(0,0,0,.2);color:var(--muted);font-size:.74rem;font-weight:700;
+  }
+  .chip-ctrl.on{border-color:var(--gold);color:var(--gold);background:rgba(216,180,94,.14);}
+  .seg-title{display:flex;justify-content:space-between;align-items:baseline;margin:16px 2px 10px;}
+  .seg-title h2{margin:0;font-size:.95rem;}
+  .seg-title span{color:var(--muted);font-size:.74rem;}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .tile{
+    position:relative;border:1px solid var(--line);border-radius:14px;
+    background:var(--panel2);overflow:hidden;display:flex;flex-direction:column;
+  }
+  .tile.lethal{
+    border-color:var(--red);
+    box-shadow:0 0 0 1px rgba(221,113,104,.5),0 10px 26px rgba(221,113,104,.18);
+    background:rgba(221,113,104,.10);
+  }
+  .art{
+    position:relative;width:100%;aspect-ratio:5/4;overflow:hidden;
+    background:linear-gradient(160deg,#2b3340,#171b22);
+  }
+  .art img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block;}
+  .art .ph{
+    position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+    padding:8px;color:rgba(255,255,255,.82);font-weight:800;font-size:.78rem;
+    background:
+      radial-gradient(120% 80% at 50% 0%,rgba(255,255,255,.06),transparent),
+      linear-gradient(160deg,var(--c1,#3a4658),var(--c2,#1b2129));
+  }
+  .badge{
+    position:absolute;top:8px;right:8px;z-index:2;
+    display:grid;place-items:center;gap:0;
+    min-width:42px;padding:5px 9px;border-radius:11px;
+    background:rgba(8,10,14,.78);backdrop-filter:blur(2px);
+    border:1px solid rgba(255,255,255,.12);
+    text-align:center;line-height:1;
+  }
+  .badge small{display:block;color:var(--muted);font-size:.52rem;font-weight:800;text-transform:uppercase;margin-bottom:2px;}
+  .badge b{font-size:1.35rem;font-weight:900;color:var(--damage);}
+  .badge.range b,.badge.crest b{font-size:.92rem;letter-spacing:.01em;}
+  .badge.lethal{background:rgba(60,12,12,.82);border-color:rgba(221,113,104,.6);box-shadow:0 0 14px rgba(221,113,104,.5);}
+  .badge.lethal b{color:#ff8a80;}
+  .badge.x b{color:var(--blue);}
+  .body{padding:9px 10px 11px;display:flex;flex-direction:column;gap:7px;flex:1;}
+  .name{font-size:.86rem;font-weight:800;line-height:1.2;}
+  .meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto;}
+  .meta span{
+    padding:3px 7px;border:1px solid rgba(255,255,255,.08);border-radius:7px;
+    color:var(--muted);background:rgba(0,0,0,.22);font-size:.66rem;font-weight:700;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div>
+      <p class="eyebrow">相手リーサル確認</p>
+      <h1>逆リーサルチェッカー</h1>
+    </div>
+    <div class="hp"><small>自分HP</small><b>11</b></div>
+  </div>
+  <div class="controls">
+    <span class="chip-ctrl on">ナイトメア</span>
+    <span class="chip-ctrl">ローテーション</span>
+    <span class="chip-ctrl">ターン11</span>
+  </div>
+
+  <div class="seg-title">
+    <h2>脅威カード</h2>
+    <span>5枚 / リーサル2</span>
+  </div>
+
+  <div class="grid">
+    <!-- ベリアル lethal 20 -->
+    <article class="tile lethal">
+      <div class="art" style="--c1:#5a2230;--c2:#1c1014">
+        <div class="badge lethal"><small>打点</small><b>20</b></div>
+        <img src="https://shadowverse-wb.com/uploads/card_image/jpn/card/1943d0a4403944cb883cbc7ceeee7722.png" onerror="this.style.display='none'" alt="">
+        <div class="ph">狡知の堕天司<br>ベリアル</div>
+      </div>
+      <div class="body">
+        <div class="name">狡知の堕天司・ベリアル</div>
+        <div class="meta"><span>コスト 7</span><span>超進化</span></div>
+      </div>
+    </article>
+
+    <!-- シャクドウ lethal 17/16 -->
+    <article class="tile lethal">
+      <div class="art" style="--c1:#3a2b58;--c2:#15101f">
+        <div class="badge lethal"><small>除去込/素</small><b>17</b></div>
+        <img src="https://shadowverse-wb.com/uploads/card_image/jpn/card/6222e292845a4c4f949f3703001a796b.png" onerror="this.style.display='none'" alt="">
+        <div class="ph">奥夜花<br>シャクドウ</div>
+      </div>
+      <div class="body">
+        <div class="name">奥夜花・シャクドウ</div>
+        <div class="meta"><span>コスト 10</span><span>超進化</span></div>
+      </div>
+    </article>
+
+    <!-- ラウラ X -->
+    <article class="tile">
+      <div class="art" style="--c1:#244a55;--c2:#0f1c20">
+        <div class="badge x"><small>打点</small><b>X<span style="font-size:.7rem;color:var(--muted)"> +1</span></b></div>
+        <img src="https://shadowverse-wb.com/uploads/card_image/jpn/card/3da084ba39ae4db984505d3a516f4ec5.png" onerror="this.style.display='none'" alt="">
+        <div class="ph">クルーエルウォー<br>ラウラ</div>
+      </div>
+      <div class="body">
+        <div class="name">クルーエルウォー・ラウラ</div>
+        <div class="meta"><span>コスト 4</span><span>超進化</span></div>
+      </div>
+    </article>
+
+    <!-- エクセラ range -->
+    <article class="tile">
+      <div class="art" style="--c1:#244a55;--c2:#0f1c20">
+        <div class="badge range"><small>超/進/通</small><b>8/7/4</b></div>
+        <img src="https://shadowverse-wb.com/uploads/card_image/jpn/card/8b62c124c9614b18a13c726e0ae70ff1.png" onerror="this.style.display='none'" alt="">
+        <div class="ph">ノクターンジェネラル<br>エクセラ</div>
+      </div>
+      <div class="body">
+        <div class="name">ノクターンジェネラル・エクセラ</div>
+        <div class="meta"><span>コスト 5</span><span>〜4/3/1</span></div>
+      </div>
+    </article>
+
+    <!-- マーウィン crest -->
+    <article class="tile">
+      <div class="art" style="--c1:#4a3a22;--c2:#1f1810">
+        <div class="badge crest"><small>クレスト</small><b>5/4/3</b></div>
+        <img src="https://shadowverse-wb.com/uploads/card_image/jpn/card/38a27d8bcad746deb87c6095ed0c5a01.png" onerror="this.style.display='none'" alt="">
+        <div class="ph">絶望の顕現<br>マーウィン</div>
+      </div>
+      <div class="body">
+        <div class="name">絶望の顕現・マーウィン</div>
+        <div class="meta"><span>コスト 4</span><span>クレスト 5/4/3/2/1</span></div>
+      </div>
+    </article>
+  </div>
+</div>
+</body>
+</html>
