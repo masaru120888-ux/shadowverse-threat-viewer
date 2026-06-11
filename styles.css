@@ -331,6 +331,38 @@ input {
   margin: 3px 0 8px;
 }
 
+.card-effect {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.card-effect.expanded {
+  display: block;
+  overflow: visible;
+}
+
+.detail-button {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1.6;
+}
+
+.detail-button:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
 .threat-meta {
   display: flex;
   flex-wrap: wrap;

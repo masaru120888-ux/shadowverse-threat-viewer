@@ -139,7 +139,7 @@ function hasLeaderDamage(card) {
 
 function baseThreats() {
   if (turnsPlayed == null) return [];
-  const enemyMaxPp = Math.min(10, turnsPlayed);
+  const enemyMaxPp = Math.min(11, turnsPlayed);
   return cardData.cards
     .filter((card) => card.classKey === enemyClass || card.classKey === "neutral")
     .filter(formatAllows)
@@ -256,7 +256,7 @@ function threatVariants(card) {
 
 function comboThreats(cards) {
   if (turnsPlayed == null) return [];
-  const maxPp = Math.min(10, turnsPlayed);
+  const maxPp = Math.min(11, turnsPlayed);
   const maxEvolve = Math.max(0, evolvePoints);
   const table = Array.from({ length: maxPp + 1 }, () =>
     Array.from({ length: maxEvolve + 1 }, () => []),
@@ -388,7 +388,8 @@ function renderThreatCard(card) {
       <img class="threat-art" src="${cardImageUrl(card)}" alt="${imageLabel}" loading="lazy" />
       <div class="threat-copy">
         <strong>${displayName}</strong>
-        <p>${selectedCard.effect}</p>
+        <p class="card-effect">${selectedCard.effect}</p>
+        <button class="detail-button" type="button">${lang === "ja" ? "詳細" : "Details"}</button>
         <div class="threat-meta">
           <span>${ui[lang].cost}: ${card.cost}</span>
           <span>${ui[lang].condition}: ${card.condition}</span>
@@ -453,7 +454,7 @@ function render() {
   const singleThreats = damageMode === "combo" ? baseThreats() : availableThreats();
   const threats = damageMode === "combo" ? comboThreats(singleThreats) : singleThreats;
   const inputComplete = turnsPlayed != null && currentHealth != null;
-  const enemyMaxPp = inputComplete ? Math.min(10, turnsPlayed) : 0;
+  const enemyMaxPp = inputComplete ? Math.min(11, turnsPlayed) : 0;
   const stormDamage = Math.max(0, ...threats.map((card) => card.stormDamage));
   const burnDamage = Math.max(0, ...threats.map((card) => card.burnDamage));
   const visibleLeaderDamage = Math.max(0, ...threats.map((card) => card.leaderDamage));
@@ -497,6 +498,15 @@ function render() {
   renderFormatButtons();
   renderDamageModeButtons();
 }
+
+fields.enemyThreats.addEventListener("click", (event) => {
+  const btn = event.target.closest(".detail-button");
+  if (!btn) return;
+  const p = btn.previousElementSibling;
+  if (!p) return;
+  const expanded = p.classList.toggle("expanded");
+  btn.textContent = expanded ? (lang === "ja" ? "閉じる" : "Close") : (lang === "ja" ? "詳細" : "Details");
+});
 
 fields.turnInput.addEventListener("input", (event) => {
   turnsPlayed = Number(event.target.value);
