@@ -542,6 +542,79 @@ input {
   background: var(--inset-bg);
 }
 
+/* ── Swipe pages (mobile only) ── */
+.swipe-hint {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .swipe-pages {
+    display: flex;
+    gap: 28px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .swipe-pages::-webkit-scrollbar {
+    display: none;
+  }
+
+  .swipe-page {
+    flex: 0 0 100%;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    align-self: flex-start;
+  }
+
+  .swipe-hint {
+    display: flex;
+    width: 100%;
+    min-height: 50px;
+    margin-top: 12px;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    background: rgba(216, 180, 94, 0.12);
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  :root.light-mode .swipe-hint {
+    background: rgba(166, 121, 27, 0.10);
+  }
+
+  .swipe-hint-back {
+    margin: 0 0 2px;
+  }
+
+  .swipe-arrow {
+    font-size: 1.1rem;
+    animation: swipe-nudge-right 1.6s ease-in-out infinite;
+  }
+
+  .swipe-arrow-left {
+    animation-name: swipe-nudge-left;
+  }
+}
+
+@keyframes swipe-nudge-right {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+@keyframes swipe-nudge-left {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-5px); }
+}
+
 .app-footer {
     margin: 24px auto 0;
     width: min(980px, calc(100% - 24px));

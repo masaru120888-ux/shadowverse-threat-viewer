@@ -64,6 +64,8 @@ const ui = {
     tabBoard: "盤面脅威チェッカー",
     tabSoon: "近日登場",
     experimental: "実験的",
+    swipeToResults: "結果へスワイプ",
+    swipeBackToInput: "入力へ戻る",
   },
   en: {
     introEyebrow: "Enemy lethal check",
@@ -112,6 +114,8 @@ const ui = {
     tabBoard: "Board Threats",
     tabSoon: "Coming Soon",
     experimental: "Experimental",
+    swipeToResults: "Swipe to results",
+    swipeBackToInput: "Back to input",
   },
 };
 
@@ -558,6 +562,42 @@ fields.language.addEventListener("click", () => {
   lang = lang === "ja" ? "en" : "ja";
   render();
 });
+
+// ── モバイル横スワイプページ（入力 ⇆ 結果） ──
+// スマホ幅では入力欄と結果一覧を横並びの2ページにし、スワイプ/ボタンで切り替える。
+// コンテナの高さを現在表示中のページに合わせて補間し、非表示ページ分の縦余白を消す。
+const swipePages = document.querySelector("#swipe-pages");
+const swipePageList = Array.from(document.querySelectorAll(".swipe-page"));
+const swipeMq = window.matchMedia("(max-width: 760px)");
+
+function syncSwipeHeight() {
+  if (!swipePages || swipePageList.length < 2) return;
+  if (!swipeMq.matches) {
+    swipePages.style.height = "";
+    return;
+  }
+  const [inputPage, resultPage] = swipePageList;
+  const maxScroll = swipePages.scrollWidth - swipePages.clientWidth;
+  const progress = maxScroll > 0 ? Math.min(1, Math.max(0, swipePages.scrollLeft / maxScroll)) : 0;
+  const height = inputPage.offsetHeight + (resultPage.offsetHeight - inputPage.offsetHeight) * progress;
+  swipePages.style.height = `${Math.ceil(height)}px`;
+}
+
+if (swipePages) {
+  swipePages.addEventListener("scroll", syncSwipeHeight, { passive: true });
+  window.addEventListener("resize", syncSwipeHeight);
+  swipeMq.addEventListener("change", syncSwipeHeight);
+  const swipeResizeObserver = new ResizeObserver(syncSwipeHeight);
+  swipePageList.forEach((page) => swipeResizeObserver.observe(page));
+
+  document.querySelector("#goto-results")?.addEventListener("click", () => {
+    swipePages.scrollTo({ left: swipePages.scrollWidth - swipePages.clientWidth, behavior: "smooth" });
+    document.querySelector(".match")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  document.querySelector("#goto-input")?.addEventListener("click", () => {
+    swipePages.scrollTo({ left: 0, behavior: "smooth" });
+  });
+}
 
 fields.theme.addEventListener("click", () => {
   theme = theme === "dark" ? "light" : "dark";

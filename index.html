@@ -35,6 +35,8 @@
       </nav>
 
       <section class="match" aria-label="opponent threat analyzer">
+        <div class="swipe-pages" id="swipe-pages">
+          <div class="swipe-page" id="page-input">
         <section class="class-control" aria-labelledby="class-control-title">
           <div>
             <h2 id="class-control-title" data-i18n="classControl">相手クラス</h2>
@@ -81,6 +83,17 @@
           </div>
         </section>
 
+        <button class="swipe-hint" id="goto-results" type="button">
+          <span data-i18n="swipeToResults">結果へスワイプ</span>
+          <span class="swipe-arrow" aria-hidden="true">→</span>
+        </button>
+          </div>
+
+          <div class="swipe-page" id="page-results">
+        <button class="swipe-hint swipe-hint-back" id="goto-input" type="button">
+          <span class="swipe-arrow swipe-arrow-left" aria-hidden="true">←</span>
+          <span data-i18n="swipeBackToInput">入力へ戻る</span>
+        </button>
 
         <section class="lethal-panel" aria-label="combat summary">
           <article>
@@ -108,6 +121,8 @@
           </div>
           <div class="threat-row" id="enemy-threats"></div>
         </section>
+          </div>
+        </div>
       </section>
     </main>
 
