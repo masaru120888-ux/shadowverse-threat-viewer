@@ -573,6 +573,11 @@ input {
     touch-action: pan-x pan-y;
   }
 
+  /* スライダーは横ドラッグ操作を自身で完結させ、ページスワイプに渡さない */
+  .turn-input-wrap input[type="range"] {
+    touch-action: none;
+  }
+
   .swipe-hint {
     display: flex;
     width: 100%;

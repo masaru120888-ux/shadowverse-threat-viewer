@@ -627,14 +627,16 @@ if (swipePages && swipePageList.length >= 2) {
 
   swipePages.addEventListener("touchstart", (event) => {
     if (!swipeMq.matches || event.touches.length !== 1) return;
-    // 横スクロールする子要素（コンボのカード画像帯）内は自前処理しない
-    if (event.target.closest(".combo-art-strip")) return;
+    // スライダーとその操作枠、横スクロールする子要素では自前処理しない
+    if (event.target.closest('.turn-input-wrap, input[type="range"], .combo-art-strip')) return;
     touchState = {
       x: event.touches[0].clientX,
       y: event.touches[0].clientY,
       start: performance.now(),
       axis: null,
       dx: 0,
+      // スライダー周辺（同じセクション内）はページ切替の感度を下げる
+      nearSlider: !!event.target.closest(".turn-control"),
     };
     swipePages.classList.remove("is-animating");
   }, { passive: true });
@@ -644,8 +646,10 @@ if (swipePages && swipePageList.length >= 2) {
     const dx = event.touches[0].clientX - touchState.x;
     const dy = event.touches[0].clientY - touchState.y;
     if (!touchState.axis) {
-      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
-      touchState.axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+      const lockDistance = touchState.nearSlider ? 18 : 8;
+      const horizontalBias = touchState.nearSlider ? 1.5 : 1;
+      if (Math.abs(dx) < lockDistance && Math.abs(dy) < lockDistance) return;
+      touchState.axis = Math.abs(dx) > Math.abs(dy) * horizontalBias ? "x" : "y";
     }
     if (touchState.axis !== "x") return;
     if (event.cancelable) event.preventDefault();
@@ -666,8 +670,10 @@ if (swipePages && swipePageList.length >= 2) {
       const step = swipeStep();
       const elapsed = Math.max(1, performance.now() - touchState.start);
       const velocity = Math.abs(touchState.dx) / elapsed;
-      const draggedFar = Math.abs(touchState.dx) > step / 3;
-      const flicked = velocity > 0.6 && Math.abs(touchState.dx) > 48;
+      const draggedFar = Math.abs(touchState.dx) > (touchState.nearSlider ? step / 2 : step / 3);
+      const flicked = touchState.nearSlider
+        ? velocity > 0.9 && Math.abs(touchState.dx) > 80
+        : velocity > 0.6 && Math.abs(touchState.dx) > 48;
       if (draggedFar || flicked) {
         goToSwipePage(swipeIndex + (touchState.dx < 0 ? 1 : -1));
       } else {
