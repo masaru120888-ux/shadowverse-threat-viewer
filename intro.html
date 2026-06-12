@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>逆リーサルチェッカー</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0b0e13;
+      color: #f5f7fb;
+      font-family: -apple-system, 'Hiragino Kaku Gothic ProN', 'Noto Sans JP',
+                   'Yu Gothic UI', 'Meiryo', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── page wrapper ── */
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 80px 32px 100px;
+      text-align: center;
+    }
+
+    /* ─────────────────────────────
+       BRAND
+    ───────────────────────────── */
+    .brand {
+      margin-bottom: 48px;
+    }
+
+    .brand-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      color: #d8b45e;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .brand-eyebrow::before,
+    .brand-eyebrow::after {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: rgba(216, 180, 94, 0.45);
+    }
+
+    .brand-title {
+      font-size: clamp(2.8rem, 8.5vw, 5.6rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 0;
+    }
+    .brand-title .gold { color: #d8b45e; }
+    .brand-title .icon {
+      font-style: normal;
+      font-size: 0.62em;
+      vertical-align: middle;
+      margin-left: 6px;
+      opacity: 0.85;
+    }
+
+    .brand-sub {
+      font-size: 1.05rem;
+      color: #5c6675;
+      letter-spacing: 0.06em;
+      margin-top: 18px;
+    }
+
+    /* ─────────────────────────────
+       WAVE DECORATION
+    ───────────────────────────── */
+    .wave-deco {
+      margin: 0 auto 56px;
+      line-height: 0;
+    }
+
+    /* ─────────────────────────────
+       FEATURES GRID
+    ───────────────────────────── */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .feature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .feature-head {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f5f7fb;
+      line-height: 1.45;
+      min-height: 2.9em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    /* coloured accent bar */
+    .bar {
+      width: 28px;
+      height: 3px;
+      border-radius: 2px;
+      margin: 0 auto 18px;
+    }
+    .feature:nth-child(1) .bar { background: #5dbfd4; }
+    .feature:nth-child(2) .bar { background: #d8b45e; }
+    .feature:nth-child(3) .bar { background: #76c87c; }
+    .feature:nth-child(4) .bar { background: #dd7168; }
+
+    /* ── phone frame ── */
+    .phone {
+      width: 178px;
+      height: 355px;
+      background: #07090c;
+      border-radius: 34px;
+      border: 2.5px solid #1e2330;
+      box-shadow:
+        0 0 0 0.5px #111,
+        0 28px 72px rgba(0, 0, 0, 0.8),
+        0 6px 18px  rgba(0, 0, 0, 0.5),
+        inset 0  1px 0 rgba(255,255,255,0.04),
+        inset 0 -1px 0 rgba(0,0,0,0.5);
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    /* pill notch */
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 52px;
+      height: 8px;
+      background: #07090c;
+      border-radius: 4px;
+      z-index: 10;
+    }
+
+    /* subtle glare */
+    .phone::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        140deg,
+        rgba(255,255,255,0.055) 0%,
+        transparent 42%
+      );
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .phone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .feature-foot {
+      font-size: 0.78rem;
+      color: #434d5e;
+      margin-top: 14px;
+      line-height: 1.75;
+    }
+
+    /* ─────────────────────────────
+       RESPONSIVE
+    ───────────────────────────── */
+    @media (max-width: 860px) {
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 36px 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page { padding: 56px 20px 72px; }
+      .features { grid-template-columns: 1fr; }
+      .brand-sub { font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Brand ── -->
+  <div class="brand">
+    <div class="brand-eyebrow">Shadowverse Threat Viewer</div>
+    <h1 class="brand-title">
+      逆リーサル<span class="gold">チェッカー</span><i class="icon">⚔</i>
+    </h1>
+    <p class="brand-sub">相手の脅威を先読みする、シャドバ専用ツール</p>
+  </div>
+
+  <!-- ── Wave decoration ── -->
+  <div class="wave-deco">
+    <svg width="340" height="22" viewBox="0 0 340 22" fill="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- sinusoidal path -->
+      <path d="M0 11 Q42.5 3 85 11 Q127.5 19 170 11 Q212.5 3 255 11 Q297.5 19 340 11"
+            stroke="rgba(216,180,94,.28)" stroke-width="1.5" fill="none"/>
+      <!-- nodes -->
+      <circle cx="0"   cy="11" r="1.5" fill="rgba(216,180,94,.22)"/>
+      <circle cx="85"  cy="11" r="2.5" fill="rgba(216,180,94,.55)"/>
+      <circle cx="170" cy="11" r="4"   fill="#d8b45e"/>
+      <circle cx="255" cy="11" r="2.5" fill="rgba(216,180,94,.55)"/>
+      <circle cx="340" cy="11" r="1.5" fill="rgba(216,180,94,.22)"/>
+    </svg>
+  </div>
+
+  <!-- ── Features ── -->
+  <div class="features">
+
+    <!-- 1: HP input -->
+    <div class="feature">
+      <div class="feature-head">残りHPを入力</div>
+      <div class="bar"></div>
+      <div class="phone">
+        <img src="mockups/mockup-d.png" alt="HP入力画面"
+             style="object-position: center top;">
+      </div>
+      <p class="feature-foot">相手リーダーの残りHPを<br>入力するだけで即フィルタ</p>
+    </div>
+
+    <!-- 2: Format / Turn -->
+    <div class="feature">
+      <div class="feature-head">条件を絞り込む</div>
+      <div class="bar"></div>
+      <div class="phone">
+        <img src="mockups/mockup-a.png" alt="条件設定画面"
+             style="object-position: center 30%;">
+      </div>
+      <p class="feature-foot">フォーマット・ターン数で<br>カードをフィルタリング</p>
+    </div>
+
+    <!-- 3: Threat card list -->
+    <div class="feature">
+      <div class="feature-head">脅威カードを確認</div>
+      <div class="bar"></div>
+      <div class="phone">
+        <img src="mockups/mockup-d.png" alt="脅威カード一覧"
+             style="object-position: center 65%;">
+      </div>
+      <p class="feature-foot">打点順に並んだ<br>脅威カードを一覧表示</p>
+    </div>
+
+    <!-- 4: Lethal highlight -->
+    <div class="feature">
+      <div class="feature-head">リーサルを見逃さない</div>
+      <div class="bar"></div>
+      <div class="phone">
+        <img src="mockups/mockup-a.png" alt="リーサル強調表示"
+             style="object-position: center top;">
+      </div>
+      <p class="feature-foot">リーサルカードは<br>赤くハイライト表示</p>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>
