@@ -2,11 +2,21 @@
 // Object.assign でカードデータに上書き適用される。
 window.SHADOWVERSE_CARD_OVERRIDES = [
   // カミシラ — 超進化3バーン + 除去1
-  { id: "10674110", requiresEvolve: true, evolveEffectLeaderDamage: 3, superEvolveKillDamage: 1, condition: "超進化" },
+  { id: "10674110", requiresEvolve: true, requiresSuperEvolve: true, evolveEffectLeaderDamage: 3, superEvolveKillDamage: 1, condition: "超進化" },
   // シャクドウ — 超進化17 / 進化16 / 通常8
   { id: "10554120", evolveEffectLeaderDamage: 16, superEvolveKillDamage: 1, stormBreakdownMax: [17, 16, 8], condition: "超進化" },
-  // クルーエルウォー・ラウラ — 自身疾走不可、他フォロワーに疾走付与(X) + 除去1
-  { id: "10253110", xDamage: true, leaderDamage: 0, burnDamage: 0, evolveEffectLeaderDamage: 0, superEvolveKillDamage: 1, requiresEvolve: true, condition: "超進化" },
+  // クルーエルウォー・ラウラ — 自身疾走不可、他フォロワーに疾走付与(X) + 除去1。超進化時のみ
+  { id: "10253110", xDamage: true, leaderDamage: 0, burnDamage: 0, evolveEffectLeaderDamage: 0, superEvolveKillDamage: 1, requiresEvolve: true, requiresSuperEvolve: true, condition: "超進化" },
+  // 奮励の追走・ミュー — AF3種以上で超進化時のみ疾走
+  { id: "10774120", requiresSuperEvolve: true, condition: "AF3種以上 / 超進化" },
+  // 魔煌のトリックスター・ラスティ — 超進化時のみ（同名カードを引いて疾走付与）
+  { id: "10022120", requiresSuperEvolve: true, condition: "超進化" },
+  // 常在戦場・カゲミツ — 超進化時のみ疾走
+  { id: "10124130", requiresSuperEvolve: true, condition: "超進化" },
+  // 懐旧の送り火・エルモート — 超進化時のみクレスト付与
+  { id: "10433110", requiresSuperEvolve: true, condition: "超進化" },
+  // 風を読む者・ゼル — 超進化時のみ他フォロワーに疾走付与
+  { id: "10142130", requiresSuperEvolve: true, condition: "超進化" },
   // ノクターンジェネラル・エクセラ — 能力による攻撃力変動 8/7/4〜4/3/1
   { id: "10253120", stormBreakdownMax: [8, 7, 4], stormBreakdownMin: [4, 3, 1] },
   // デッドプレゼンター・マクミラン — ネクロ10最大6点 + 除去1

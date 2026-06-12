@@ -46,6 +46,7 @@ const ui = {
     comboCards: "カード枚数",
     accumulatedDamage: "累積打点",
     damageBreakdown: "超進化/進化/通常",
+    damageBreakdownNoSuper: "進化/通常",
     killBreakdown: "除去込み/素打点",
     cost: "コスト",
     condition: "条件",
@@ -99,6 +100,7 @@ const ui = {
     comboCards: "Cards",
     accumulatedDamage: "Running damage",
     damageBreakdown: "Super/Evolve/Base",
+    damageBreakdownNoSuper: "Evolve/Base",
     killBreakdown: "w/ kill / base",
     cost: "Cost",
     condition: "Condition",
@@ -219,14 +221,15 @@ function stormDamageBreakdown(card) {
 }
 
 function variantCondition(card, label) {
-  return [
-    card.condition,
-    label,
-  ].filter(Boolean).join(" / ");
+  const parts = (card.condition ? card.condition.split(" / ") : []).concat(label || []);
+  return [...new Set(parts)].join(" / ");
 }
 
 function threatVariants(card) {
   const variants = [];
+  const requiresSuper = !!card.requiresSuperEvolve;
+  // 打点が超進化前提のカードは、超進化できないターン（6未満）では表示しない
+  if (requiresSuper && !canSuperEvolve()) return [];
   if (!card.requiresEvolve) {
     variants.push({ ...card, baseLeaderDamage: card.leaderDamage, evolveCost: 0, variant: "base" });
   }
@@ -236,18 +239,22 @@ function threatVariants(card) {
   const hasEvolveDamage = card.requiresEvolve || evolveBonus > 0 || evolveEffectDamage > 0;
 
   if (evolvePoints > 0 && hasEvolveDamage) {
-    const killBonus = card.superEvolveKillDamage || 0;
+    // 超進化フォロワーの破壊時打点は超進化できるターンのみ加算
+    const killBonus = canSuperEvolve() ? (card.superEvolveKillDamage || 0) : 0;
     const confirmedDamage = Math.max(card.leaderDamage + evolveBonus, evolveEffectDamage);
+    const evolveLabel = requiresSuper
+      ? (lang === "ja" ? "超進化" : "Super-evolve")
+      : (lang === "ja" ? "進化" : "Evolve");
     variants.push({
       ...card,
       baseLeaderDamage: card.leaderDamage,
       evolveCost: 1,
-      variant: "evolve",
+      variant: requiresSuper ? "super-evolve" : "evolve",
       leaderDamage: confirmedDamage + killBonus,
       killDamage: killBonus,
       stormDamage: card.stormDamage + evolveBonus,
       burnDamage: card.stormDamage > 0 ? card.burnDamage : Math.max(card.burnDamage, evolveEffectDamage),
-      condition: variantCondition(card, lang === "ja" ? "進化" : "Evolve"),
+      condition: variantCondition(card, evolveLabel),
     });
   }
 
@@ -342,12 +349,18 @@ function formatDamage(value) {
 function renderDamageBreakdown(card) {
   const breakdown = stormDamageBreakdown(card);
   if (!breakdown) return "";
-  const max = [breakdown.superEvolve, breakdown.evolve, breakdown.base].join("/");
+  // ターン6未満は超進化できないため、超進化打点(x)を除いた 進化/通常(y/z) のみ表示
+  const withSuper = canSuperEvolve();
+  const label = withSuper ? ui[lang].damageBreakdown : ui[lang].damageBreakdownNoSuper;
+  const maxParts = withSuper
+    ? [breakdown.superEvolve, breakdown.evolve, breakdown.base]
+    : [breakdown.evolve, breakdown.base];
+  const max = maxParts.join("/");
   if (breakdown.min) {
-    const minStr = breakdown.min.join("/");
-    return `<span class="damage-breakdown"><small>${ui[lang].damageBreakdown}</small>${max}~${minStr}</span>`;
+    const minStr = (withSuper ? breakdown.min : breakdown.min.slice(1)).join("/");
+    return `<span class="damage-breakdown"><small>${label}</small>${max}~${minStr}</span>`;
   }
-  return `<span class="damage-breakdown"><small>${ui[lang].damageBreakdown}</small>${max}</span>`;
+  return `<span class="damage-breakdown"><small>${label}</small>${max}</span>`;
 }
 
 function renderKillDamageBreakdown(card) {
