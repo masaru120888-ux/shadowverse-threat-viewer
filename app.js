@@ -578,37 +578,120 @@ fields.language.addEventListener("click", () => {
 
 // ── モバイル横スワイプページ（入力 ⇆ 結果） ──
 // スマホ幅では入力欄と結果一覧を横並びの2ページにし、スワイプ/ボタンで切り替える。
-// コンテナの高さを現在表示中のページに合わせて補間し、非表示ページ分の縦余白を消す。
+// タッチを自前で処理し、画面幅の1/3以上のドラッグか明確なフリックのときだけ
+// ページを移動する（標準スクロールスナップは感度が強すぎるため）。
+// コンテナの高さは表示中ページに合わせて補間し、非表示ページ分の縦余白を消す。
 const swipePages = document.querySelector("#swipe-pages");
 const swipePageList = Array.from(document.querySelectorAll(".swipe-page"));
 const swipeMq = window.matchMedia("(max-width: 760px)");
+let swipeIndex = 0;
 
-function syncSwipeHeight() {
-  if (!swipePages || swipePageList.length < 2) return;
-  if (!swipeMq.matches) {
-    swipePages.style.height = "";
-    return;
-  }
-  const [inputPage, resultPage] = swipePageList;
-  const maxScroll = swipePages.scrollWidth - swipePages.clientWidth;
-  const progress = maxScroll > 0 ? Math.min(1, Math.max(0, swipePages.scrollLeft / maxScroll)) : 0;
-  const height = inputPage.offsetHeight + (resultPage.offsetHeight - inputPage.offsetHeight) * progress;
-  swipePages.style.height = `${Math.ceil(height)}px`;
+function swipeStep() {
+  const gap = parseFloat(getComputedStyle(swipePages).columnGap) || 0;
+  return swipePages.clientWidth + gap;
 }
 
-if (swipePages) {
-  swipePages.addEventListener("scroll", syncSwipeHeight, { passive: true });
-  window.addEventListener("resize", syncSwipeHeight);
-  swipeMq.addEventListener("change", syncSwipeHeight);
-  const swipeResizeObserver = new ResizeObserver(syncSwipeHeight);
+function applySwipeOffset(offset) {
+  for (const page of swipePageList) page.style.transform = `translateX(${offset}px)`;
+}
+
+function swipeHeightAt(progress) {
+  const [inputPage, resultPage] = swipePageList;
+  const p = Math.min(1, Math.max(0, progress));
+  return Math.ceil(inputPage.offsetHeight + (resultPage.offsetHeight - inputPage.offsetHeight) * p);
+}
+
+function settleSwipe(animate) {
+  swipePages.classList.toggle("is-animating", animate);
+  applySwipeOffset(-swipeIndex * swipeStep());
+  swipePages.style.height = `${swipeHeightAt(swipeIndex)}px`;
+}
+
+function goToSwipePage(index) {
+  swipeIndex = Math.min(swipePageList.length - 1, Math.max(0, index));
+  settleSwipe(true);
+}
+
+function syncSwipeLayout() {
+  if (!swipeMq.matches) {
+    swipePages.classList.remove("is-animating");
+    swipePages.style.height = "";
+    for (const page of swipePageList) page.style.transform = "";
+    return;
+  }
+  settleSwipe(false);
+}
+
+if (swipePages && swipePageList.length >= 2) {
+  let touchState = null;
+
+  swipePages.addEventListener("touchstart", (event) => {
+    if (!swipeMq.matches || event.touches.length !== 1) return;
+    // 横スクロールする子要素（コンボのカード画像帯）内は自前処理しない
+    if (event.target.closest(".combo-art-strip")) return;
+    touchState = {
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY,
+      start: performance.now(),
+      axis: null,
+      dx: 0,
+    };
+    swipePages.classList.remove("is-animating");
+  }, { passive: true });
+
+  swipePages.addEventListener("touchmove", (event) => {
+    if (!touchState) return;
+    const dx = event.touches[0].clientX - touchState.x;
+    const dy = event.touches[0].clientY - touchState.y;
+    if (!touchState.axis) {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+      touchState.axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+    }
+    if (touchState.axis !== "x") return;
+    if (event.cancelable) event.preventDefault();
+    touchState.dx = dx;
+    const step = swipeStep();
+    let offset = -swipeIndex * step + dx;
+    const minOffset = -(swipePageList.length - 1) * step;
+    // 端を越えるドラッグはゴムのように抵抗をつける
+    if (offset > 0) offset *= 0.3;
+    else if (offset < minOffset) offset = minOffset + (offset - minOffset) * 0.3;
+    applySwipeOffset(offset);
+    swipePages.style.height = `${swipeHeightAt(-offset / step)}px`;
+  }, { passive: false });
+
+  const endTouch = () => {
+    if (!touchState) return;
+    if (touchState.axis === "x") {
+      const step = swipeStep();
+      const elapsed = Math.max(1, performance.now() - touchState.start);
+      const velocity = Math.abs(touchState.dx) / elapsed;
+      const draggedFar = Math.abs(touchState.dx) > step / 3;
+      const flicked = velocity > 0.6 && Math.abs(touchState.dx) > 48;
+      if (draggedFar || flicked) {
+        goToSwipePage(swipeIndex + (touchState.dx < 0 ? 1 : -1));
+      } else {
+        settleSwipe(true);
+      }
+    }
+    touchState = null;
+  };
+  swipePages.addEventListener("touchend", endTouch);
+  swipePages.addEventListener("touchcancel", endTouch);
+
+  window.addEventListener("resize", syncSwipeLayout);
+  swipeMq.addEventListener("change", syncSwipeLayout);
+  const swipeResizeObserver = new ResizeObserver(() => {
+    if (!touchState) syncSwipeLayout();
+  });
   swipePageList.forEach((page) => swipeResizeObserver.observe(page));
 
   document.querySelector("#goto-results")?.addEventListener("click", () => {
-    swipePages.scrollTo({ left: swipePages.scrollWidth - swipePages.clientWidth, behavior: "smooth" });
+    goToSwipePage(1);
     document.querySelector(".match")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
   document.querySelector("#goto-input")?.addEventListener("click", () => {
-    swipePages.scrollTo({ left: 0, behavior: "smooth" });
+    goToSwipePage(0);
   });
 }
 

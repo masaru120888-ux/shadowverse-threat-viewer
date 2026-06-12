@@ -551,23 +551,26 @@ input {
   .swipe-pages {
     display: flex;
     gap: 28px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    overflow: hidden;
+    touch-action: pan-y;
   }
 
-  .swipe-pages::-webkit-scrollbar {
-    display: none;
+  .swipe-pages.is-animating {
+    transition: height 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
   }
 
   .swipe-page {
     flex: 0 0 100%;
     min-width: 0;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     align-self: flex-start;
+  }
+
+  .swipe-pages.is-animating .swipe-page {
+    transition: transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .combo-art-strip {
+    touch-action: pan-x pan-y;
   }
 
   .swipe-hint {
