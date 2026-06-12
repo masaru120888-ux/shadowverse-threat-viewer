@@ -46,6 +46,7 @@ const ui = {
     comboCards: "カード枚数",
     accumulatedDamage: "累積打点",
     damageBreakdown: "超進化/進化/通常",
+    damageBreakdownNoSuper: "進化/通常",
     killBreakdown: "除去込み/素打点",
     cost: "コスト",
     condition: "条件",
@@ -64,6 +65,8 @@ const ui = {
     tabBoard: "盤面脅威チェッカー",
     tabSoon: "近日登場",
     experimental: "実験的",
+    swipeToResults: "結果へスワイプ",
+    swipeBackToInput: "入力へ戻る",
   },
   en: {
     introEyebrow: "Enemy lethal check",
@@ -97,6 +100,7 @@ const ui = {
     comboCards: "Cards",
     accumulatedDamage: "Running damage",
     damageBreakdown: "Super/Evolve/Base",
+    damageBreakdownNoSuper: "Evolve/Base",
     killBreakdown: "w/ kill / base",
     cost: "Cost",
     condition: "Condition",
@@ -112,6 +116,8 @@ const ui = {
     tabBoard: "Board Threats",
     tabSoon: "Coming Soon",
     experimental: "Experimental",
+    swipeToResults: "Swipe to results",
+    swipeBackToInput: "Back to input",
   },
 };
 
@@ -215,14 +221,15 @@ function stormDamageBreakdown(card) {
 }
 
 function variantCondition(card, label) {
-  return [
-    card.condition,
-    label,
-  ].filter(Boolean).join(" / ");
+  const parts = (card.condition ? card.condition.split(" / ") : []).concat(label || []);
+  return [...new Set(parts)].join(" / ");
 }
 
 function threatVariants(card) {
   const variants = [];
+  const requiresSuper = !!card.requiresSuperEvolve;
+  // 打点が超進化前提のカードは、超進化できないターン（6未満）では表示しない
+  if (requiresSuper && !canSuperEvolve()) return [];
   if (!card.requiresEvolve) {
     variants.push({ ...card, baseLeaderDamage: card.leaderDamage, evolveCost: 0, variant: "base" });
   }
@@ -232,18 +239,22 @@ function threatVariants(card) {
   const hasEvolveDamage = card.requiresEvolve || evolveBonus > 0 || evolveEffectDamage > 0;
 
   if (evolvePoints > 0 && hasEvolveDamage) {
-    const killBonus = card.superEvolveKillDamage || 0;
+    // 超進化フォロワーの破壊時打点は超進化できるターンのみ加算
+    const killBonus = canSuperEvolve() ? (card.superEvolveKillDamage || 0) : 0;
     const confirmedDamage = Math.max(card.leaderDamage + evolveBonus, evolveEffectDamage);
+    const evolveLabel = requiresSuper
+      ? (lang === "ja" ? "超進化" : "Super-evolve")
+      : (lang === "ja" ? "進化" : "Evolve");
     variants.push({
       ...card,
       baseLeaderDamage: card.leaderDamage,
       evolveCost: 1,
-      variant: "evolve",
+      variant: requiresSuper ? "super-evolve" : "evolve",
       leaderDamage: confirmedDamage + killBonus,
       killDamage: killBonus,
       stormDamage: card.stormDamage + evolveBonus,
       burnDamage: card.stormDamage > 0 ? card.burnDamage : Math.max(card.burnDamage, evolveEffectDamage),
-      condition: variantCondition(card, lang === "ja" ? "進化" : "Evolve"),
+      condition: variantCondition(card, evolveLabel),
     });
   }
 
@@ -338,12 +349,18 @@ function formatDamage(value) {
 function renderDamageBreakdown(card) {
   const breakdown = stormDamageBreakdown(card);
   if (!breakdown) return "";
-  const max = [breakdown.superEvolve, breakdown.evolve, breakdown.base].join("/");
+  // ターン6未満は超進化できないため、超進化打点(x)を除いた 進化/通常(y/z) のみ表示
+  const withSuper = canSuperEvolve();
+  const label = withSuper ? ui[lang].damageBreakdown : ui[lang].damageBreakdownNoSuper;
+  const maxParts = withSuper
+    ? [breakdown.superEvolve, breakdown.evolve, breakdown.base]
+    : [breakdown.evolve, breakdown.base];
+  const max = maxParts.join("/");
   if (breakdown.min) {
-    const minStr = breakdown.min.join("/");
-    return `<span class="damage-breakdown"><small>${ui[lang].damageBreakdown}</small>${max}~${minStr}</span>`;
+    const minStr = (withSuper ? breakdown.min : breakdown.min.slice(1)).join("/");
+    return `<span class="damage-breakdown"><small>${label}</small>${max}~${minStr}</span>`;
   }
-  return `<span class="damage-breakdown"><small>${ui[lang].damageBreakdown}</small>${max}</span>`;
+  return `<span class="damage-breakdown"><small>${label}</small>${max}</span>`;
 }
 
 function renderKillDamageBreakdown(card) {
@@ -558,6 +575,131 @@ fields.language.addEventListener("click", () => {
   lang = lang === "ja" ? "en" : "ja";
   render();
 });
+
+// ── モバイル横スワイプページ（入力 ⇆ 結果） ──
+// スマホ幅では入力欄と結果一覧を横並びの2ページにし、スワイプ/ボタンで切り替える。
+// タッチを自前で処理し、画面幅の1/3以上のドラッグか明確なフリックのときだけ
+// ページを移動する（標準スクロールスナップは感度が強すぎるため）。
+// コンテナの高さは表示中ページに合わせて補間し、非表示ページ分の縦余白を消す。
+const swipePages = document.querySelector("#swipe-pages");
+const swipePageList = Array.from(document.querySelectorAll(".swipe-page"));
+const swipeMq = window.matchMedia("(max-width: 760px)");
+let swipeIndex = 0;
+
+function swipeStep() {
+  const gap = parseFloat(getComputedStyle(swipePages).columnGap) || 0;
+  return swipePages.clientWidth + gap;
+}
+
+function applySwipeOffset(offset) {
+  for (const page of swipePageList) page.style.transform = `translateX(${offset}px)`;
+}
+
+function swipeHeightAt(progress) {
+  const [inputPage, resultPage] = swipePageList;
+  const p = Math.min(1, Math.max(0, progress));
+  return Math.ceil(inputPage.offsetHeight + (resultPage.offsetHeight - inputPage.offsetHeight) * p);
+}
+
+function settleSwipe(animate) {
+  swipePages.classList.toggle("is-animating", animate);
+  applySwipeOffset(-swipeIndex * swipeStep());
+  swipePages.style.height = `${swipeHeightAt(swipeIndex)}px`;
+}
+
+function goToSwipePage(index) {
+  swipeIndex = Math.min(swipePageList.length - 1, Math.max(0, index));
+  settleSwipe(true);
+}
+
+function syncSwipeLayout() {
+  if (!swipeMq.matches) {
+    swipePages.classList.remove("is-animating");
+    swipePages.style.height = "";
+    for (const page of swipePageList) page.style.transform = "";
+    return;
+  }
+  settleSwipe(false);
+}
+
+if (swipePages && swipePageList.length >= 2) {
+  let touchState = null;
+
+  swipePages.addEventListener("touchstart", (event) => {
+    if (!swipeMq.matches || event.touches.length !== 1) return;
+    // スライダーとその操作枠、横スクロールする子要素では自前処理しない
+    if (event.target.closest('.turn-input-wrap, input[type="range"], .combo-art-strip')) return;
+    touchState = {
+      x: event.touches[0].clientX,
+      y: event.touches[0].clientY,
+      start: performance.now(),
+      axis: null,
+      dx: 0,
+      // スライダー周辺（同じセクション内）はページ切替の感度を下げる
+      nearSlider: !!event.target.closest(".turn-control"),
+    };
+    swipePages.classList.remove("is-animating");
+  }, { passive: true });
+
+  swipePages.addEventListener("touchmove", (event) => {
+    if (!touchState) return;
+    const dx = event.touches[0].clientX - touchState.x;
+    const dy = event.touches[0].clientY - touchState.y;
+    if (!touchState.axis) {
+      const lockDistance = touchState.nearSlider ? 18 : 8;
+      const horizontalBias = touchState.nearSlider ? 1.5 : 1;
+      if (Math.abs(dx) < lockDistance && Math.abs(dy) < lockDistance) return;
+      touchState.axis = Math.abs(dx) > Math.abs(dy) * horizontalBias ? "x" : "y";
+    }
+    if (touchState.axis !== "x") return;
+    if (event.cancelable) event.preventDefault();
+    touchState.dx = dx;
+    const step = swipeStep();
+    let offset = -swipeIndex * step + dx;
+    const minOffset = -(swipePageList.length - 1) * step;
+    // 端を越えるドラッグはゴムのように抵抗をつける
+    if (offset > 0) offset *= 0.3;
+    else if (offset < minOffset) offset = minOffset + (offset - minOffset) * 0.3;
+    applySwipeOffset(offset);
+    swipePages.style.height = `${swipeHeightAt(-offset / step)}px`;
+  }, { passive: false });
+
+  const endTouch = () => {
+    if (!touchState) return;
+    if (touchState.axis === "x") {
+      const step = swipeStep();
+      const elapsed = Math.max(1, performance.now() - touchState.start);
+      const velocity = Math.abs(touchState.dx) / elapsed;
+      const draggedFar = Math.abs(touchState.dx) > (touchState.nearSlider ? step / 2 : step / 3);
+      const flicked = touchState.nearSlider
+        ? velocity > 0.9 && Math.abs(touchState.dx) > 80
+        : velocity > 0.6 && Math.abs(touchState.dx) > 48;
+      if (draggedFar || flicked) {
+        goToSwipePage(swipeIndex + (touchState.dx < 0 ? 1 : -1));
+      } else {
+        settleSwipe(true);
+      }
+    }
+    touchState = null;
+  };
+  swipePages.addEventListener("touchend", endTouch);
+  swipePages.addEventListener("touchcancel", endTouch);
+
+  window.addEventListener("resize", syncSwipeLayout);
+  swipeMq.addEventListener("change", syncSwipeLayout);
+  const swipeResizeObserver = new ResizeObserver(() => {
+    if (!touchState) syncSwipeLayout();
+  });
+  swipePageList.forEach((page) => swipeResizeObserver.observe(page));
+
+  document.querySelector("#goto-results")?.addEventListener("click", () => {
+    goToSwipePage(1);
+    document.querySelector(".match")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  document.querySelector("#goto-input")?.addEventListener("click", () => {
+    goToSwipePage(0);
+  });
+}
 
 fields.theme.addEventListener("click", () => {
   theme = theme === "dark" ? "light" : "dark";
