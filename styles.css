@@ -608,10 +608,40 @@ input {
 .card-thumb {
   display: grid;
   place-items: center;
+  border-radius: var(--radius-sm);
   background:
     linear-gradient(155deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0) 46%, rgba(0, 0, 0, 0.28)),
     var(--ci, var(--class-neutral));
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+/* Single-card threat: small fixed badge anchored to top-left of the card */
+.threat-art.card-thumb {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  width: 28px;
+  height: 28px;
+  min-height: 0;
+}
+
+/* Remove the art column from the grid when using the emblem badge */
+.threat-card:has(> .threat-art.card-thumb) {
+  grid-template-columns: minmax(0, 1fr) minmax(82px, auto);
+  padding-left: 56px; /* 20px left offset + 28px badge + 8px gap */
+}
+
+/* Combo art strip: each badge is a small square */
+.combo-art.card-thumb {
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 0;
+}
+
+/* Shrink the combo art column to match the badge width */
+.combo-card:has(.combo-art.card-thumb) {
+  grid-template-columns: 28px minmax(0, 1fr) minmax(82px, auto);
 }
 
 .card-thumb .class-icon {
@@ -619,11 +649,6 @@ input {
   height: 54%;
   color: #fff;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
-}
-
-.combo-art.card-thumb .class-icon {
-  width: 66%;
-  height: 66%;
 }
 
 .threat-copy,
@@ -892,6 +917,19 @@ input {
     min-height: 116px;
   }
 
+  /* Badge overrides: keep small fixed size on mobile too */
+  .threat-art.card-thumb {
+    width: 28px;
+    height: 28px;
+    min-height: 0;
+    top: 10px;
+    left: 14px;
+  }
+
+  .threat-card:has(> .threat-art.card-thumb) {
+    padding-left: 50px;
+  }
+
   .combo-art-strip {
     min-height: 104px;
   }
@@ -899,6 +937,13 @@ input {
   .combo-art {
     width: 36px;
     min-width: 36px;
+  }
+
+  .combo-art.card-thumb {
+    width: 28px;
+    min-width: 28px;
+    height: 28px;
+    min-height: 0;
   }
 
   .threat-card strong {
