@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shadowverse Threat Viewer — Clean</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-top">
+          <div class="wb-logo" role="img" aria-label="Shadowverse: Worlds Beyond">
+            <span class="wb-logo-top">SHADOWVERSE</span>
+            <span class="wb-logo-bottom">
+              <span class="wb-rule"></span>
+              <span class="wb-logo-sub">WORLDS BEYOND</span>
+              <span class="wb-rule"></span>
+            </span>
+          </div>
+          <div class="button-group">
+            <button class="language-button" id="language-button" type="button">English</button>
+            <button class="language-button" id="theme-button" type="button" data-i18n="themeButton">🌙</button>
+          </div>
+        </div>
+        <h1 id="page-title" data-i18n="title">相手の脅威カード</h1>
+        <p data-i18n="introBody">相手が使えるPPと条件に合わせた脅威カードを提示します。リーサルカードは赤く表示されます。</p>
+      </section>
+
+      <nav class="tab-bar" aria-label="モード切替">
+        <button class="tab is-active" type="button">
+          <span class="tab-label" data-i18n="tabLethal">リーサルチェッカー</span>
+        </button>
+        <button class="tab is-coming-soon" type="button" disabled aria-disabled="true">
+          <span class="tab-label" data-i18n="tabHeal">ヒールチェッカー</span>
+          <span class="tab-badge" data-i18n="tabSoon">近日登場</span>
+        </button>
+        <button class="tab is-coming-soon" type="button" disabled aria-disabled="true">
+          <span class="tab-label" data-i18n="tabBoard">盤面脅威チェッカー</span>
+          <span class="tab-badge" data-i18n="tabSoon">近日登場</span>
+        </button>
+      </nav>
+
+      <section class="match" aria-label="opponent threat analyzer">
+        <div class="swipe-pages" id="swipe-pages">
+          <div class="swipe-page" id="page-input">
+        <section class="class-control" aria-labelledby="class-control-title">
+          <div>
+            <h2 id="class-control-title" data-i18n="classControl">相手クラス</h2>
+            <p data-i18n="classHelp">表示する相手クラスを切り替えます。</p>
+          </div>
+          <div class="class-buttons" id="class-buttons"></div>
+        </section>
+
+        <section class="class-control" aria-labelledby="format-control-title">
+          <div>
+            <h2 id="format-control-title" data-i18n="formatControl">フォーマット</h2>
+            <p data-i18n="formatHelp">ローテーションまたはアンリミテッドで絞り込みます。</p>
+          </div>
+          <div class="class-buttons" id="format-buttons"></div>
+        </section>
+
+        <section class="class-control" aria-labelledby="damage-mode-title">
+          <div>
+            <h2 id="damage-mode-title" data-i18n="damageModeControl">ダメージ表示</h2>
+            <p data-i18n="damageModeHelp">単体カードまたはPP内の複数カード最大打点を表示します。</p>
+          </div>
+          <div class="class-buttons" id="damage-mode-buttons"></div>
+        </section>
+
+        <section class="turn-control" aria-labelledby="turn-control-title">
+          <div>
+            <h2 id="turn-control-title" data-i18n="turnControl">経過ターンを調整</h2>
+            <p data-i18n="turnHelp">このターン数までに相手が到達したPPとコンボ条件で判定します。</p>
+          </div>
+          <div class="turn-input-wrap">
+            <input id="turn-input" type="range" min="1" max="11" value="1" />
+            <output id="turn-output" for="turn-input">1</output>
+          </div>
+        </section>
+
+        <section class="turn-control" aria-labelledby="health-control-title">
+          <div>
+            <h2 id="health-control-title" data-i18n="healthControl">自分の体力</h2>
+            <p data-i18n="healthHelp">相手のリーダー打点がこの体力以上ならリーサル候補として表示します。</p>
+          </div>
+          <div class="turn-input-wrap">
+            <input id="health-input" type="range" min="1" max="20" value="20" />
+            <output id="health-output" for="health-input">20</output>
+          </div>
+        </section>
+
+        <button class="swipe-hint" id="goto-results" type="button">
+          <span data-i18n="swipeToResults">結果へスワイプ</span>
+          <span class="swipe-arrow" aria-hidden="true">→</span>
+        </button>
+          </div>
+
+          <div class="swipe-page" id="page-results">
+        <button class="swipe-hint swipe-hint-back" id="goto-input" type="button">
+          <span class="swipe-arrow swipe-arrow-left" aria-hidden="true">←</span>
+          <span data-i18n="swipeBackToInput">入力へ戻る</span>
+        </button>
+
+        <section class="lethal-panel" aria-label="combat summary">
+          <article>
+            <span class="label" data-i18n="stormDamage">相手の疾走/攻撃打点</span>
+            <strong id="storm-damage"></strong>
+          </article>
+          <article>
+            <span class="label" data-i18n="burnDamage">相手のバーン打点</span>
+            <strong id="burn-damage"></strong>
+          </article>
+          <article>
+            <span class="label" data-i18n="maxThreat">最大単体打点</span>
+            <strong id="max-threat"></strong>
+          </article>
+          <article>
+            <span class="label" data-i18n="enemyLethal">相手リーサル候補</span>
+            <strong id="enemy-lethal"></strong>
+          </article>
+        </section>
+
+        <section class="threat-panel" aria-labelledby="enemy-threat-title">
+          <div class="zone-title">
+            <h2 id="enemy-threat-title" data-i18n="enemyThreatPreview">脅威カード</h2>
+            <span id="enemy-threat-total"></span>
+          </div>
+          <div class="threat-row" id="enemy-threats"></div>
+        </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>お問い合わせ: <a href="https://x.com/Orange__zip" target="_blank" rel="noopener noreferrer">@Orange__zip</a></p>
+    </footer>
+
+    <script>
+      // 公式カード画像を一切読み込まないクリーン版。app.js がこのフラグを見て
+      // カード画像の代わりに自作クラス紋章タイルを描画する。
+      window.NO_OFFICIAL_ART = true;
+    </script>
+    <script src="card-data.js"></script>
+    <script src="card-overrides.js"></script>
+    <script src="class-icons.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

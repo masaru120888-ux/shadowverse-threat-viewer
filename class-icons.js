@@ -2,6 +2,9 @@
 // can be tinted per class via CSS). Approximated brand emblems — self-contained,
 // no external image dependency.
 window.SHADOWVERSE_CLASS_ICONS = {
+  // ニュートラル / Neutral — four-point spark
+  neutral:
+    '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.8l2.3 7.9 7.9 2.3-7.9 2.3L12 22.2l-2.3-7.9L1.8 12l7.9-2.3L12 1.8z"/></svg>',
   // エルフ / Forestcraft — leaf
   forest:
     '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.8 7.6 6.8 16.4 12 22c5.2-5.6 5.2-14.4 0-20zm-.7 5.2h1.4v8.9l-.7 1.4-.7-1.4V7.2z"/></svg>',

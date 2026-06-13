@@ -370,10 +370,21 @@ function renderKillDamageBreakdown(card) {
 }
 
 const classIcons = window.SHADOWVERSE_CLASS_ICONS || {};
+// クリーン版（clean.html）では公式カード画像を一切読み込まず、自作のクラス紋章タイルで代替する。
+const useGeneratedArt = window.NO_OFFICIAL_ART === true;
 
 function classIconMarkup(key) {
   const svg = classIcons[key];
   return svg ? `<span class="class-icon" aria-hidden="true">${svg}</span>` : "";
+}
+
+function cardArtMarkup(card, label, variant) {
+  const sizeClass = variant === "combo" ? "combo-art" : "threat-art";
+  if (useGeneratedArt) {
+    const cls = card.classKey || "neutral";
+    return `<div class="${sizeClass} card-thumb" data-class="${cls}" role="img" aria-label="${label}">${classIconMarkup(cls)}</div>`;
+  }
+  return `<img class="${sizeClass}" src="${cardImageUrl(card)}" alt="${label}" loading="lazy" />`;
 }
 
 function renderClassButtons() {
@@ -424,7 +435,7 @@ function renderThreatCard(card) {
   const damageMarkup = card.xDamage ? xDamageMarkup : primaryDamage;
   return `
     <article class="threat-card ${isLethal ? "is-lethal" : ""}">
-      <img class="threat-art" src="${cardImageUrl(card)}" alt="${imageLabel}" loading="lazy" />
+      ${cardArtMarkup(card, imageLabel, "single")}
       <div class="threat-copy">
         <strong>${displayName}</strong>
         <p class="card-effect">${selectedCard.effect}</p>
@@ -456,7 +467,7 @@ function renderCombo(combo) {
   }).join("");
   const cardImages = combo.cards.map((card) => {
     const imageLabel = card.displayCard?.[lang]?.name || card[lang].name;
-    return `<img class="combo-art" src="${cardImageUrl(card)}" alt="${imageLabel}" loading="lazy" />`;
+    return cardArtMarkup(card, imageLabel, "combo");
   }).join("");
   return `
     <article class="threat-card combo-card ${combo.leaderDamage >= currentHealth ? "is-lethal" : ""}">
