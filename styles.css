@@ -16,6 +16,13 @@
   --inset-bg: rgba(0, 0, 0, 0.12);
   --btn-bg: rgba(0, 0, 0, 0.18);
   --lethal-bg: rgba(221, 113, 104, 0.18);
+  --radius: 4px;
+  --radius-sm: 3px;
+  --cut: 9px;
+  --gold-2: #ecd28a;
+  --gold-grad: linear-gradient(135deg, #ecd28a 0%, #c89a3c 100%);
+  --gold-line: rgba(216, 180, 94, 0.55);
+  --red-grad: linear-gradient(135deg, #e88a82 0%, #c8463c 100%);
 }
 
 :root.light-mode {
@@ -36,6 +43,10 @@
   --inset-bg: #f0f3f8;
   --btn-bg: #f1f4f9;
   --lethal-bg: rgba(209, 47, 47, 0.09);
+  --gold-2: #c79a2f;
+  --gold-grad: linear-gradient(135deg, #c79a2f 0%, #9a6f12 100%);
+  --gold-line: rgba(166, 121, 27, 0.5);
+  --red-grad: linear-gradient(135deg, #e0413c 0%, #b51f1f 100%);
 }
 
 
@@ -89,26 +100,35 @@ body {
 .tab-bar::-webkit-scrollbar { display: none; }
 
 .tab {
+  position: relative;
   flex: none;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3px;
-  padding: 9px 16px;
+  padding: 9px 18px;
   border: 1px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius);
   background: var(--btn-bg);
   color: var(--muted);
   font-weight: 700;
   font-size: 0.82rem;
+  letter-spacing: 0.01em;
   cursor: pointer;
   white-space: nowrap;
+  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
+  transition: color 0.15s ease, background 0.15s ease;
 }
 
 .tab.is-active {
-  border-color: var(--gold);
+  color: var(--gold-2);
+  background: linear-gradient(180deg, rgba(216, 180, 94, 0.16), rgba(216, 180, 94, 0.04));
+  box-shadow: inset 0 -3px 0 0 var(--gold-2);
+}
+
+:root.light-mode .tab.is-active {
   color: var(--gold);
-  background: rgba(216, 180, 94, 0.12);
+  box-shadow: inset 0 -3px 0 0 var(--gold);
 }
 
 :root.light-mode .tab.is-active {
@@ -131,7 +151,7 @@ body {
 .mode-badge {
   margin-left: 5px;
   padding: 2px 6px;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   background: rgba(93, 191, 212, 0.15);
   color: var(--blue);
   font-size: 0.64rem;
@@ -171,9 +191,15 @@ input {
   min-height: 40px;
   padding: 0 14px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--panel);
   color: var(--text);
+  font-weight: 700;
+  transition: border-color 0.15s ease;
+}
+
+.language-button:hover {
+  border-color: var(--gold-line);
 }
 
 .eyebrow,
@@ -182,8 +208,21 @@ input {
   color: var(--gold);
   font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 2px;
+  background: var(--gold-grad);
 }
 
 .intro h1 {
@@ -209,7 +248,7 @@ input {
 .match {
   padding: 16px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--match-bg);
 }
 
@@ -223,7 +262,7 @@ input {
 .turn-control,
 .class-control {
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--panel-2);
 }
 
@@ -235,6 +274,25 @@ input {
   grid-template-columns: minmax(0, 1fr) minmax(220px, 360px);
   gap: 18px;
   align-items: center;
+}
+
+.turn-control h2,
+.class-control h2,
+.zone-title h2 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.turn-control h2::before,
+.class-control h2::before,
+.zone-title h2::before {
+  content: "";
+  flex: none;
+  width: 3px;
+  height: 1em;
+  border-radius: 1px;
+  background: var(--gold-grad);
 }
 
 .turn-control h2,
@@ -257,16 +315,29 @@ input {
 .class-button {
   min-height: 44px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--btn-bg);
   color: var(--text);
   font-weight: 800;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.class-button:hover {
+  border-color: var(--gold-line);
 }
 
 .class-button[aria-pressed="true"] {
   border-color: var(--gold);
+  color: var(--gold-2);
+  background: linear-gradient(180deg, rgba(216, 180, 94, 0.22), rgba(216, 180, 94, 0.06));
+  box-shadow: inset 0 0 0 1px rgba(216, 180, 94, 0.25);
+}
+
+:root.light-mode .class-button[aria-pressed="true"] {
   color: var(--gold);
-  background: rgba(216, 180, 94, 0.14);
+  background: rgba(166, 121, 27, 0.12);
 }
 
 .turn-input-wrap {
@@ -283,13 +354,18 @@ input {
 
 .turn-input-wrap output {
   min-height: 44px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  border: 1px solid var(--gold-line);
+  border-radius: var(--radius);
   display: grid;
   place-items: center;
-  color: var(--gold);
+  color: var(--gold-2);
+  background: linear-gradient(180deg, rgba(216, 180, 94, 0.12), transparent);
   font-size: 1.3rem;
   font-weight: 900;
+}
+
+:root.light-mode .turn-input-wrap output {
+  color: var(--gold);
 }
 
 .lethal-panel {
@@ -306,6 +382,7 @@ input {
 .lethal-panel strong {
   color: var(--text);
   font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .lethal-panel article.is-lethal strong {
@@ -345,10 +422,12 @@ input {
 }
 
 .threat-card {
+  position: relative;
+  overflow: hidden;
   min-height: 110px;
-  padding: 12px;
+  padding: 12px 12px 12px 16px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--panel-2);
   display: grid;
   grid-template-columns: 72px minmax(0, 1fr) minmax(82px, auto);
@@ -356,10 +435,27 @@ input {
   align-items: stretch;
 }
 
+.threat-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gold-grad);
+  opacity: 0.4;
+}
+
 .threat-card.is-lethal {
   border-color: var(--red);
   background: var(--lethal-bg);
   box-shadow: 0 0 0 1px rgba(221, 113, 104, 0.45), 0 10px 24px rgba(221, 113, 104, 0.12);
+}
+
+.threat-card.is-lethal::before {
+  width: 4px;
+  background: var(--red-grad);
+  opacity: 1;
 }
 
 .threat-card.is-lethal strong {
@@ -382,7 +478,7 @@ input {
   min-height: 110px;
   object-fit: contain;
   object-position: center;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: var(--art-bg);
 }
 
@@ -402,7 +498,7 @@ input {
   height: 100%;
   object-fit: contain;
   object-position: center;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   background: var(--art-bg);
 }
 
@@ -438,7 +534,7 @@ input {
   margin-bottom: 6px;
   padding: 2px 8px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--muted);
   font-size: 0.72rem;
@@ -461,7 +557,7 @@ input {
 .threat-meta span {
   padding: 4px 8px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   color: var(--muted);
   background: var(--chip-bg);
   font-size: 0.78rem;
@@ -479,8 +575,10 @@ input {
   display: grid;
   gap: 1px;
   color: var(--damage);
-  font-size: 1.08rem;
+  font-size: 1.15rem;
   font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
 .damage-line small {
@@ -494,8 +592,10 @@ input {
   display: grid;
   gap: 1px;
   color: var(--damage);
-  font-size: 1.08rem;
+  font-size: 1.15rem;
   font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
 .damage-breakdown small {
@@ -538,7 +638,7 @@ input {
   margin: 0;
   padding: 18px;
   border: 1px dashed var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius);
   background: var(--inset-bg);
 }
 
@@ -587,12 +687,18 @@ input {
     justify-content: center;
     gap: 8px;
     border: 1px solid var(--gold);
-    border-radius: 8px;
-    background: rgba(216, 180, 94, 0.12);
-    color: var(--gold);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(216, 180, 94, 0.18), rgba(216, 180, 94, 0.05));
+    color: var(--gold-2);
     font-weight: 800;
     font-size: 0.95rem;
+    letter-spacing: 0.02em;
     cursor: pointer;
+    clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  }
+
+  :root.light-mode .swipe-hint {
+    color: var(--gold);
   }
 
   :root.light-mode .swipe-hint {
