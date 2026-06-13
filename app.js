@@ -369,11 +369,18 @@ function renderKillDamageBreakdown(card) {
   return `<span class="damage-breakdown"><small>${ui[lang].killBreakdown}</small>${card.leaderDamage}/${base}</span>`;
 }
 
+const classIcons = window.SHADOWVERSE_CLASS_ICONS || {};
+
+function classIconMarkup(key) {
+  const svg = classIcons[key];
+  return svg ? `<span class="class-icon" aria-hidden="true">${svg}</span>` : "";
+}
+
 function renderClassButtons() {
   fields.classButtons.innerHTML = classEntries()
     .map(([key, names]) => {
       const pressed = key === enemyClass ? "true" : "false";
-      return `<button class="class-button" type="button" data-class="${key}" aria-pressed="${pressed}">${names[lang]}</button>`;
+      return `<button class="class-button" type="button" data-class="${key}" aria-pressed="${pressed}">${classIconMarkup(key)}<span class="class-label">${names[lang]}</span></button>`;
     })
     .join("");
 }
@@ -382,7 +389,7 @@ function renderFormatButtons() {
   fields.formatButtons.innerHTML = ["rotation", "unlimited"]
     .map((key) => {
       const pressed = key === format ? "true" : "false";
-      return `<button class="class-button" type="button" data-format="${key}" aria-pressed="${pressed}">${ui[lang][key]}</button>`;
+      return `<button class="class-button" type="button" data-format="${key}" aria-pressed="${pressed}">${classIconMarkup(key)}<span class="class-label">${ui[lang][key]}</span></button>`;
     })
     .join("");
 }
