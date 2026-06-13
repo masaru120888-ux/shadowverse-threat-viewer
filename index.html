@@ -7,6 +7,31 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <header class="site-nav">
+      <div class="site-nav-inner">
+        <a class="site-brand" href="index.html" aria-label="Shadowverse Threat Viewer ホーム">
+          <span class="site-brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.8l2.3 7.9 7.9 2.3-7.9 2.3L12 22.2l-2.3-7.9L1.8 12l7.9-2.3L12 1.8z"/></svg>
+          </span>
+          <span class="site-brand-text">Threat Viewer</span>
+        </a>
+        <nav class="site-nav-links" aria-label="サイトナビゲーション">
+          <a class="site-nav-link is-active" href="index.html" aria-current="page">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9h5v-5h4v5h5v-9"/></svg>
+            <span>ホーム</span>
+          </a>
+          <a class="site-nav-link" href="legal.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h6"/></svg>
+            <span>利用規約・プライバシーポリシー</span>
+          </a>
+          <a class="site-nav-link" href="contact.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-.9L3 20.5l1.5-4.1A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/></svg>
+            <span>お問い合わせ</span>
+          </a>
+        </nav>
+      </div>
+    </header>
+
     <main class="app">
       <section class="intro" aria-labelledby="page-title">
         <div class="intro-top">
@@ -137,11 +162,6 @@
       <p>お問い合わせ: <a href="https://x.com/Orange__zip" target="_blank" rel="noopener noreferrer">@Orange__zip</a></p>
     </footer>
 
-    <script>
-      // 公式カード画像を一切読み込まないクリーン版。app.js がこのフラグを見て
-      // カード画像の代わりに自作クラス紋章タイルを描画する。
-      window.NO_OFFICIAL_ART = true;
-    </script>
     <script src="card-data.js"></script>
     <script src="card-overrides.js"></script>
     <script src="class-icons.js"></script>
