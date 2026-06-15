@@ -3,10 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shadowverse Threat Viewer</title>
+    <script>
+      // 保存済みテーマ（無ければ端末設定）を描画前に適用し、ちらつきを防ぐ。
+      (function () {
+        try {
+          var t = localStorage.getItem("svtv-theme");
+          if (t !== "light" && t !== "dark") {
+            t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+          }
+          if (t === "light") document.documentElement.classList.add("light-mode");
+        } catch (e) {}
+      })();
+    </script>
+    <title>逆リーサルチェッカー | Shadowverse: Worlds Beyond 非公式ツール</title>
+    <meta name="description" content="Shadowverse: Worlds Beyond の逆リーサルチェッカー。相手のPP・条件から、相手が出せる打点とリーサル候補カードを即座に表示する非公式ファンツールです。" />
+    <link rel="canonical" href="https://shadowverse-threat-viewer.vercel.app/" />
+    <meta name="theme-color" content="#101216" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Shadowverse Threat Viewer" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content="逆リーサルチェッカー | Shadowverse: Worlds Beyond 非公式ツール" />
+    <meta property="og:description" content="相手のPP・条件から、相手が出せる打点とリーサル候補カードを即座に表示する非公式ファンツール。" />
+    <meta property="og:url" content="https://shadowverse-threat-viewer.vercel.app/" />
+    <meta property="og:image" content="https://shadowverse-threat-viewer.vercel.app/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="逆リーサルチェッカー | Shadowverse: Worlds Beyond 非公式ツール" />
+    <meta name="twitter:description" content="相手のPP・条件から、相手が出せる打点とリーサル候補カードを即座に表示する非公式ファンツール。" />
+    <meta name="twitter:image" content="https://shadowverse-threat-viewer.vercel.app/og-image.png" />
+    <link rel="preconnect" href="https://shadowverse-wb.com" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main">本文へスキップ</a>
     <header class="site-nav">
       <div class="site-nav-inner">
         <a class="site-brand" href="index.html" aria-label="Shadowverse Threat Viewer ホーム">
@@ -32,7 +63,7 @@
       </div>
     </header>
 
-    <main class="app">
+    <main class="app" id="main">
       <section class="intro" aria-labelledby="page-title">
         <div class="intro-top">
           <div class="wb-logo" role="img" aria-label="Shadowverse: Worlds Beyond">
@@ -159,7 +190,15 @@
     </main>
 
     <footer class="app-footer">
-      <p>お問い合わせ: <a href="https://x.com/Orange__zip" target="_blank" rel="noopener noreferrer">@Orange__zip</a></p>
+      <nav class="app-footer-links" aria-label="フッターナビゲーション">
+        <a href="legal.html">利用規約・プライバシーポリシー</a>
+        <a href="contact.html">お問い合わせ</a>
+        <a href="https://x.com/Orange__zip" target="_blank" rel="noopener noreferrer">@Orange__zip</a>
+      </nav>
+      <p class="app-footer-legal">
+        本サイトは非公式のファンサイトであり、株式会社Cygames および「Shadowverse: Worlds Beyond」公式とは一切関係がありません（非公認）。<br />
+        Shadowverse: Worlds Beyond™ およびカード名・画像・テキスト等の著作権は © Cygames, Inc. に帰属します。
+      </p>
     </footer>
 
     <script src="card-data.js"></script>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /official.html
+
+Sitemap: https://shadowverse-threat-viewer.vercel.app/sitemap.xml

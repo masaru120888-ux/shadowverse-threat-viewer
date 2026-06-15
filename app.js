@@ -1,5 +1,36 @@
-let lang = "ja";
-let theme = "dark";
+// テーマ・言語の設定はブラウザの localStorage に保存し、再訪・ページ遷移でも維持する。
+const SETTINGS_KEYS = { theme: "svtv-theme", lang: "svtv-lang" };
+
+function loadSetting(key, allowed, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    if (allowed.includes(value)) return value;
+  } catch (e) {}
+  return fallback;
+}
+
+function saveSetting(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch (e) {}
+}
+
+function preferredTheme() {
+  try {
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+      return "light";
+    }
+  } catch (e) {}
+  return "dark";
+}
+
+function applyThemeClass() {
+  document.documentElement.classList.toggle("light-mode", theme === "light");
+}
+
+let lang = loadSetting(SETTINGS_KEYS.lang, ["ja", "en"], "ja");
+let theme = loadSetting(SETTINGS_KEYS.theme, ["dark", "light"], preferredTheme());
+applyThemeClass();
 let enemyClass = null;
 let format = "rotation";
 let damageMode = "single";
@@ -591,6 +622,7 @@ fields.damageModeButtons.addEventListener("click", (event) => {
 
 fields.language.addEventListener("click", () => {
   lang = lang === "ja" ? "en" : "ja";
+  saveSetting(SETTINGS_KEYS.lang, lang);
   render();
 });
 
@@ -721,11 +753,8 @@ if (swipePages && swipePageList.length >= 2) {
 
 fields.theme.addEventListener("click", () => {
   theme = theme === "dark" ? "light" : "dark";
-  if (theme === "light") {
-    document.documentElement.classList.add("light-mode");
-  } else {
-    document.documentElement.classList.remove("light-mode");
-  }
+  applyThemeClass();
+  saveSetting(SETTINGS_KEYS.theme, theme);
   render();
 });
 

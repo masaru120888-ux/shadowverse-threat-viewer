@@ -1,0 +1,14 @@
+{
+  "name": "shadowverse-threat-viewer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shadowverse: Worlds Beyond 逆リーサルチェッカー（非公式ファンツール）",
+  "type": "module",
+  "scripts": {
+    "generate": "node scripts/generate-card-data.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,36 @@
+name: Refresh card data
+
+# 手動実行のみ。公式APIへの継続的な自動アクセスを避けるため、
+# スケジュール（cron）は意図的に設定していません。
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Regenerate card-data.js from the official card list
+        run: node scripts/generate-card-data.mjs
+
+      - name: Commit if card data changed
+        run: |
+          if git diff --quiet -- card-data.js; then
+            echo "No changes to card-data.js."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add card-data.js
+            git commit -m "Refresh card-data.js from official card list"
+            git push
+          fi
