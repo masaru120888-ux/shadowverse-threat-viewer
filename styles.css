@@ -903,9 +903,14 @@ input {
     gap: 12px;
   }
 
+  .threat-row {
+    gap: 6px;
+  }
+
   .threat-card {
-    gap: 10px;
-    padding: 10px;
+    gap: 8px;
+    padding: 8px 10px;
+    min-height: 88px;
   }
 
   .combo-card {
@@ -914,7 +919,7 @@ input {
 
   .threat-art {
     width: 62px;
-    min-height: 116px;
+    min-height: 96px;
   }
 
   /* Badge overrides: keep small fixed size on mobile too */
@@ -952,6 +957,24 @@ input {
 
   .threat-card p {
     font-size: 0.9rem;
+    margin: 2px 0 4px;
+  }
+
+  .card-effect {
+    -webkit-line-clamp: 2;
+    margin-bottom: 2px;
+  }
+
+  .detail-button {
+    margin-bottom: 3px;
+  }
+
+  .threat-meta {
+    gap: 5px;
+  }
+
+  .threat-meta span {
+    padding: 3px 7px;
   }
 
   .threat-damage {
