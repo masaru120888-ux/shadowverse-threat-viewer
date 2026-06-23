@@ -53,7 +53,7 @@ const displayCardPPOverride = new Map([
 
 const ui = {
   ja: {
-    title: "シャドバリーサルチェッカー",
+    title: "シャドバチェッカー",
     classControl: "相手クラス",
     formatControl: "フォーマット",
     formatHelp: "ローテーションまたはアンリミテッドで絞り込みます。",
