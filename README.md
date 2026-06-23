@@ -1,4 +1,4 @@
-# Shadowverse Threat Viewer（逆リーサルチェッカー）
+# Shadowverse Threat Viewer（シャドバリーサルチェッカー）
 
 「Shadowverse: Worlds Beyond」向けの**非公式**ファンツール。相手のPP（経過ターン）と
 条件から、相手が出せるリーダー打点・リーサル候補カードを一覧表示します。
