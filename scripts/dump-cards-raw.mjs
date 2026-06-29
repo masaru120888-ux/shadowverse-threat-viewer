@@ -38,6 +38,7 @@ async function fetchClass(classId, lang) {
       if (!detail?.common) continue;
       detail.common.evo_skill_text = detail.evo?.skill_text || "";
       detail.common.related = (data.cards?.[cardId]?.related_card_ids || []).map(String);
+      detail.common.specific = (data.cards?.[cardId]?.specific_effect_card_ids || []).map(String);
       byId.set(String(cardId), detail.common);
     }
     offset += data.sort_card_id_list.length || 30;
@@ -56,6 +57,10 @@ for (const classId of CLASS_IDS) {
       return { id: rid, name: stripMarkup(r.name), atk: r.atk, life: r.life, cost: r.cost,
         text: stripMarkup(r.skill_text), evo: stripMarkup(r.evo_skill_text) };
     });
+    const crests = (card.specific || []).map((sid) => {
+      const s = ja.specificById.get(sid) || {};
+      return { id: sid, cost: s.cost, text: stripMarkup(s.skill_text) };
+    });
     result.push({
       id, cost: card.cost, atk: card.atk, life: card.life, type: card.type,
       name: stripMarkup(card.name),
@@ -63,6 +68,7 @@ for (const classId of CLASS_IDS) {
       evo: stripMarkup(card.evo_skill_text),
       en_name: stripMarkup(enCard.name),
       related,
+      crests,
     });
   }
 }
