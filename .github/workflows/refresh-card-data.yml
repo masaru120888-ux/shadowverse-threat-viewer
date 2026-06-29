@@ -20,13 +20,17 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Dump raw set-8 card info
-        run: node scripts/dump-cards-raw.mjs
+      - name: Regenerate card-data.js from the official card list
+        run: node scripts/generate-card-data.mjs
 
-      - name: Commit dump
+      - name: Commit if card data changed
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add dump-cards-raw.json
-          git commit -m "Add set-8 raw card dump (temp)" || echo "no change"
-          git push
+          if git diff --quiet -- card-data.js; then
+            echo "No changes to card-data.js."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add card-data.js
+            git commit -m "Refresh card-data.js from official card list"
+            git push
+          fi
