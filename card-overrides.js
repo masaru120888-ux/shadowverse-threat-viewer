@@ -35,4 +35,20 @@ window.SHADOWVERSE_CARD_OVERRIDES = [
   { id: "10544110", superEvolveKillDamage: 1, condition: "超進化" },
   // マーウィン — 進化でクレスト付与、最大5点
   { id: "10364120", leaderDamage: 5, burnDamage: 5, crestBreakdown: "5/4/3/2/1" },
+
+  // === クロニクルオブデスティニー（第8弾 / set8）打点補正 ===
+  // ダークナイト・マーシャ — FF/進化時それぞれリーダーすべてに1。自動検出が「リーダーすべて」を拾えず0点になっていた。基本1 / 進化2
+  { id: "10852120", leaderDamage: 1, burnDamage: 1, evolveEffectLeaderDamage: 2, condition: "進化" },
+  // 焦がれし炎将・マーズ — FFでナイト3体召喚→兵士が出るたび自身+1/+0で疾走4点（自動は素の攻撃力1のみ）。進化6 / 超進化8（追加ナイト込み）
+  { id: "10824120", leaderDamage: 4, stormDamage: 4, stormBreakdownMax: [8, 6, 4], condition: "疾走" },
+  // 早鐘の歓喜・アルフィード — 疾走は進化時のみ。素出しは打点なし。進化で攻撃力1+2=3点
+  { id: "10802110", requiresEvolve: true, condition: "進化" },
+  // 決断の交差・アシュレイ＆リディア — エンハンス9で進化＋疾走（5+2=7点）。素出しは疾走なし。実質9コスト固定7点
+  { id: "10874110", leaderDamage: 7, stormDamage: 0, burnDamage: 0, evolveLeaderBonus: 0, evolveEffectLeaderDamage: 0, effectiveCost: 9, unlockTurn: 9, condition: "エンハンス9 / 疾走" },
+  // マナリアスクリプター・ティコ — クレストは超進化時付与。マナリア・スペルをプレイするごとに相手リーダーに1（可変）。超進化前提
+  { id: "10833110", requiresEvolve: true, requiresSuperEvolve: true, leaderDamage: 1, burnDamage: 1, evolveEffectLeaderDamage: 1, condition: "超進化 / マナリア・スペルごとに1" },
+  // エターナルクリスタリア・ティア — 自身は突進。検出された3点は手札に加わる『ソードクリスタリア・イヴ』(疾走)由来で、バフ誘発が条件のため直接打点としては扱わない
+  { id: "10814120", leaderDamage: 0, stormDamage: 0, burnDamage: 0, evolveEffectLeaderDamage: 0, displayCard: null, condition: "" },
+  // 飛躍の姉妹・ベルディリア＆カステル — 超進化でクレスト付与＋FFで超進化フォロワー召喚。クレストでそれが「1ターンに2回攻撃」を得て、フォロワー2体を破壊すると超進化追撃で相手リーダーに2点。超進化前提
+  { id: "10864110", leaderDamage: 2, evolveEffectLeaderDamage: 2, requiresEvolve: true, requiresSuperEvolve: true, condition: "超進化 / 超進化追撃×2（フォロワー2体破壊）" },
 ];

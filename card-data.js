@@ -1,5 +1,5 @@
 window.SHADOWVERSE_CARD_DATA = {
-  "generatedAt": "2026-06-01T07:55:02.508Z",
+  "generatedAt": "2026-06-29T11:03:49.897Z",
   "classes": {
     "neutral": {
       "ja": "ニュートラル",
@@ -39,7 +39,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10201110",
       "classKey": "neutral",
       "cost": 1,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 1,
       "unlockTurn": 1,
       "requiresEvolve": false,
@@ -282,7 +282,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10201310",
       "classKey": "neutral",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -309,7 +309,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10202110",
       "classKey": "neutral",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -336,7 +336,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10203120",
       "classKey": "neutral",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -495,6 +495,87 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10801110",
+      "classKey": "neutral",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "克己の聖鳥・ハンサ",
+        "effect": "【進化時】これは+5/+5する。",
+        "imageHash": "a4683e2449454172a051af2d1a6a8c0c"
+      },
+      "en": {
+        "name": "Hamsa, Sculpted Divinity",
+        "effect": "Evolve: Give this follower +5/+5.",
+        "imageHash": "4a2d368f854143e185250208c90acd57"
+      }
+    },
+    {
+      "id": "10803110",
+      "classKey": "neutral",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "忘失の無垢・アイカ",
+        "effect": "【ファンファーレ】このバトル中に破壊された自分のフォロワーからランダム1枚と同名のカード1枚を非公開で自分の手札に加える。 【進化時】【ファンファーレ】と同じ能力が働く。",
+        "imageHash": "335ba7806bfb42e9869edf2b6b7f7f75"
+      },
+      "en": {
+        "name": "Aika, Elegy of Loss",
+        "effect": "Fanfare: Add a copy of a random allied follower destroyed this match to your hand without revealing it. Evolve: Replicate the effects of this card's Fanfare ability.",
+        "imageHash": "bbe4db9cb1e84732babfd44b1acab963"
+      }
+    },
+    {
+      "id": "10803310",
+      "classKey": "neutral",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 3,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "相承の意思",
+        "effect": "【モード】1つを選んでその能力が働く。 （1）相手の場のフォロワーからランダム1枚に3ダメージ。 （2）【リアニメイト_2】を行う。 （3）自分の場のフォロワーすべては+1/+0する。",
+        "imageHash": "25644e3203134d618f3a0a52e8521fce"
+      },
+      "en": {
+        "name": "Wills United",
+        "effect": "Select a Mode to activate. 1. Deal 3 damage to a random enemy follower. 2. Reanimate (2). 3. Give all allied followers on the field +1/+0.",
+        "imageHash": "2a8263b0b58d4ff398595644e5a02b61"
+      }
+    },
+    {
       "id": "10002110",
       "classKey": "neutral",
       "cost": 3,
@@ -633,18 +714,27 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10204120",
       "classKey": "neutral",
       "cost": 3,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 3,
       "unlockTurn": 3,
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 2,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "condition": "Base / Creates Crest / Specific Effect",
+      "displayCard": {
+        "ja": {
+          "name": "Crest / Specific Effect",
+          "imageHash": ""
+        },
+        "en": {
+          "name": "Crest / Specific Effect",
+          "imageHash": ""
+        }
+      },
       "ja": {
         "name": "颶風の天業・グリームニル",
         "effect": "【ファンファーレ】自分は『クレスト：颶風の天業・グリームニル』を持つ。 【守護】",
@@ -879,6 +969,33 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Altaro, Mayor of Babelon",
         "effect": "Ambush At the end of your turn, draw a card.",
         "imageHash": "9b6cbc88cc014f308ce0ad5b150ee55c"
+      }
+    },
+    {
+      "id": "10802310",
+      "classKey": "neutral",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "救世の勇姿",
+        "effect": "相手の手札からランダム1枚のコピー1枚を非公開で自分の手札に加える。それのコストを-1する。自分のデッキから1枚を引く。",
+        "imageHash": "3034a7aa30ee45c3a0cadc70ae54bafe"
+      },
+      "en": {
+        "name": "Legacy of the Brave",
+        "effect": "Add an exact copy of a random card in your opponent's hand to your hand without revealing it and reduce its cost by 1. Draw a card.",
+        "imageHash": "fc066dbce7894d16af526646428fb8ea"
       }
     },
     {
@@ -1125,6 +1242,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10802110",
+      "classKey": "neutral",
+      "cost": 4,
+      "isRotation": true,
+      "effectiveCost": 4,
+      "unlockTurn": 4,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 2,
+      "evolveEffectLeaderDamage": 1,
+      "tokenDamage": 4,
+      "leaderDamage": 1,
+      "stormDamage": 1,
+      "burnDamage": 0,
+      "condition": "Storm",
+      "displayCard": null,
+      "ja": {
+        "name": "早鐘の歓喜・アルフィード",
+        "effect": "【ファンファーレ】相手の場のフォロワー1枚を選ぶ。それに4ダメージ。 【進化時】これは【疾走】を持つ。",
+        "imageHash": "741b0e762d6145a5b8d2b665c2785085"
+      },
+      "en": {
+        "name": "Alfied, Squire of Joy",
+        "effect": "Fanfare: Select an enemy follower on the field and deal it 4 damage. Evolve: Give this follower Storm.",
+        "imageHash": "f200a5b09b6644249f8be19b1b16afab"
+      }
+    },
+    {
       "id": "10101310",
       "classKey": "neutral",
       "cost": 5,
@@ -1257,6 +1401,33 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Disrupted Commoner",
         "effect": "Fanfare: Select an enemy follower on the field and destroy it. Bane",
         "imageHash": "7c77fa8024804bc6a87e9fa26a79a925"
+      }
+    },
+    {
+      "id": "10801120",
+      "classKey": "neutral",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 5,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "タイムレスジャーニー・レイナ",
+        "effect": "【ファンファーレ】自分のEPを1回復。",
+        "imageHash": "462c0ec037cc4e5497d5efc63304b46e"
+      },
+      "en": {
+        "name": "Reina, Timeless Wanderer",
+        "effect": "Fanfare: Recover 1 evolution point.",
+        "imageHash": "01ab9e7999e64a69af4c7917fd932600"
       }
     },
     {
@@ -1398,7 +1569,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10203110",
       "classKey": "neutral",
       "cost": 7,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 7,
       "unlockTurn": 7,
       "requiresEvolve": false,
@@ -1425,7 +1596,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10204110",
       "classKey": "neutral",
       "cost": 7,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 7,
       "unlockTurn": 7,
       "requiresEvolve": false,
@@ -1503,6 +1674,60 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10804110",
+      "classKey": "neutral",
+      "cost": 9,
+      "isRotation": true,
+      "effectiveCost": 9,
+      "unlockTurn": 9,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "アルビオンバハムート",
+        "effect": "【ファンファーレ】【モード】1つを選んでその能力が働く。 （1）場の他のフォロワーすべてを消滅。 （2）場のアミュレットすべてを消滅。 （3）クレストすべてを消滅。",
+        "imageHash": "6acb230c3b4149dbb95d4c3371d40b95"
+      },
+      "en": {
+        "name": "Alabaster Bahamut",
+        "effect": "Fanfare: Select a Mode to activate. 1. Banish all other followers from the field. 2. Banish all amulets from the field. 3. Banish all crests.",
+        "imageHash": "6419eddf46bb4bc699d85d75b487562c"
+      }
+    },
+    {
+      "id": "10804120",
+      "classKey": "neutral",
+      "cost": 9,
+      "isRotation": true,
+      "effectiveCost": 9,
+      "unlockTurn": 9,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "気高き黒翼・オリヴィエ",
+        "effect": "【ファンファーレ】自分のSEPを2回復。 【守護】",
+        "imageHash": "6b0545ca22324075b5e44017d0d013c1"
+      },
+      "en": {
+        "name": "Olivia, Proud Dark Angel",
+        "effect": "Fanfare: Recover 2 super-evolution points. Ward",
+        "imageHash": "6bb0926267c1473fba398bac6449f64f"
+      }
+    },
+    {
       "id": "10104120",
       "classKey": "neutral",
       "cost": 10,
@@ -1512,7 +1737,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 2,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 6,
       "leaderDamage": 10,
       "stormDamage": 10,
       "burnDamage": 0,
@@ -1650,7 +1875,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10212310",
       "classKey": "forest",
       "cost": 1,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 1,
       "unlockTurn": 3,
       "requiresEvolve": false,
@@ -1827,12 +2052,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 2,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Combo 3",
-      "displayCard": null,
+      "condition": "Combo 3 / Creates Magnified Malice",
+      "displayCard": {
+        "ja": {
+          "name": "害意の拡大",
+          "imageHash": "159616d736344894ae44d45d001f660e"
+        },
+        "en": {
+          "name": "Magnified Malice",
+          "imageHash": "799b4835e9e04a22869a0616cd29ec57"
+        }
+      },
       "ja": {
         "name": "憂慮の縮小",
         "effect": "自分のリーダーを1回復。【コンボ_3】自分は『クレスト：憂慮の縮小』を持つ。",
@@ -1869,6 +2103,33 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Magnified Malice",
         "effect": "Deal 2 damage to a random enemy follower. Combo (3) - Gain Crest: Magnified Malice.",
         "imageHash": "799b4835e9e04a22869a0616cd29ec57"
+      }
+    },
+    {
+      "id": "10811130",
+      "classKey": "forest",
+      "cost": 1,
+      "isRotation": true,
+      "effectiveCost": 1,
+      "unlockTurn": 1,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "グルーミーガール・モエル",
+        "effect": "【ファンファーレ】自分の手札1枚を選ぶ。それをデッキに戻す。自分のデッキから1枚を引く。 【守護】",
+        "imageHash": "e09cc107580b405d938f32ee9dc6db1d"
+      },
+      "en": {
+        "name": "Moelle, Gloomy Maiden",
+        "effect": "Fanfare: Select a card in your hand and return it to deck. Draw a card. Ward",
+        "imageHash": "2c80560640574459a584b388f6c10a53"
       }
     },
     {
@@ -2064,7 +2325,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10212120",
       "classKey": "forest",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -2091,7 +2352,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10213310",
       "classKey": "forest",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -2466,6 +2727,69 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10812110",
+      "classKey": "forest",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "太古の妖精・ルフレ",
+        "effect": "これの攻撃力か体力が場で+されたとき、自分のターンごとに1回、『フェアリー』1枚を自分の場に出す。 【ラストワード】『フェアリー』1枚を自分の手札に加える。",
+        "imageHash": "f110c14ff65b4ad0ae299624a1720503"
+      },
+      "en": {
+        "name": "Ruflet, Primeval Fairy",
+        "effect": "Once on each of your turns, when this follower is given + attack or defense on the field, summon a Fairy. Last Words: Add a Fairy to your hand.",
+        "imageHash": "0d657ecea3a74affbc057b87a359cf02"
+      }
+    },
+    {
+      "id": "10814120",
+      "classKey": "forest",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 2,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 3,
+      "stormDamage": 3,
+      "burnDamage": 0,
+      "condition": "Enhance 4 / Creates Eve, Blade of Crystalia",
+      "displayCard": {
+        "ja": {
+          "name": "ソードクリスタリア・イヴ",
+          "imageHash": "7317b3de2ab6435c8218b66ead66c46e"
+        },
+        "en": {
+          "name": "Eve, Blade of Crystalia",
+          "imageHash": "2875735a9f15433d994c4fcd023530e6"
+        }
+      },
+      "ja": {
+        "name": "エターナルクリスタリア・ティア",
+        "effect": "【エンハンス_4】自分の場のフォロワーすべては+1/+1する。 【突進】 これの攻撃力か体力が場で+されたとき、自分のターンごとに1回、『ソードクリスタリア・イヴ』1枚を自分の手札に加える。",
+        "imageHash": "fd0a4b0f6a584cc4907fd86897b39ef2"
+      },
+      "en": {
+        "name": "Tia, Eternal Crystalian",
+        "effect": "Enhance (4): Give all allied followers on the field +1/+1. Rush Once on each of your turns, when this follower is given + attack or defense on the field, add an Eve, Blade of Crystalia to your hand.",
+        "imageHash": "5b421fb566454bd8bcf94e9def4c7b38"
+      }
+    },
+    {
       "id": "10111120",
       "classKey": "forest",
       "cost": 3,
@@ -2631,7 +2955,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10211110",
       "classKey": "forest",
       "cost": 3,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 3,
       "unlockTurn": 3,
       "requiresEvolve": false,
@@ -2844,6 +3168,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10811120",
+      "classKey": "forest",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "ヘレティックハーミット・シトラス",
+        "effect": "【ファンファーレ】『フェアリー』2枚を自分の場に出す。 【進化時】【ファンファーレ】と同じ能力が働く。",
+        "imageHash": "b9165f321bde4a6981a62e7f65fb03fd"
+      },
+      "en": {
+        "name": "Citrus, Heretical Hermit",
+        "effect": "Fanfare: Summon 2 copies of Fairy. Evolve: Replicate the effects of this card's Fanfare ability.",
+        "imageHash": "93236d2fb93d467e820ebf495058ab4c"
+      }
+    },
+    {
       "id": "10011130",
       "classKey": "forest",
       "cost": 4,
@@ -2901,7 +3252,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10213110",
       "classKey": "forest",
       "cost": 4,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 4,
       "unlockTurn": 4,
       "requiresEvolve": false,
@@ -2928,7 +3279,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10214110",
       "classKey": "forest",
       "cost": 4,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 4,
       "unlockTurn": 4,
       "requiresEvolve": false,
@@ -3114,6 +3465,60 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10812120",
+      "classKey": "forest",
+      "cost": 4,
+      "isRotation": true,
+      "effectiveCost": 4,
+      "unlockTurn": 4,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "情念の毒茨・リコリス",
+        "effect": "【ファンファーレ】『優しき読心者・ミツェル』1枚を自分の場に出す。 【突進】 【必殺】",
+        "imageHash": "cc7d7a0a053e4e239df4338a501fff41"
+      },
+      "en": {
+        "name": "Lycoris, Barbs of Passion",
+        "effect": "Fanfare: Summon a Michelle, Kind Mindreader. Rush Bane",
+        "imageHash": "d5ec7f2884b94c81b7bb36bc727e0182"
+      }
+    },
+    {
+      "id": "10812310",
+      "classKey": "forest",
+      "cost": 4,
+      "isRotation": true,
+      "effectiveCost": 4,
+      "unlockTurn": 4,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "穏やかなる孤独",
+        "effect": "相手の場のフォロワー1枚を選ぶ。それを破壊。自分のリーダーを2回復。",
+        "imageHash": "fb67fdd8789b44fab7ce81a99686887d"
+      },
+      "en": {
+        "name": "Peaceful Solitude",
+        "effect": "Select an enemy follower on the field and destroy it. Restore 2 defense to your leader.",
+        "imageHash": "7b7420ce7ff64273a2b5309db3e940e2"
+      }
+    },
+    {
       "id": "10113120",
       "classKey": "forest",
       "cost": 5,
@@ -3144,7 +3549,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10211120",
       "classKey": "forest",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -3384,6 +3789,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10813310",
+      "classKey": "forest",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 5,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "水鏡の信頼",
+        "effect": "自分のデッキのコスト2以下のフォロワーからランダム2種類を自分の場に出す。自分の場のフォロワーすべては+1/+1する。",
+        "imageHash": "5344c9eb21e548c6b64628379a6d829a"
+      },
+      "en": {
+        "name": "Curiosity Abounds",
+        "effect": "Summon 2 random differently named followers that cost 2 or less from your deck. Give all allied followers on the field +1/+1.",
+        "imageHash": "5e4c23b3476148e080953fb60192d0b3"
+      }
+    },
+    {
       "id": "10114110",
       "classKey": "forest",
       "cost": 6,
@@ -3414,7 +3846,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10212110",
       "classKey": "forest",
       "cost": 6,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 6,
       "unlockTurn": 6,
       "requiresEvolve": false,
@@ -3519,6 +3951,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10813110",
+      "classKey": "forest",
+      "cost": 6,
+      "isRotation": true,
+      "effectiveCost": 6,
+      "unlockTurn": 6,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "優しき読心者・ミツェル",
+        "effect": "【ファンファーレ】『情念の毒茨・リコリス』1枚を自分の場に出す。自分の場のフォロワーすべては【バリア】を持つ。 【守護】",
+        "imageHash": "9b0fdd083721494bb4cecdbe5d6a527a"
+      },
+      "en": {
+        "name": "Michelle, Kind Mindreader",
+        "effect": "Fanfare: Summon a Lycoris, Barbs of Passion. Give all allied followers on the field Barrier. Ward",
+        "imageHash": "bd4be3b701d540a2a0bed8f3e2c20fcc"
+      }
+    },
+    {
       "id": "10012120",
       "classKey": "forest",
       "cost": 7,
@@ -3576,7 +4035,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10211310",
       "classKey": "forest",
       "cost": 7,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 7,
       "unlockTurn": 7,
       "requiresEvolve": false,
@@ -3603,7 +4062,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10214120",
       "classKey": "forest",
       "cost": 7,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 7,
       "unlockTurn": 7,
       "requiresEvolve": false,
@@ -3678,6 +4137,60 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Advent of the Eld Lance",
         "effect": "Deal 4 damage to all enemy followers. Summon 2 copies of Springbloom Fairy.",
         "imageHash": "73a5aac6cc7b4132be480113e9f7f01e"
+      }
+    },
+    {
+      "id": "10811110",
+      "classKey": "forest",
+      "cost": 7,
+      "isRotation": true,
+      "effectiveCost": 7,
+      "unlockTurn": 7,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "昔日の天秤・マーロン",
+        "effect": "【ファンファーレ】相手の場のフォロワーからランダムX枚を破壊。Xは「相手の場のフォロワーの枚数から、自分の場のフォロワーの枚数を引いた数」である。",
+        "imageHash": "28f6ae6a725545178062be731bf86657"
+      },
+      "en": {
+        "name": "Marlone, Scales of the Past",
+        "effect": "Fanfare: Destroy X random enemy followers. X is the number of enemy followers on the field minus the number of allied followers on the field.",
+        "imageHash": "e46b4e40a0384ff9b780c65db56a49bb"
+      }
+    },
+    {
+      "id": "10814110",
+      "classKey": "forest",
+      "cost": 7,
+      "isRotation": true,
+      "effectiveCost": 7,
+      "unlockTurn": 7,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 2,
+      "evolveEffectLeaderDamage": 4,
+      "tokenDamage": 0,
+      "leaderDamage": 4,
+      "stormDamage": 4,
+      "burnDamage": 0,
+      "condition": "Storm",
+      "displayCard": null,
+      "ja": {
+        "name": "離合の有終・セタス＆メイシア",
+        "effect": "【ファンファーレ】相手の場のフォロワー1枚を選ぶ。それを破壊。自分の場の他のフォロワーすべては+1/+1する。 【疾走】 【守護】",
+        "imageHash": "d6a809353fab440bb2e8e3b74f07d33c"
+      },
+      "en": {
+        "name": "Setus & Maisha, Bladerights",
+        "effect": "Fanfare: Select an enemy follower on the field and destroy it. Give all other allied followers on the field +1/+1. Storm Ward",
+        "imageHash": "5823d6ad3f7f41a78c019e452fcd3624"
       }
     },
     {
@@ -4224,7 +4737,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10221110",
       "classKey": "sword",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -4251,7 +4764,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10221310",
       "classKey": "sword",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -4278,7 +4791,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10222310",
       "classKey": "sword",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 4,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -4305,7 +4818,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10223120",
       "classKey": "sword",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -4572,12 +5085,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 1,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "condition": "Base / Creates Depths of the Eld Sword",
+      "displayCard": {
+        "ja": {
+          "name": "天剣の深淵",
+          "imageHash": "d84da7cb42bd4f2385e87a186d8c6be5"
+        },
+        "en": {
+          "name": "Depths of the Eld Sword",
+          "imageHash": "7d9fb0ccf1a54dc3af2c803751188b3e"
+        }
+      },
       "ja": {
         "name": "旧き天剣・イドメタ",
         "effect": "【ファンファーレ】『天剣の深淵』1枚を自分の手札に加える。 【進化時】信仰値を-5して、自分の信仰は「自分がカードを【エンハンス】でプレイしたとき、自分の場のフォロワーすべては+1/+1する。」を持つ。",
@@ -4614,6 +5136,60 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Sharp-Eared Operative",
         "effect": "Last Words: Summon a Knight. Evolve: Select an enemy follower on the field and deal it 3 damage.",
         "imageHash": "24c26c7e6cd947b3973464cec36beb18"
+      }
+    },
+    {
+      "id": "10821120",
+      "classKey": "sword",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "寡黙なアサシン・シャイリィ",
+        "effect": "【潜伏】 【進化時】相手の場のフォロワー1枚を選ぶ。相手のターン終了まで、それは「フォロワーやリーダーを攻撃できない。」を持つ。",
+        "imageHash": "b8b102a805fd4366a2dc73ae8b07c148"
+      },
+      "en": {
+        "name": "Shaili, Prowling Assassin",
+        "effect": "Ambush Evolve: Select an enemy follower on the field and give it \"Can't attack followers or leaders\" until the end of your opponent's turn.",
+        "imageHash": "04a8016ad9bb4beaaff57102ef5fde8c"
+      }
+    },
+    {
+      "id": "10823310",
+      "classKey": "sword",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 4,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "二等分の日常",
+        "effect": "【モード】1つを選んでその能力が働く。自分の場のカードの枚数が2以上なら、1つを選ぶのではなくすべて。 （1）相手の場のフォロワーからランダム1枚に4ダメージ。 （2）自分のリーダーを2回復。",
+        "imageHash": "6622615a5d074e74aee8983eb253f66f"
+      },
+      "en": {
+        "name": "Slice of Domesticity",
+        "effect": "Select a Mode to activate. If there are at least 2 allied cards on the field, activate all of them instead. 1. Deal 4 damage to a random enemy follower. 2. Restore 2 defense to your leader.",
+        "imageHash": "2bf151fb305c462eb1f71ceff3a65e90"
       }
     },
     {
@@ -4809,7 +5385,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10222110",
       "classKey": "sword",
       "cost": 3,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 3,
       "unlockTurn": 3,
       "requiresEvolve": false,
@@ -4836,7 +5412,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10223110",
       "classKey": "sword",
       "cost": 3,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 3,
       "requiresEvolve": false,
@@ -4995,12 +5571,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 2,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "condition": "Base / Creates Glittering Gold",
+      "displayCard": {
+        "ja": {
+          "name": "輝く金貨",
+          "imageHash": "30d8628a98774a73850130df8f373ebc"
+        },
+        "en": {
+          "name": "Glittering Gold",
+          "imageHash": "804adfc11ec24d7b935170c119cb0ce4"
+        }
+      },
       "ja": {
         "name": "煙管の美玉",
         "effect": "【ファンファーレ】自分の手札のスペルの枚数が2以上なら、これは+1/+1して【守護】を持つ。 【進化時】『輝く金貨』1枚を自分の手札に加える。",
@@ -5022,12 +5607,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 2,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Enhance 5",
-      "displayCard": null,
+      "condition": "Enhance 5 / Creates Glittering Gold",
+      "displayCard": {
+        "ja": {
+          "name": "輝く金貨",
+          "imageHash": "30d8628a98774a73850130df8f373ebc"
+        },
+        "en": {
+          "name": "Glittering Gold",
+          "imageHash": "804adfc11ec24d7b935170c119cb0ce4"
+        }
+      },
       "ja": {
         "name": "栄耀なる麗金花",
         "effect": "『輝く金貨』2枚を自分の手札に加える。 【エンハンス_5】2枚ではなく4枚。",
@@ -5148,6 +5742,69 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10822110",
+      "classKey": "sword",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 2,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base / Creates Glittering Gold",
+      "displayCard": {
+        "ja": {
+          "name": "輝く金貨",
+          "imageHash": "30d8628a98774a73850130df8f373ebc"
+        },
+        "en": {
+          "name": "Glittering Gold",
+          "imageHash": "804adfc11ec24d7b935170c119cb0ce4"
+        }
+      },
+      "ja": {
+        "name": "ジェイルブレイク・カッツェ",
+        "effect": "自分がスペルをプレイしたとき、自分のターンごとに1回、相手の場のフォロワーからランダム1枚に2ダメージ。 【進化時】『輝く金貨』1枚を自分の手札に加える。",
+        "imageHash": "1128eddae0074d7cb8d3be2a0bcbcbd6"
+      },
+      "en": {
+        "name": "Katze, Magical Thief",
+        "effect": "Once on each of your turns, when you play a spell, deal 2 damage to a random enemy follower. Evolve: Add a Glittering Gold to your hand.",
+        "imageHash": "f53b749d70b9482786e870606724fea1"
+      }
+    },
+    {
+      "id": "10823110",
+      "classKey": "sword",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "沖田総司",
+        "effect": "【ファンファーレ】超進化可能ターンなら、これは進化する。 【突進】 【攻撃時】フォロワーへの攻撃なら、「交戦相手に3ダメージ。」を1回行う。これが進化後なら、1回ではなく3回。",
+        "imageHash": "0c0cc9794e6b4f019faea874c6776256"
+      },
+      "en": {
+        "name": "Okita Souji",
+        "effect": "Fanfare: If you've unlocked super-evolution, evolve this follower. Rush Follower Strike: Do this 1 time: \"Deal 3 damage to the opposing follower.\" If this follower is evolved, do it 3 times instead.",
+        "imageHash": "1cf2ad750e7d46bcb41896a897e87f7a"
+      }
+    },
+    {
       "id": "10021120",
       "classKey": "sword",
       "cost": 4,
@@ -5259,7 +5916,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10222120",
       "classKey": "sword",
       "cost": 4,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 4,
       "unlockTurn": 4,
       "requiresEvolve": false,
@@ -5508,6 +6165,60 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10821130",
+      "classKey": "sword",
+      "cost": 4,
+      "isRotation": true,
+      "effectiveCost": 4,
+      "unlockTurn": 4,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "悠久の騎士・サーシャ",
+        "effect": "【ファンファーレ】『スティールナイト』1枚を自分の場に出す。それは【突進】を持つ。 【進化時】『スティールナイト』1枚を自分の場に出す。それは【守護】を持つ。",
+        "imageHash": "44ef229489514099b7fd524338a28343"
+      },
+      "en": {
+        "name": "Sasha, Knight Everlasting",
+        "effect": "Fanfare: Summon a Steelclad Knight and give it Rush. Evolve: Summon a Steelclad Knight and give it Ward.",
+        "imageHash": "392a4b8035d44948978d89f3f175c063"
+      }
+    },
+    {
+      "id": "10822310",
+      "classKey": "sword",
+      "cost": 4,
+      "isRotation": true,
+      "effectiveCost": 4,
+      "unlockTurn": 4,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Enhance 6",
+      "displayCard": null,
+      "ja": {
+        "name": "リライブリライフ",
+        "effect": "相手の場の攻撃力最大のフォロワーからランダム1枚は-10/-10する。 【エンハンス_6】『異形』3枚を自分の場に出す。",
+        "imageHash": "0d938a9c6aed45fa9fe01cc0bd96bd0f"
+      },
+      "en": {
+        "name": "Shared Existence",
+        "effect": "Give a random enemy follower on the field with the highest attack -10/-10. Enhance (6): Summon 3 copies of Wretch.",
+        "imageHash": "f5abc1baf9e544ef85708b915827eec2"
+      }
+    },
+    {
       "id": "10122120",
       "classKey": "sword",
       "cost": 5,
@@ -5565,7 +6276,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10221120",
       "classKey": "sword",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -5652,12 +6363,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 2,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "condition": "Base / Creates Glittering Gold",
+      "displayCard": {
+        "ja": {
+          "name": "輝く金貨",
+          "imageHash": "30d8628a98774a73850130df8f373ebc"
+        },
+        "en": {
+          "name": "Glittering Gold",
+          "imageHash": "804adfc11ec24d7b935170c119cb0ce4"
+        }
+      },
       "ja": {
         "name": "麗金花・ウンケイ",
         "effect": "【ファンファーレ】相手の場のフォロワー1枚を選ぶ。それを消滅。『輝く金貨』1枚を自分の手札に加える。 【超進化時】自分は『クレスト：麗金花・ウンケイ』を持つ。",
@@ -5751,6 +6471,42 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10824110",
+      "classKey": "sword",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 5,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 4,
+      "tokenDamage": 4,
+      "leaderDamage": 4,
+      "stormDamage": 0,
+      "burnDamage": 4,
+      "condition": "Rally / Creates Desperados' Shot",
+      "displayCard": {
+        "ja": {
+          "name": "デスペラードショット",
+          "imageHash": "5e3e08fc099f466bb27ce73fdf6352b5"
+        },
+        "en": {
+          "name": "Desperados' Shot",
+          "imageHash": "65f8fc0058304f689629faf235e44957"
+        }
+      },
+      "ja": {
+        "name": "天命の弾丸・バニー＆バロン",
+        "effect": "【ファンファーレ】『天命の弾丸・バニー＆バロン』1枚を自分の場に出す。【連携_20】相手のリーダーに4ダメージ。 【突進】 【進化時】『デスペラードショット』1枚を自分の手札に加える。",
+        "imageHash": "f1bf5f3860964eb2aee85335944ad0cc"
+      },
+      "en": {
+        "name": "Bunny & Baron, Fate's Bullet",
+        "effect": "Fanfare: Summon a Bunny & Baron, Fate's Bullet. Rally (20) - Deal 4 damage to the enemy leader. Rush Evolve: Add a Desperados' Shot to your hand.",
+        "imageHash": "0328b2e9a7f94306a1b943d80e68448c"
+      }
+    },
+    {
       "id": "10121120",
       "classKey": "sword",
       "cost": 6,
@@ -5808,7 +6564,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10224110",
       "classKey": "sword",
       "cost": 6,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 6,
       "unlockTurn": 6,
       "requiresEvolve": false,
@@ -6097,8 +6853,17 @@ window.SHADOWVERSE_CARD_DATA = {
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "condition": "Base / Creates Glittering Gold",
+      "displayCard": {
+        "ja": {
+          "name": "輝く金貨",
+          "imageHash": "30d8628a98774a73850130df8f373ebc"
+        },
+        "en": {
+          "name": "Glittering Gold",
+          "imageHash": "804adfc11ec24d7b935170c119cb0ce4"
+        }
+      },
       "ja": {
         "name": "吉祥蛙",
         "effect": "自分のターン終了時、自分の手札のスペルの枚数が2以上なら、相手の場のフォロワーすべてに5ダメージ。 【進化時】『輝く金貨』2枚を自分の手札に加える。",
@@ -6135,6 +6900,33 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Cesar, Accordant Major",
         "effect": "Fanfare: Summon 2 copies of Steelclad Knight. Give all other allied Swordcraft followers on the field +1/+3 and Ward. Ward Super-Evolve: Select an enemy follower on the field and destroy it.",
         "imageHash": "58bb37a17a29454196334644538c4848"
+      }
+    },
+    {
+      "id": "10821110",
+      "classKey": "sword",
+      "cost": 7,
+      "isRotation": true,
+      "effectiveCost": 7,
+      "unlockTurn": 7,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 3,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "武力と治安・ナハト・ナハト＆ヴィンセント",
+        "effect": "【ファンファーレ】『ナハトの私兵』1枚を自分の場に出す。相手の場のフォロワーすべてに3ダメージ。 【超進化時】【ファンファーレ】と同じ能力が働く。",
+        "imageHash": "04e796cb70cb482bb985638e39312e97"
+      },
+      "en": {
+        "name": "Naht & Vince, Force and Order",
+        "effect": "Fanfare: Summon a Naht's Henchman. Deal 3 damage to all enemy followers. Super-Evolve: Replicate the effects of this card's Fanfare ability.",
+        "imageHash": "b8007ca293cc4025a0fea3d40fab65a5"
       }
     },
     {
@@ -6195,7 +6987,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10224120",
       "classKey": "sword",
       "cost": 8,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 8,
       "unlockTurn": 8,
       "requiresEvolve": false,
@@ -6246,6 +7038,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10824120",
+      "classKey": "sword",
+      "cost": 8,
+      "isRotation": true,
+      "effectiveCost": 8,
+      "unlockTurn": 8,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 2,
+      "evolveEffectLeaderDamage": 1,
+      "tokenDamage": 0,
+      "leaderDamage": 1,
+      "stormDamage": 1,
+      "burnDamage": 0,
+      "condition": "Storm",
+      "displayCard": null,
+      "ja": {
+        "name": "焦がれし炎将・マーズ",
+        "effect": "【ファンファーレ】『ナイト』3枚を自分の場に出す。 【疾走】 【必殺】 自分の兵士・フォロワーが場に出たとき、それは+2/+0して【突進】を持つ。これは+1/+0する。 【超進化時】『ナイト』1枚を自分の場に出す。",
+        "imageHash": "d6a989a916ab4da18a988e4bee018c77"
+      },
+      "en": {
+        "name": "Mars, Conflagrant Commander",
+        "effect": "Fanfare: Summon 3 copies of Knight. Storm Bane Whenever an allied Officer follower enters the field, give it +2/+0 and Rush and give this follower +1/+0. Super-Evolve: Summon a Knight.",
+        "imageHash": "4ffecb77d91143049e421029d8271e7d"
+      }
+    },
+    {
       "id": "10524110",
       "classKey": "sword",
       "cost": 9,
@@ -6270,6 +7089,33 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Oluon, Raging Chariot",
         "effect": "At the end of your turn, if this follower is unevolved, deal 7 damage to all enemy followers. If it's evolved, do this 3 times: \"Deal 7 damage to another random ally or enemy.\"",
         "imageHash": "69312cd9885b4f75aa308b4749f2c0ee"
+      }
+    },
+    {
+      "id": "10822120",
+      "classKey": "sword",
+      "cost": 10,
+      "isRotation": true,
+      "effectiveCost": 10,
+      "unlockTurn": 10,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 6,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "織田信長",
+        "effect": "【ファンファーレ】相手の場のフォロワーすべてに6ダメージ。 【威圧】",
+        "imageHash": "691df8d9ed804f449f73376f229757a0"
+      },
+      "en": {
+        "name": "Oda Nobunaga",
+        "effect": "Fanfare: Deal 6 damage to all enemy followers. Intimidate",
+        "imageHash": "2a190d8189344a04aed648583a6899bc"
       }
     },
     {
@@ -6330,7 +7176,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10131320",
       "classKey": "rune",
       "cost": 1,
-      "isRotation": false,
+      "isRotation": true,
       "effectiveCost": 1,
       "unlockTurn": 1,
       "requiresEvolve": false,
@@ -6489,6 +7335,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10831310",
+      "classKey": "rune",
+      "cost": 1,
+      "isRotation": true,
+      "effectiveCost": 1,
+      "unlockTurn": 1,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "ストームブラスト",
+        "effect": "Xは2から始まる。 【スペルブースト時】これのXを+1する。 相手の場のフォロワー1枚を選ぶ。それにXダメージ。",
+        "imageHash": "8f6eecd282e54fa78233312465669b30"
+      },
+      "en": {
+        "name": "Stormy Blast",
+        "effect": "X starts at 2. On Spellboost: Increase X by 1. Select an enemy follower on the field and deal it X damage.",
+        "imageHash": "5e70ee83b78745dea3c7ef43d865998e"
+      }
+    },
+    {
       "id": "10031320",
       "classKey": "rune",
       "cost": 2,
@@ -6627,7 +7500,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10231110",
       "classKey": "rune",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -6654,7 +7527,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10231120",
       "classKey": "rune",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -6681,7 +7554,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10233310",
       "classKey": "rune",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -6948,6 +7821,96 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10831110",
+      "classKey": "rune",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 1,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "緑の幸・ムニャール＆マンマル2号＆ジーナ",
+        "effect": "【ファンファーレ】相手の場のフォロワー1枚を選ぶ。それに1ダメージ。自分の手札すべては1回スペルブーストする。 【進化時】【ファンファーレ】と同じ能力が働く。",
+        "imageHash": "82aa9feb6a9f49d7b02f9957ec3851b2"
+      },
+      "en": {
+        "name": "Meowskers, Roly-Poly Mk II & Djeana",
+        "effect": "Fanfare: Select an enemy follower on the field and deal it 1 damage. Spellboost your hand. Evolve: Replicate the effects of this card's Fanfare ability.",
+        "imageHash": "7ab0ec5fe73f4b1b830056db0ff44028"
+      }
+    },
+    {
+      "id": "10831120",
+      "classKey": "rune",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 3,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base / Creates Mysterian Missile",
+      "displayCard": {
+        "ja": {
+          "name": "マナリアの魔弾",
+          "imageHash": "24ee938585f249b88edcc34f1dbebf18"
+        },
+        "en": {
+          "name": "Mysterian Missile",
+          "imageHash": "66e4dc17a39046ebb26112ebca155fd1"
+        }
+      },
+      "ja": {
+        "name": "マナリアクラーク・ポピー",
+        "effect": "【ファンファーレ】『マナリアの魔弾』1枚を自分の手札に加える。",
+        "imageHash": "ca38499cfc774f2095a34f84144504ca"
+      },
+      "en": {
+        "name": "Poppy, Mysterian Secretary",
+        "effect": "Fanfare: Add a Mysterian Missile to your hand.",
+        "imageHash": "3c1fa27c97874cda885984b982642fc0"
+      }
+    },
+    {
+      "id": "10832310",
+      "classKey": "rune",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "睦まやかな団欒",
+        "effect": "自分のリーダーを2回復。自分の手札すべては1回スペルブーストする。",
+        "imageHash": "432cdb7c2d804e10bac5e3580d97dd2b"
+      },
+      "en": {
+        "name": "Harmonious Meal",
+        "effect": "Restore 2 defense to your leader. Spellboost your hand.",
+        "imageHash": "cf1927f9215a4cd28b821eb56ef950bf"
+      }
+    },
+    {
       "id": "10031110",
       "classKey": "rune",
       "cost": 3,
@@ -7038,12 +8001,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 2,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "condition": "Base / Creates Looking Smart!",
+      "displayCard": {
+        "ja": {
+          "name": "成長したですぅ！",
+          "imageHash": "f85a20879a3b4fd4bdd65708c6543382"
+        },
+        "en": {
+          "name": "Looking Smart!",
+          "imageHash": "e22c8232a65f4b368ed7f4c4166a8ccf"
+        }
+      },
       "ja": {
         "name": "宿題やるですぅ！",
         "effect": "Xは0から始まる。 【スペルブースト時】これのXを+1する。その後、Xが5以上なら、これは『成長したですぅ！』に変身する。 自分のデッキから2枚を引く。",
@@ -7059,7 +8031,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10232310",
       "classKey": "rune",
       "cost": 3,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 3,
       "unlockTurn": 3,
       "requiresEvolve": false,
@@ -7086,7 +8058,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10233110",
       "classKey": "rune",
       "cost": 3,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 3,
       "unlockTurn": 3,
       "requiresEvolve": false,
@@ -7398,6 +8370,69 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10833110",
+      "classKey": "rune",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": true,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 3,
+      "leaderDamage": 1,
+      "stormDamage": 0,
+      "burnDamage": 1,
+      "condition": "Base / Evolve / Creates Crest / Specific Effect",
+      "displayCard": {
+        "ja": {
+          "name": "Crest / Specific Effect",
+          "imageHash": ""
+        },
+        "en": {
+          "name": "Crest / Specific Effect",
+          "imageHash": ""
+        }
+      },
+      "ja": {
+        "name": "マナリアスクリプター・ティコ",
+        "effect": "【ファンファーレ】『マナリアの魔弾』2枚を自分の手札に加える。 【進化時】自分の手札のマナリア・スペルすべてのコストを-1する。 【超進化時】自分は『クレスト：マナリアスクリプター・ティコ』を持つ。",
+        "imageHash": "981871168ea34975b02e32bb67f22355"
+      },
+      "en": {
+        "name": "Tico, Mysterian Spellcrafter",
+        "effect": "Fanfare: Add 2 copies of Mysterian Missile to your hand. Evolve: Reduce the cost of all Mysteria spells in your hand by 1. Super-Evolve: Gain Crest: Tico, Mysterian Spellcrafter.",
+        "imageHash": "79955834df554a44a8471894f596a77d"
+      }
+    },
+    {
+      "id": "10833310",
+      "classKey": "rune",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "鋼鉄の微睡み",
+        "effect": "Xは0から始まる。 【スペルブースト時】これのXを+1する。 自分のデッキから2枚を引く。Xが5以上なら、自分のリーダーを2回復。自分のPPを2回復。",
+        "imageHash": "88efab276cd1459da3d8394ce50ddfce"
+      },
+      "en": {
+        "name": "Amethyst's Naptime",
+        "effect": "X starts at 0. On Spellboost: Increase X by 1. Draw 2 cards. If X is at least 5, restore 2 defense to your leader and recover 2 play points.",
+        "imageHash": "7eaa69f87f644394be7a9ca0c5ff716f"
+      }
+    },
+    {
       "id": "10032110",
       "classKey": "rune",
       "cost": 4,
@@ -7509,7 +8544,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10231310",
       "classKey": "rune",
       "cost": 4,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 4,
       "unlockTurn": 4,
       "requiresEvolve": false,
@@ -7536,7 +8571,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10232120",
       "classKey": "rune",
       "cost": 4,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 4,
       "unlockTurn": 4,
       "requiresEvolve": false,
@@ -7596,12 +8631,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 4,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "condition": "Base / Creates Crest / Specific Effect",
+      "displayCard": {
+        "ja": {
+          "name": "Crest / Specific Effect",
+          "imageHash": ""
+        },
+        "en": {
+          "name": "Crest / Specific Effect",
+          "imageHash": ""
+        }
+      },
       "ja": {
         "name": "クリスタルゲイジング",
         "effect": "自分は『クレスト：クリスタルゲイジング』を持つ。",
@@ -7677,12 +8721,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 2,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Super Skybound Art",
-      "displayCard": null,
+      "condition": "Super Skybound Art / Creates Ars Magna",
+      "displayCard": {
+        "ja": {
+          "name": "アルス・マグナ",
+          "imageHash": "a423c9082a4548068a5e1c515a2a2978"
+        },
+        "en": {
+          "name": "Ars Magna",
+          "imageHash": "ba48673df3e24a06a3ded8055738089e"
+        }
+      },
       "ja": {
         "name": "天才美少女錬金術師・カリオストロ",
         "effect": "【ファンファーレ】自分の場の土の印を+2する。『アルス・マグナ』1枚を自分の手札に加える。【奥義】これは進化する。【解放奥義】自分は『クレスト：天才美少女錬金術師・カリオストロ』を持つ。",
@@ -7941,7 +8994,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10232110",
       "classKey": "rune",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -8073,6 +9126,60 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10832110",
+      "classKey": "rune",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 5,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "ハッピーフラワー・サミー＆マリー",
+        "effect": "【スペルブースト時】これのコストを-1する。 【ファンファーレ】自分のデッキから2枚を引く。相手は自身のデッキから1枚を引く。",
+        "imageHash": "9617d66a749c4940b031b07a53bfeaff"
+      },
+      "en": {
+        "name": "Sammy & Marie, Flowers of Joy",
+        "effect": "On Spellboost: Reduce the cost of this card by 1. Fanfare: Draw 2 cards. Your opponent draws a card.",
+        "imageHash": "c4aacca386e14870974ffd77c3c0c7f8"
+      }
+    },
+    {
+      "id": "10832320",
+      "classKey": "rune",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 5,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 8,
+      "leaderDamage": 2,
+      "stormDamage": 0,
+      "burnDamage": 2,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "地を這う雷撃",
+        "effect": "相手の場の攻撃力最大のフォロワーからランダム1枚に8ダメージ。相手のリーダーに2ダメージ。【土の秘術_2】『地を這う雷撃』1枚を自分の手札に加える。",
+        "imageHash": "1ab9eb019b7b4d2381f80c302b7b2879"
+      },
+      "en": {
+        "name": "Earth-Shattering Bolt",
+        "effect": "Deal 8 damage to a random enemy follower with the highest attack. Deal 2 damage to the enemy leader. Earth Rite (2) - Add an Earth-Shattering Bolt to your hand.",
+        "imageHash": "d0b7c6ed73864d25a6a0bd58d40cc317"
+      }
+    },
+    {
       "id": "10132130",
       "classKey": "rune",
       "cost": 6,
@@ -8103,7 +9210,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10234120",
       "classKey": "rune",
       "cost": 6,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 6,
       "unlockTurn": 6,
       "requiresEvolve": false,
@@ -8232,6 +9339,42 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Daydream Librarian",
         "effect": "Fanfare: Summon a Caravan Mammoth. Super-Evolve: Give all other allied followers on the field Rush.",
         "imageHash": "87cfed87ca2245f99b5564f67a6f20fa"
+      }
+    },
+    {
+      "id": "10834110",
+      "classKey": "rune",
+      "cost": 6,
+      "isRotation": true,
+      "effectiveCost": 6,
+      "unlockTurn": 6,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 2,
+      "evolveEffectLeaderDamage": 5,
+      "tokenDamage": 5,
+      "leaderDamage": 5,
+      "stormDamage": 5,
+      "burnDamage": 0,
+      "condition": "Storm / Creates Delta Cannon",
+      "displayCard": {
+        "ja": {
+          "name": "ソニック・フォー",
+          "imageHash": "c2a5b97c8d3c42818b9390415c1b076b"
+        },
+        "en": {
+          "name": "Delta Cannon",
+          "imageHash": "ed0611171e32408f8147050dc1f08ea0"
+        }
+      },
+      "ja": {
+        "name": "恩愛の大地・テトラ＆ラティカ",
+        "effect": "Xは0から始まる。 【スペルブースト時】これのXを+1する。 【ファンファーレ】Xが10以上なら、『ソニック・フォー』1枚を自分の手札に加える。20以上なら、『大いなる回帰』1枚を自分の手札に加える。 【疾走】",
+        "imageHash": "904bd3b84d9340219a4d5a5722286293"
+      },
+      "en": {
+        "name": "Tetra & Ladica, Forest BFFs",
+        "effect": "X starts at 0. On Spellboost: Increase X by 1. Fanfare: If X is at least 10, add a Delta Cannon to your hand. If X is at least 20, add a Send 'Em Packing to your hand. Storm",
+        "imageHash": "d5e2765410f64cb49f393f53db795e7b"
       }
     },
     {
@@ -8397,6 +9540,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10834120",
+      "classKey": "rune",
+      "cost": 7,
+      "isRotation": true,
+      "effectiveCost": 7,
+      "unlockTurn": 7,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "災いの言霊・ジンジャー",
+        "effect": "【ファンファーレ】『ガーディアンゴーレム』2枚を自分の場に出す。 自分の他のフォロワーが場に出たとき、それは【突進】を持つ。自分の手札すべては1回スペルブーストする。 【進化時】『ガーディアンゴーレム』1枚を自分の場に出す。",
+        "imageHash": "83a9e57a29104dc09b04bceaccb86b73"
+      },
+      "en": {
+        "name": "Ginger, Disastrous Word",
+        "effect": "Fanfare: Summon 2 copies of Guardian Golem. Whenever another allied follower enters the field, give it Rush and spellboost your hand. Evolve: Summon a Guardian Golem.",
+        "imageHash": "ce2fce7760fc4d19b3e4d2ca49c79e00"
+      }
+    },
+    {
       "id": "10132320",
       "classKey": "rune",
       "cost": 8,
@@ -8427,7 +9597,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10234110",
       "classKey": "rune",
       "cost": 8,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 8,
       "unlockTurn": 8,
       "requiresEvolve": false,
@@ -8697,7 +9867,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10241120",
       "classKey": "dragon",
       "cost": 1,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 1,
       "unlockTurn": 1,
       "requiresEvolve": false,
@@ -8724,7 +9894,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10242210",
       "classKey": "dragon",
       "cost": 1,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 1,
       "unlockTurn": 1,
       "requiresEvolve": false,
@@ -8802,6 +9972,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10843310",
+      "classKey": "dragon",
+      "cost": 1,
+      "isRotation": true,
+      "effectiveCost": 1,
+      "unlockTurn": 1,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 1,
+      "leaderDamage": 1,
+      "stormDamage": 0,
+      "burnDamage": 1,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "狐火陽炎",
+        "effect": "相手の場のフォロワー1枚か相手のリーダーを選ぶ。それに1ダメージ。『狐火陽炎』1枚を自分のデッキに加える。【覚醒】なら、自分のデッキから1枚を引く。",
+        "imageHash": "c6865d72dcfb471189d866288e531d73"
+      },
+      "en": {
+        "name": "Ephemeral Foxfire",
+        "effect": "Select an enemy follower on the field or the enemy leader and deal it 1 damage. Add an Ephemeral Foxfire to your deck. If you're in Overflow, draw a card.",
+        "imageHash": "54218616ade948819fde8485adb0daea"
+      }
+    },
+    {
       "id": "10041110",
       "classKey": "dragon",
       "cost": 2,
@@ -8859,7 +10056,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10241310",
       "classKey": "dragon",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -8886,7 +10083,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10242110",
       "classKey": "dragon",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -8913,7 +10110,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10244110",
       "classKey": "dragon",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -9267,6 +10464,60 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Draconic Part-Timer",
         "effect": "Fanfare: If you have 10 max play points, evolve this follower. At the end of your turn, restore 1 defense to your leader. If this follower is evolved, restore 2 defense instead.",
         "imageHash": "17cd94c712814327ad67889f95369598"
+      }
+    },
+    {
+      "id": "10841130",
+      "classKey": "dragon",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "わだつみの精",
+        "effect": "【ファンファーレ】『大海のオルカ』1枚を自分の手札に加える。 【進化時】自分は『クレスト：わだつみの精』を持つ。",
+        "imageHash": "220d942dae704b35a1e8adf4e026df69"
+      },
+      "en": {
+        "name": "Spirit of Wadatsumi",
+        "effect": "Fanfare: Add a Majestic Megalorca to your hand. Evolve: Gain Crest: Spirit of Wadatsumi.",
+        "imageHash": "62c53758744f4ce88148054e7266428e"
+      }
+    },
+    {
+      "id": "10842120",
+      "classKey": "dragon",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "笑顔の調理・キミカ",
+        "effect": "【ファンファーレ】自分の手札1枚を選ぶ。それを捨てる。自分のデッキから1枚を引く。自分のリーダーを1回復。 【進化時】【ファンファーレ】と同じ能力が働く。",
+        "imageHash": "e6c32000192345c38ea23061e1a30f34"
+      },
+      "en": {
+        "name": "Kimika, Cook of Happiness",
+        "effect": "Fanfare: Select a card in your hand and discard it. Draw a card. Restore 1 defense to your leader. Evolve: Replicate the effects of this card's Fanfare ability.",
+        "imageHash": "46606daf199a462cacb166e2b44e052f"
       }
     },
     {
@@ -9864,6 +11115,60 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10841110",
+      "classKey": "dragon",
+      "cost": 4,
+      "isRotation": true,
+      "effectiveCost": 4,
+      "unlockTurn": 4,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "人狼族の長・ギド",
+        "effect": "【ファンファーレ】自分のリーダーの体力が10以下なら、これは進化する。 【必殺】 【守護】",
+        "imageHash": "8eff987ebc314de395cd3a52c3591a74"
+      },
+      "en": {
+        "name": "Gido, Leader of the Pack",
+        "effect": "Fanfare: If your leader's defense is 10 or less, evolve this follower. Bane Ward",
+        "imageHash": "592c5a01a77d4baeb35e1b1d260c827e"
+      }
+    },
+    {
+      "id": "10844110",
+      "classKey": "dragon",
+      "cost": 4,
+      "isRotation": true,
+      "effectiveCost": 4,
+      "unlockTurn": 4,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "反照の赤紅・ドラーク＆アルザード",
+        "effect": "【ファンファーレ】これは+X/+Xする。Xが2以上なら、これは進化する。Xはこのバトル中に場に出た自分の他の『反照の赤紅・ドラーク＆アルザード』の枚数である。 【守護】 【ラストワード】自分は『クレスト：反照の赤紅・ドラーク＆アルザード』を持つ。",
+        "imageHash": "84bfaf7edca2492694ed08d4f6405f34"
+      },
+      "en": {
+        "name": "Drache & Aluzard, Burning Blood",
+        "effect": "Fanfare: Give this follower +X/+X. If X is at least 2, evolve this follower. X is the number of other allied copies of Drache & Aluzard, Burning Blood that have entered the field this match. Ward Last Words: Gain Crest: Drache & Aluzard, Burning Blood.",
+        "imageHash": "2891a162146c44e0ab09467150f9b8ce"
+      }
+    },
+    {
       "id": "10042120",
       "classKey": "dragon",
       "cost": 5,
@@ -9921,7 +11226,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10242120",
       "classKey": "dragon",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -10107,6 +11412,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10842110",
+      "classKey": "dragon",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 5,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "キラキラサウンド・リーフ＆ロロ",
+        "effect": "【ファンファーレ】『キラキラサウンド・リーフ＆ロロ』1枚を自分の場に出す。 【突進】 自分のターン終了時、『大海のオルカ』1枚を自分の手札に加える。",
+        "imageHash": "b93144a134d84f6b9acf5803deed7507"
+      },
+      "en": {
+        "name": "Reef & Lolo, Serene Sirens",
+        "effect": "Fanfare: Summon a Reef & Lolo, Serene Sirens. Rush At the end of your turn, add a Majestic Megalorca to your hand.",
+        "imageHash": "aed7968b347b4107b856041bd3c9f584"
+      }
+    },
+    {
       "id": "10041120",
       "classKey": "dragon",
       "cost": 6,
@@ -10245,7 +11577,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10243310",
       "classKey": "dragon",
       "cost": 6,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 6,
       "unlockTurn": 6,
       "requiresEvolve": false,
@@ -10377,6 +11709,60 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10842310",
+      "classKey": "dragon",
+      "cost": 6,
+      "isRotation": true,
+      "effectiveCost": 6,
+      "unlockTurn": 6,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 4,
+      "leaderDamage": 4,
+      "stormDamage": 0,
+      "burnDamage": 4,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "末世死化粧",
+        "effect": "相手の場のフォロワーからランダム1枚に4ダメージ。相手のリーダーに4ダメージ。",
+        "imageHash": "28244b5cd8ef4f3f9986a2da14fc6218"
+      },
+      "en": {
+        "name": "Art of Decay",
+        "effect": "Deal 4 damage to a random enemy follower. Deal 4 damage to the enemy leader.",
+        "imageHash": "66366bfb4cb44856bb38eb34c11298a2"
+      }
+    },
+    {
+      "id": "10843110",
+      "classKey": "dragon",
+      "cost": 6,
+      "isRotation": true,
+      "effectiveCost": 6,
+      "unlockTurn": 6,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "天頂の戦火・ジェアーダ",
+        "effect": "【突進】 【威圧】 【攻撃時】これは【バリア】を持つ。フォロワーへの攻撃なら、ターン終了まで、これは「1ターンに2回攻撃できる。」を持つ。",
+        "imageHash": "333e768de32e402fa839af3a6d9a18a6"
+      },
+      "en": {
+        "name": "Giada, Peerless Flame of War",
+        "effect": "Rush Intimidate Strike: Give this follower Barrier. If attacking a follower, give this follower \"Can attack 2 times per turn\" until the end of the turn.",
+        "imageHash": "875dc4b1d3f648869011731662626ecc"
+      }
+    },
+    {
       "id": "10144110",
       "classKey": "dragon",
       "cost": 7,
@@ -10416,7 +11802,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10243110",
       "classKey": "dragon",
       "cost": 7,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 7,
       "unlockTurn": 7,
       "requiresEvolve": false,
@@ -10602,6 +11988,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10841120",
+      "classKey": "dragon",
+      "cost": 7,
+      "isRotation": true,
+      "effectiveCost": 7,
+      "unlockTurn": 7,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "砂塵の宝物番",
+        "effect": "【守護】 【ラストワード】自分のデッキから3枚を引く。",
+        "imageHash": "812c625bee7b486ea2f0c2f8068c2a66"
+      },
+      "en": {
+        "name": "Sandstorm Watchdragon",
+        "effect": "Ward Last Words: Draw 3 cards.",
+        "imageHash": "b92d0326a12749faa977d9d9915cabab"
+      }
+    },
+    {
       "id": "10041130",
       "classKey": "dragon",
       "cost": 8,
@@ -10686,7 +12099,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10244120",
       "classKey": "dragon",
       "cost": 8,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 8,
       "unlockTurn": 8,
       "requiresEvolve": false,
@@ -10788,6 +12201,33 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Spiked Dragon",
         "effect": "At the end of your turn, evolve this follower. When this follower evolves, deal 3 damage to all enemies.",
         "imageHash": "f535af8db0344177a2edca70ea90a2b8"
+      }
+    },
+    {
+      "id": "10844120",
+      "classKey": "dragon",
+      "cost": 8,
+      "isRotation": true,
+      "effectiveCost": 8,
+      "unlockTurn": 8,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 4,
+      "tokenDamage": 4,
+      "leaderDamage": 4,
+      "stormDamage": 0,
+      "burnDamage": 4,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "金銀絢爛・リュミオール＆アルジャンテ",
+        "effect": "【ファンファーレ】自分の手札2枚を選ぶ。それを捨てる。相手の場のフォロワーすべてと相手のリーダーに4ダメージ。 【超進化時】自分のデッキから3枚を引く。",
+        "imageHash": "597150e50a1d4bc397f0119bf14e6699"
+      },
+      "en": {
+        "name": "Lumiore & Argente, Shining Wings",
+        "effect": "Fanfare: Select 2 cards in your hand and discard them. Deal 4 damage to all enemies. Super-Evolve: Draw 3 cards.",
+        "imageHash": "d9703c489e6d46f4a778b620f16d5821"
       }
     },
     {
@@ -10911,7 +12351,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10241110",
       "classKey": "dragon",
       "cost": 10,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 10,
       "unlockTurn": 10,
       "requiresEvolve": false,
@@ -11046,7 +12486,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10251120",
       "classKey": "nightmare",
       "cost": 1,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 1,
       "unlockTurn": 1,
       "requiresEvolve": false,
@@ -11103,6 +12543,33 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Soul Tuning",
         "effect": "Select 2 allied followers on the field and give them +0/+1. Draw a card.",
         "imageHash": "f0d6daa82fd04a608fdaa5da9160c5b3"
+      }
+    },
+    {
+      "id": "10851120",
+      "classKey": "nightmare",
+      "cost": 1,
+      "isRotation": true,
+      "effectiveCost": 1,
+      "unlockTurn": 1,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "キュートな悪魔・リリム",
+        "effect": "【攻撃時】リーダーすべてに1ダメージ。 【ラストワード】『バット』1枚を自分の手札に加える。",
+        "imageHash": "bd9a7fd170944bc1b38978f42b06db73"
+      },
+      "en": {
+        "name": "Lilith, Devilish Cutie",
+        "effect": "Strike: Deal 1 damage to both leaders. Last Words: Add a Bat to your hand.",
+        "imageHash": "c6ea9fd3411e4ecebae20d048f6ea9fb"
       }
     },
     {
@@ -11325,7 +12792,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10251310",
       "classKey": "nightmare",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -11361,7 +12828,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10252310",
       "classKey": "nightmare",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -11502,12 +12969,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 2,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "condition": "Base / Creates Crest / Specific Effect",
+      "displayCard": {
+        "ja": {
+          "name": "Crest / Specific Effect",
+          "imageHash": ""
+        },
+        "en": {
+          "name": "Crest / Specific Effect",
+          "imageHash": ""
+        }
+      },
       "ja": {
         "name": "ヴァリアントエッジ",
         "effect": "自分のリーダーに2ダメージ。自分は『クレスト：ヴァリアントエッジ』を持つ。",
@@ -11709,6 +13185,60 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10851130",
+      "classKey": "nightmare",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "バニーな悪魔・リミル",
+        "effect": "【ファンファーレ】自分のリーダーの体力が相手のリーダーの体力より大きいなら、『バット』2枚を自分の場に出す。 【進化時】【ファンファーレ】と同じ能力が働く。",
+        "imageHash": "2c52601fdc7b46b2b31573fbb65c2168"
+      },
+      "en": {
+        "name": "Limil, Devilish Bunny",
+        "effect": "Fanfare: If your leader's defense is higher than the enemy leader's defense, summon 2 copies of Bat. Evolve: Replicate the effects of this card's Fanfare ability.",
+        "imageHash": "0e7c542ef411420db51191a7c4ae8029"
+      }
+    },
+    {
+      "id": "10853310",
+      "classKey": "nightmare",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "変わりし流れ",
+        "effect": "自分の手札1枚を選ぶ。それをデッキに戻す。自分のデッキから2枚を引く。超進化可能ターンなら、それのコストを-1する。",
+        "imageHash": "4a67c2ff36bf48e99edeb88597e8be1c"
+      },
+      "en": {
+        "name": "Ebb and Flow",
+        "effect": "Select a card in your hand and return it to deck. Draw 2 cards. If you've unlocked super-evolution, reduce their costs by 1.",
+        "imageHash": "9df583d21a4343fd855ff7e532b5969e"
+      }
+    },
+    {
       "id": "10051120",
       "classKey": "nightmare",
       "cost": 3,
@@ -11856,7 +13386,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10252110",
       "classKey": "nightmare",
       "cost": 3,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 3,
       "unlockTurn": 3,
       "requiresEvolve": false,
@@ -11883,7 +13413,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10253110",
       "classKey": "nightmare",
       "cost": 3,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 3,
       "unlockTurn": 3,
       "requiresEvolve": true,
@@ -12195,6 +13725,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10852310",
+      "classKey": "nightmare",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 3,
+      "leaderDamage": 1,
+      "stormDamage": 0,
+      "burnDamage": 1,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "旅立ちの退出",
+        "effect": "【モード】2つを選んでその能力が働く。 （1）相手のリーダーに1ダメージ。 （2）自分のリーダーを2回復。 （3）相手の場のフォロワーからランダム1枚に3ダメージ。 （4）自分の墓場を+4する。",
+        "imageHash": "686b2323848e4b3990a812097329a098"
+      },
+      "en": {
+        "name": "Bittersweet Departures",
+        "effect": "Select 2 Modes to activate. 1. Deal 1 damage to the enemy leader. 2. Restore 2 defense to your leader. 3. Deal 3 damage to a random enemy follower. 4. Gain 4 shadows.",
+        "imageHash": "5f6c9147a9b44b378b8d916ee9c306e1"
+      }
+    },
+    {
       "id": "10052120",
       "classKey": "nightmare",
       "cost": 4,
@@ -12333,7 +13890,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10253120",
       "classKey": "nightmare",
       "cost": 4,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 4,
       "unlockTurn": 4,
       "requiresEvolve": false,
@@ -12492,6 +14049,60 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10851110",
+      "classKey": "nightmare",
+      "cost": 4,
+      "isRotation": true,
+      "effectiveCost": 4,
+      "unlockTurn": 4,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 2,
+      "evolveEffectLeaderDamage": 2,
+      "tokenDamage": 0,
+      "leaderDamage": 2,
+      "stormDamage": 2,
+      "burnDamage": 0,
+      "condition": "Storm",
+      "displayCard": null,
+      "ja": {
+        "name": "透き通る信念・アンサージュ",
+        "effect": "【疾走】 【守護】を無視して攻撃できる。",
+        "imageHash": "1be284ecfda546f49af35d60135a8203"
+      },
+      "en": {
+        "name": "Anisage, Clear Resolve",
+        "effect": "Storm Ignores Ward.",
+        "imageHash": "fee27d11e5384cdd941ea9e67cf3e968"
+      }
+    },
+    {
+      "id": "10853110",
+      "classKey": "nightmare",
+      "cost": 4,
+      "isRotation": true,
+      "effectiveCost": 4,
+      "unlockTurn": 4,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "誠実なる呪い屋・スージー",
+        "effect": "【ファンファーレ】相手の場のフォロワー1枚を選ぶ。それは-0/-3する。 【進化時】自分の手札のフォロワー1枚を選ぶ。それは+3/+0する。",
+        "imageHash": "1d6e8e0937504a85b34ebce6c9a53923"
+      },
+      "en": {
+        "name": "Suzy, Sincere Hexcaster",
+        "effect": "Fanfare: Select an enemy follower on the field and give it -0/-3. Evolve: Select a follower in your hand and give it +3/+0.",
+        "imageHash": "20558e65d83a4fa28c60d21729e107bb"
+      }
+    },
+    {
       "id": "10151150",
       "classKey": "nightmare",
       "cost": 5,
@@ -12549,7 +14160,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10251110",
       "classKey": "nightmare",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -12576,7 +14187,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10254120",
       "classKey": "nightmare",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -12744,6 +14355,60 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10852120",
+      "classKey": "nightmare",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 5,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 1,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "ダークナイト・マーシャ",
+        "effect": "【ファンファーレ】相手の場のフォロワーすべてとリーダーすべてに1ダメージ。 【進化時】【ファンファーレ】と同じ能力が働く。",
+        "imageHash": "908ec04d289842a5af98bf37df62a339"
+      },
+      "en": {
+        "name": "Marsha, Dark Knight",
+        "effect": "Fanfare: Deal 1 damage to all enemy followers and both leaders. Evolve: Replicate the effects of this card's Fanfare ability.",
+        "imageHash": "72bba8f9f1d4490c8a0a857e1f8ab973"
+      }
+    },
+    {
+      "id": "10854120",
+      "classKey": "nightmare",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 5,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "陽と月の薔薇・セレス",
+        "effect": "【ファンファーレ】【ネクロマンス_20】自分の手札のナイトメア・カードすべてのコストを-2する。 【交戦時】交戦相手に4ダメージ。 自分のターン終了時、自分のリーダーを4回復。",
+        "imageHash": "767f058c1701456abf92c5a5b3c132d2"
+      },
+      "en": {
+        "name": "Ceres, Liminal Rose",
+        "effect": "Fanfare: Necromancy (20) - Reduce the cost of all Abysscraft cards in your hand by 2. Clash: Deal 4 damage to the opposing follower. At the end of your turn, restore 4 defense to your leader.",
+        "imageHash": "0a19b4f77e714fb9bc4b701b58d18f8e"
+      }
+    },
+    {
       "id": "10051110",
       "classKey": "nightmare",
       "cost": 6,
@@ -12801,7 +14466,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10252120",
       "classKey": "nightmare",
       "cost": 6,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 6,
       "unlockTurn": 6,
       "requiresEvolve": false,
@@ -12957,6 +14622,33 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Adahime, Anathema of Death",
         "effect": "Fanfare: Summon 2 random differently named Abysscraft followers that cost 2 or less from your deck. Whenever another allied Abysscraft follower enters the field, give it Rush. Super-Evolve: Give all other allied Abysscraft followers on the field +2/+2.",
         "imageHash": "eadb1c98fb864125a5e1d918e330bad0"
+      }
+    },
+    {
+      "id": "10852110",
+      "classKey": "nightmare",
+      "cost": 6,
+      "isRotation": true,
+      "effectiveCost": 6,
+      "unlockTurn": 6,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "マザーな悪魔・フィオレ",
+        "effect": "【ファンファーレ】『バット』3枚を自分の場に出す。 自分の『バット』が場に出たとき、それは【突進】を持つ。",
+        "imageHash": "c01dc6294d7f4b0798d44842a365c8e9"
+      },
+      "en": {
+        "name": "Fiole, Devilish Matriarch",
+        "effect": "Fanfare: Summon 3 copies of Bat. Whenever an allied Bat enters the field, give it Rush.",
+        "imageHash": "39c6c0aac65243639f884230e2cc60ea"
       }
     },
     {
@@ -13284,10 +14976,37 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10854110",
+      "classKey": "nightmare",
+      "cost": 8,
+      "isRotation": true,
+      "effectiveCost": 8,
+      "unlockTurn": 8,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 4,
+      "tokenDamage": 5,
+      "leaderDamage": 4,
+      "stormDamage": 0,
+      "burnDamage": 4,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "出発の憧憬・イツルギ＆タケツミ",
+        "effect": "【ファンファーレ】【モード】1つを選んでその能力が働く。 （1）相手のリーダーに4ダメージ。自分のリーダーを4回復。 （2）相手の場のフォロワーすべてに5ダメージ。自分のEPを1回復。 【進化時】【モード】1つを選んでその能力が働く。 （1）自分のデッキから2枚を引く。 （2）自分のPPを2回復。",
+        "imageHash": "51609651919847c797d96081a890b615"
+      },
+      "en": {
+        "name": "Itsurugi & Taketsumi, Brothers",
+        "effect": "Fanfare: Select a Mode to activate. 1. Deal 4 damage to the enemy leader. Restore 4 defense to your leader. 2. Deal 5 damage to all enemy followers. Recover 1 evolution point. Evolve: Select a Mode to activate. 1. Draw 2 cards. 2. Recover 2 play points.",
+        "imageHash": "403d43db1db84b588114798506bf67a3"
+      }
+    },
+    {
       "id": "10254110",
       "classKey": "nightmare",
       "cost": 9,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 9,
       "unlockTurn": 9,
       "requiresEvolve": false,
@@ -13512,7 +15231,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10262310",
       "classKey": "bishop",
       "cost": 1,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 1,
       "unlockTurn": 1,
       "requiresEvolve": false,
@@ -13755,7 +15474,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10261120",
       "classKey": "bishop",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -13782,7 +15501,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10261210",
       "classKey": "bishop",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -14022,6 +15741,87 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10861110",
+      "classKey": "bishop",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 2,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "図書室の魔女・リリウム",
+        "effect": "【ラストワード】自分のデッキから1枚を引く。 【進化時】相手の場のフォロワー1枚を選ぶ。それは能力すべてを失う。それに2ダメージ。",
+        "imageHash": "769c5af79f1943a6a9b6b78b80b7978c"
+      },
+      "en": {
+        "name": "Lilium, Witch of the Tomes",
+        "effect": "Last Words: Draw a card. Evolve: Select an enemy follower on the field, remove all abilities from it, and deal it 2 damage.",
+        "imageHash": "0a9d3b49aebd4a90a8368a80422a64f7"
+      }
+    },
+    {
+      "id": "10862310",
+      "classKey": "bishop",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Enhance 5",
+      "displayCard": null,
+      "ja": {
+        "name": "脅威の残滓",
+        "effect": "相手の場の体力3以下のフォロワー1枚を選ぶ。それを消滅。 【エンハンス_5】1枚を選ぶのではなくすべて。",
+        "imageHash": "dc91ca37a1df4e2cb616e1d8f1d0b24a"
+      },
+      "en": {
+        "name": "Lingering Threat",
+        "effect": "Select an enemy follower on the field with 3 defense or less and banish it. Enhance (5): Banish all enemy followers with 3 defense or less instead.",
+        "imageHash": "85153c43d45b435c8baba1813afad172"
+      }
+    },
+    {
+      "id": "10863210",
+      "classKey": "bishop",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "朋友の学級",
+        "effect": "【カウントダウン_2】 自分のターン終了時、自分のデッキから1枚を引く。自分の場に進化後のフォロワーがあるなら、自分のリーダーを1回復。自分の場に超進化後のフォロワーがあるなら、1回復ではなく2回復。",
+        "imageHash": "24e58eaa7538462198fe5ef8156710a0"
+      },
+      "en": {
+        "name": "Academy Hijinks",
+        "effect": "Countdown (2) At the end of your turn, draw a card and, if there's an evolved allied follower on the field, restore 1 defense to your leader. If there's a super-evolved allied follower on the field, restore 2 defense instead.",
+        "imageHash": "4370ba8a14b448e7addc8fe6176758af"
+      }
+    },
+    {
       "id": "10161110",
       "classKey": "bishop",
       "cost": 3,
@@ -14106,7 +15906,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10261110",
       "classKey": "bishop",
       "cost": 3,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 3,
       "unlockTurn": 3,
       "requiresEvolve": false,
@@ -14133,7 +15933,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10262110",
       "classKey": "bishop",
       "cost": 3,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 3,
       "unlockTurn": 3,
       "requiresEvolve": false,
@@ -14463,6 +16263,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10863110",
+      "classKey": "bishop",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 1,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "セイントエクソシスト・コレット",
+        "effect": "【ファンファーレ】自分の場に進化後のフォロワーがあるなら、これは進化する。 【守護】 これが進化したとき、「相手の場のフォロワーからランダム1枚に1ダメージ。」を2回行う。",
+        "imageHash": "ff65903d08a645e79cd7df714de99fc4"
+      },
+      "en": {
+        "name": "Colette, Holy Exorcist",
+        "effect": "Fanfare: If there's an evolved allied follower on the field, evolve this follower. Ward When this follower evolves, do this 2 times: \"Deal 1 damage to a random enemy follower.\"",
+        "imageHash": "312f0735c9754d14bed09c47aa45fc14"
+      }
+    },
+    {
       "id": "10061130",
       "classKey": "bishop",
       "cost": 4,
@@ -14610,7 +16437,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10263310",
       "classKey": "bishop",
       "cost": 4,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 4,
       "unlockTurn": 4,
       "requiresEvolve": false,
@@ -14997,7 +16824,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10262120",
       "classKey": "bishop",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -15024,7 +16851,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10263110",
       "classKey": "bishop",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -15156,6 +16983,60 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10861130",
+      "classKey": "bishop",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 5,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "イモータルハンター・グラント",
+        "effect": "【ファンファーレ】相手の場のフォロワー1枚を選ぶ。それを破壊。 【進化時】【ファンファーレ】と同じ能力が働く。",
+        "imageHash": "a51b396c3fef41f9bd003b04fb7f5935"
+      },
+      "en": {
+        "name": "Grant, Hunter of Undeath",
+        "effect": "Fanfare: Select an enemy follower on the field and destroy it. Evolve: Replicate the effects of this card's Fanfare ability.",
+        "imageHash": "5e8a169fe34b46319ff853fe038f8ecd"
+      }
+    },
+    {
+      "id": "10864120",
+      "classKey": "bishop",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 5,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 3,
+      "tokenDamage": 3,
+      "leaderDamage": 3,
+      "stormDamage": 0,
+      "burnDamage": 3,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "希望の光彩・リテュエル",
+        "effect": "【ファンファーレ】【モード】1つを選んでその能力が働く。これに3ダメージ。 （1）相手の場のフォロワーすべてに3ダメージ。 （2）相手のリーダーに3ダメージ。 （3）自分のリーダーを3回復。 【進化時】自分は『クレスト：希望の光彩・リテュエル』を持つ。",
+        "imageHash": "5d4d00d23dda4aa7b742f476143f6c8a"
+      },
+      "en": {
+        "name": "Zoe, Dazzling Hope",
+        "effect": "Fanfare: Select a Mode to activate. Deal 3 damage to this follower. 1. Deal 3 damage to all enemy followers. 2. Deal 3 damage to the enemy leader. 3. Restore 3 defense to your leader. Evolve: Gain Crest: Zoe, Dazzling Hope.",
+        "imageHash": "c4a6b1de37ec4acb946cd4e1668d7772"
+      }
+    },
+    {
       "id": "10061110",
       "classKey": "bishop",
       "cost": 6,
@@ -15276,7 +17157,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10264120",
       "classKey": "bishop",
       "cost": 6,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 6,
       "unlockTurn": 6,
       "requiresEvolve": false,
@@ -15444,6 +17325,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10862120",
+      "classKey": "bishop",
+      "cost": 6,
+      "isRotation": true,
+      "effectiveCost": 6,
+      "unlockTurn": 6,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "アビスリサーチャー・ヴィーチェ",
+        "effect": "手札で働く。自分のフォロワーが超進化したとき、これのコストを-3する。 【突進】 【必殺】",
+        "imageHash": "dad1a13455fe4a5d848e192591829aa9"
+      },
+      "en": {
+        "name": "Viche, Abyssal Researcher",
+        "effect": "Activates in hand. Whenever an allied follower super-evolves, reduce the cost of this card by 3. Rush Bane",
+        "imageHash": "f835118f24d5480c96ca0e8bc6dd21ae"
+      }
+    },
+    {
       "id": "10162130",
       "classKey": "bishop",
       "cost": 7,
@@ -15528,7 +17436,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10264110",
       "classKey": "bishop",
       "cost": 7,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 7,
       "unlockTurn": 7,
       "requiresEvolve": false,
@@ -15612,6 +17520,69 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Initia, Chief Ordination Officer",
         "effect": "Fanfare: Select an enemy follower on the field and banish it. If there are at least 3 allied amulets on the field, restore 3 defense to your leader. Ward Aura Super-Evolve: Replicate the effects of this card's Fanfare ability.",
         "imageHash": "f8861e34d2b54e368e9851642b0dbdfd"
+      }
+    },
+    {
+      "id": "10861120",
+      "classKey": "bishop",
+      "cost": 7,
+      "isRotation": true,
+      "effectiveCost": 7,
+      "unlockTurn": 7,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 2,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 3,
+      "stormDamage": 3,
+      "burnDamage": 0,
+      "condition": "Base / Summons 1 Storm Soulcure Sister",
+      "displayCard": {
+        "ja": {
+          "name": "癒しのシスター",
+          "imageHash": "32d8cefcee9444c1a98e12bbda7e904c"
+        },
+        "en": {
+          "name": "Soulcure Sister",
+          "imageHash": "67ceec69e9d54f9088732e780eeffc19"
+        }
+      },
+      "ja": {
+        "name": "エルゴンプリーステス・テレサ",
+        "effect": "【ファンファーレ】『癒しのシスター』1枚を自分の場に出す。それは+2/-2して【疾走】を持つ。",
+        "imageHash": "c39287b21d994566b91ddc8ea98a9dca"
+      },
+      "en": {
+        "name": "Theresa, Ergon Priestess",
+        "effect": "Fanfare: Summon a Soulcure Sister and give it +2/-2 and Storm.",
+        "imageHash": "81ef13cbcaa14c23a5dc49552477bff6"
+      }
+    },
+    {
+      "id": "10864110",
+      "classKey": "bishop",
+      "cost": 7,
+      "isRotation": true,
+      "effectiveCost": 7,
+      "unlockTurn": 7,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "飛躍の姉妹・ベルディリア＆カステル",
+        "effect": "【ファンファーレ】自分のデッキのコスト2以下のフォロワーからランダム1枚を自分の場に出す。それは超進化する。 【超進化時】自分は『クレスト：飛躍の姉妹・ベルディリア＆カステル』を持つ。",
+        "imageHash": "b017ac60d3754352a5c4788052520cad"
+      },
+      "en": {
+        "name": "Verdilia & Castelle, Sisters",
+        "effect": "Fanfare: Summon a random follower that costs 2 or less from your deck and super-evolve it. Super-Evolve: Gain Crest: Verdilia & Castelle, Sisters.",
+        "imageHash": "7694cc2bc69d4442940b3b9d3973fc5e"
       }
     },
     {
@@ -15786,6 +17757,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10862110",
+      "classKey": "bishop",
+      "cost": 8,
+      "isRotation": true,
+      "effectiveCost": 8,
+      "unlockTurn": 8,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "天陽の使徒・エーディット",
+        "effect": "【守護】 【オーラ】 【ラストワード】『天陽の使徒・エーディット』1枚を自分の場に出す。それは【ラストワード】を失う。 【超進化時】相手の場のフォロワー1枚を選ぶ。それを破壊。",
+        "imageHash": "5b83742320fb4d2c9cda5815244a16ba"
+      },
+      "en": {
+        "name": "Edeth, Voice of Heaven",
+        "effect": "Ward Aura Last Words: Summon an Edeth, Voice of Heaven and remove Last Words from it. Super-Evolve: Select an enemy follower on the field and destroy it.",
+        "imageHash": "8c280a639a0d4590b40a6101d8f084ce"
+      }
+    },
+    {
       "id": "10664120",
       "classKey": "bishop",
       "cost": 9,
@@ -15897,7 +17895,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10271120",
       "classKey": "portal",
       "cost": 1,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 1,
       "unlockTurn": 1,
       "requiresEvolve": false,
@@ -15924,7 +17922,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10271210",
       "classKey": "portal",
       "cost": 1,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 1,
       "unlockTurn": 1,
       "requiresEvolve": false,
@@ -15960,7 +17958,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10272310",
       "classKey": "portal",
       "cost": 1,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 1,
       "unlockTurn": 1,
       "requiresEvolve": false,
@@ -16089,6 +18087,33 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Freerunning",
         "effect": "Select a Mode to activate. If at least 3 differently named allied Artifact followers have entered the field this match, activate all of them instead. 1. Add an Analyzing Artifact to your hand. 2. Add an Ancient Artifact to your hand.",
         "imageHash": "e13fd31f46634063a7a78b0bcddd309e"
+      }
+    },
+    {
+      "id": "10871130",
+      "classKey": "portal",
+      "cost": 1,
+      "isRotation": true,
+      "effectiveCost": 1,
+      "unlockTurn": 1,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "デバイスマニピュレーター・ジルク",
+        "effect": "【ファンファーレ】このバトル中に破壊された自分のアーティファクト・フォロワーからランダム1枚と同名のカード1枚を非公開で自分の手札に加える。",
+        "imageHash": "d0ccef6f864f40148c555e7b98262d19"
+      },
+      "en": {
+        "name": "Zerk, Artifact Manipulator",
+        "effect": "Fanfare: Add a copy of a random allied Artifact follower destroyed this match to your hand without revealing it.",
+        "imageHash": "d7dc6d403a264ab0b24f3b9db6acb6b0"
       }
     },
     {
@@ -16284,7 +18309,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10272110",
       "classKey": "portal",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -16311,7 +18336,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10273110",
       "classKey": "portal",
       "cost": 2,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 2,
       "unlockTurn": 2,
       "requiresEvolve": false,
@@ -16656,6 +18681,60 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Blink Step",
         "effect": "Give all allied followers on the field +1/+0. If you've unlocked super-evolution, give all followers in your hand +1/+0.",
         "imageHash": "165291f8bdca4e489ca8b96d017857a6"
+      }
+    },
+    {
+      "id": "10871120",
+      "classKey": "portal",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "エクセシブガーディアン・リオナ",
+        "effect": "【守護】 【超進化時】自分の場の他のフォロワー1枚を選ぶ。それは【潜伏】を持つ。",
+        "imageHash": "dc4c0e29ff43476390523fb976461dbd"
+      },
+      "en": {
+        "name": "Leona, Overbearing Guardian",
+        "effect": "Ward Super-Evolve: Select another allied follower on the field and give it Ambush.",
+        "imageHash": "334e2d6aeb0d409fa7df3c1782f973c5"
+      }
+    },
+    {
+      "id": "10874120",
+      "classKey": "portal",
+      "cost": 2,
+      "isRotation": true,
+      "effectiveCost": 2,
+      "unlockTurn": 2,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "アナタの先輩・エース",
+        "effect": "【ファンファーレ】『アナライズアーティファクト』1枚を自分の手札に加える。 【進化時】自分の場の他の進化前のフォロワー1枚を選ぶ。それは進化する。",
+        "imageHash": "bc5f34509a1e44b6884fb2fc13d565dc"
+      },
+      "en": {
+        "name": "Eudie, Your Dependable Mentor",
+        "effect": "Fanfare: Add an Analyzing Artifact to your hand. Evolve: Select another unevolved allied follower on the field and evolve it.",
+        "imageHash": "e79933daf70f4f348bbab2a90beb1f7d"
       }
     },
     {
@@ -17010,6 +19089,96 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10872120",
+      "classKey": "portal",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 2,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 2,
+      "stormDamage": 2,
+      "burnDamage": 0,
+      "condition": "Base / Creates Radiant Artifact",
+      "displayCard": {
+        "ja": {
+          "name": "レディアントアーティファクト",
+          "imageHash": "a47673f4faca4736ba1b7caa285e2c63"
+        },
+        "en": {
+          "name": "Radiant Artifact",
+          "imageHash": "e0543e82430f4dc2b6afc6a9b190c569"
+        }
+      },
+      "ja": {
+        "name": "ポータルコネクター・ラズリ",
+        "effect": "【ファンファーレ】『レディアントアーティファクト』1枚を自分の手札に加える。",
+        "imageHash": "8fc92d023d034ce596c01972f1859798"
+      },
+      "en": {
+        "name": "Lazuli, Gateway Connector",
+        "effect": "Fanfare: Add a Radiant Artifact to your hand.",
+        "imageHash": "536b1c2b58164c368dcda7c31da8dc6f"
+      }
+    },
+    {
+      "id": "10872310",
+      "classKey": "portal",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "穢れなき日々",
+        "effect": "自分のデッキから2枚を引く。超進化可能ターンなら、自分のリーダーを2回復。",
+        "imageHash": "918f96226cdc4c29a97940b401410384"
+      },
+      "en": {
+        "name": "Unsullied Days",
+        "effect": "Draw 2 cards. If you've unlocked super-evolution, restore 2 defense to your leader.",
+        "imageHash": "c6106fc378ed43c1a15adc3c902246f2"
+      }
+    },
+    {
+      "id": "10873310",
+      "classKey": "portal",
+      "cost": 3,
+      "isRotation": true,
+      "effectiveCost": 3,
+      "unlockTurn": 3,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 6,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "切り拓く未来",
+        "effect": "相手の場のフォロワー1枚を選ぶ。それに6ダメージ。このバトル中に場に出た自分のアーティファクト・フォロワーの種類が3以上なら、自分のEPを1回復。",
+        "imageHash": "1ec8ac9f743048fcad98f5d5df4392f9"
+      },
+      "en": {
+        "name": "The Journey Ahead",
+        "effect": "Select an enemy follower on the field and deal it 6 damage. If at least 3 differently named allied Artifact followers have entered the field this match, recover 1 evolution point.",
+        "imageHash": "a8a511bae12d498ea931bb7fbe386d7c"
+      }
+    },
+    {
       "id": "10071310",
       "classKey": "portal",
       "cost": 4,
@@ -17145,7 +19314,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 4,
       "leaderDamage": 1,
       "stormDamage": 0,
       "burnDamage": 1,
@@ -17316,6 +19485,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10872110",
+      "classKey": "portal",
+      "cost": 4,
+      "isRotation": true,
+      "effectiveCost": 4,
+      "unlockTurn": 4,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "アーティフィシャルギフト・レイラ",
+        "effect": "【突進】 【ラストワード】『エンシェントアーティファクト』1枚を自分の手札に加える。",
+        "imageHash": "5dcd671eaee94fe4811e3191f44d867d"
+      },
+      "en": {
+        "name": "Layla, Artificial Gift of Life",
+        "effect": "Rush Last Words: Add an Ancient Artifact to your hand.",
+        "imageHash": "aa2ffa19fef94977a12d17c7570bb149"
+      }
+    },
+    {
       "id": "10072120",
       "classKey": "portal",
       "cost": 5,
@@ -17481,7 +19677,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10272120",
       "classKey": "portal",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -17508,7 +19704,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10274110",
       "classKey": "portal",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -17535,7 +19731,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10274120",
       "classKey": "portal",
       "cost": 5,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 5,
       "unlockTurn": 5,
       "requiresEvolve": false,
@@ -17757,6 +19953,33 @@ window.SHADOWVERSE_CARD_DATA = {
       }
     },
     {
+      "id": "10874110",
+      "classKey": "portal",
+      "cost": 5,
+      "isRotation": true,
+      "effectiveCost": 9,
+      "unlockTurn": 5,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 2,
+      "evolveEffectLeaderDamage": 5,
+      "tokenDamage": 0,
+      "leaderDamage": 5,
+      "stormDamage": 5,
+      "burnDamage": 0,
+      "condition": "Enhance 9 / Storm",
+      "displayCard": null,
+      "ja": {
+        "name": "決断の交差・アシュレイ＆リディア",
+        "effect": "【ファンファーレ】相手の場のフォロワー1枚を選ぶ。それは【守護】を持つ。 【エンハンス_9】これは進化する。これは【疾走】を持つ。 これが進化したとき、相手の場の【守護】を持つフォロワーからランダム2枚を破壊。",
+        "imageHash": "4779dbb77c48452b87070b64fb9a3aa6"
+      },
+      "en": {
+        "name": "Asher & Lydia, Paths Beyond",
+        "effect": "Fanfare: Select an enemy follower on the field and give it Ward. Enhance (9): Evolve this follower and give it Storm. When this follower evolves, destroy 2 random enemy followers with Ward.",
+        "imageHash": "538c2ab6073141f3a4bed87dd8d3677d"
+      }
+    },
+    {
       "id": "10071130",
       "classKey": "portal",
       "cost": 6,
@@ -17841,7 +20064,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10271110",
       "classKey": "portal",
       "cost": 6,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 6,
       "unlockTurn": 6,
       "requiresEvolve": false,
@@ -17877,7 +20100,7 @@ window.SHADOWVERSE_CARD_DATA = {
       "id": "10273310",
       "classKey": "portal",
       "cost": 6,
-      "isRotation": true,
+      "isRotation": false,
       "effectiveCost": 6,
       "unlockTurn": 6,
       "requiresEvolve": false,
@@ -18027,12 +20250,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 3,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "condition": "Base / Creates Ludicrous Ordnance",
+      "displayCard": {
+        "ja": {
+          "name": "愚劣の兵器",
+          "imageHash": "6c8a5cb076db4d719a697289f3e37c5d"
+        },
+        "en": {
+          "name": "Ludicrous Ordnance",
+          "imageHash": "045201066a86462c99d68a7ecbd39f4a"
+        }
+      },
       "ja": {
         "name": "凡百の製図",
         "effect": "『愚劣の兵器』1枚と『低劣の玩具』1枚と『拙劣の人形』1枚を自分の場に出す。それは+0/+1する。",
@@ -18081,12 +20313,21 @@ window.SHADOWVERSE_CARD_DATA = {
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
-      "tokenDamage": 0,
+      "tokenDamage": 3,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "condition": "Base / Creates Ominous Artifact γ",
+      "displayCard": {
+        "ja": {
+          "name": "デストロイアーティファクトγ",
+          "imageHash": "5d171a08a51b4c12a892447737a9c81b"
+        },
+        "en": {
+          "name": "Ominous Artifact γ",
+          "imageHash": "f5913985a6bc423ba4c48e8960418d55"
+        }
+      },
       "ja": {
         "name": "音速の飛行兵",
         "effect": "【ファンファーレ】『デストロイアーティファクトγ』1枚を自分の場に出す。 【進化時】自分の場のアーティファクト・フォロワー1枚を選ぶ。それは+3/+3する。",
@@ -18132,15 +20373,14 @@ window.SHADOWVERSE_CARD_DATA = {
       "isRotation": true,
       "effectiveCost": 7,
       "unlockTurn": 7,
-      "requiresEvolve": true,
+      "requiresEvolve": false,
       "evolveLeaderBonus": 0,
-      "evolveEffectLeaderDamage": 3,
-      "superEvolveKillDamage": 1,
+      "evolveEffectLeaderDamage": 0,
       "tokenDamage": 0,
       "leaderDamage": 0,
       "stormDamage": 0,
       "burnDamage": 0,
-      "condition": "超進化",
+      "condition": "Base",
       "displayCard": null,
       "ja": {
         "name": "劣悪の純心・カミシラ",
@@ -18178,6 +20418,69 @@ window.SHADOWVERSE_CARD_DATA = {
         "name": "Beat Breaker",
         "effect": "Fanfare: Summon a Beat Breaker. If at least 3 differently named allied Artifact followers have entered the field this match, summon 2 instead. Rush",
         "imageHash": "c6330230eb194969a51cf9d6ccb90e18"
+      }
+    },
+    {
+      "id": "10871110",
+      "classKey": "portal",
+      "cost": 7,
+      "isRotation": true,
+      "effectiveCost": 7,
+      "unlockTurn": 7,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 0,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 0,
+      "stormDamage": 0,
+      "burnDamage": 0,
+      "condition": "Base",
+      "displayCard": null,
+      "ja": {
+        "name": "ありふれた幸福・クラトス",
+        "effect": "【守護】 【ラストワード】『ありふれた幸福・クラトス』1枚を自分の場に出す。それは【ラストワード】を失う。",
+        "imageHash": "0d0222bbd5ef4a5c8dfb2de5ff591f2d"
+      },
+      "en": {
+        "name": "Kratos, Everyday Joy",
+        "effect": "Ward Last Words: Summon a Kratos, Everyday Joy and remove Last Words from it.",
+        "imageHash": "dd2367dccb994462ab12e5d1c3aa316b"
+      }
+    },
+    {
+      "id": "10873110",
+      "classKey": "portal",
+      "cost": 7,
+      "isRotation": true,
+      "effectiveCost": 7,
+      "unlockTurn": 7,
+      "requiresEvolve": false,
+      "evolveLeaderBonus": 2,
+      "evolveEffectLeaderDamage": 0,
+      "tokenDamage": 0,
+      "leaderDamage": 2,
+      "stormDamage": 2,
+      "burnDamage": 0,
+      "condition": "Base / Creates Radiant Artifact",
+      "displayCard": {
+        "ja": {
+          "name": "レディアントアーティファクト",
+          "imageHash": "a47673f4faca4736ba1b7caa285e2c63"
+        },
+        "en": {
+          "name": "Radiant Artifact",
+          "imageHash": "e0543e82430f4dc2b6afc6a9b190c569"
+        }
+      },
+      "ja": {
+        "name": "レシプロケイト・ミリアム",
+        "effect": "【ファンファーレ】相手の場のフォロワー1枚を選ぶ。それを破壊。『レディアントアーティファクト』1枚を自分の場に出す。",
+        "imageHash": "e6531321efed4de188c948ac0945780f"
+      },
+      "en": {
+        "name": "Miriam, Reciprocator",
+        "effect": "Fanfare: Select an enemy follower on the field and destroy it. Summon a Radiant Artifact.",
+        "imageHash": "c4566f8951d7438196c6691ee700ce94"
       }
     },
     {
