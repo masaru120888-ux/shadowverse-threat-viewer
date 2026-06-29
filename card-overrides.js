@@ -49,4 +49,6 @@ window.SHADOWVERSE_CARD_OVERRIDES = [
   { id: "10833110", requiresEvolve: true, requiresSuperEvolve: true, leaderDamage: 1, burnDamage: 1, evolveEffectLeaderDamage: 1, condition: "超進化 / マナリア・スペルごとに1" },
   // エターナルクリスタリア・ティア — 自身は突進。検出された3点は手札に加わる『ソードクリスタリア・イヴ』(疾走)由来で、バフ誘発が条件のため直接打点としては扱わない
   { id: "10814120", leaderDamage: 0, stormDamage: 0, burnDamage: 0, evolveEffectLeaderDamage: 0, displayCard: null, condition: "" },
+  // 飛躍の姉妹・ベルディリア＆カステル — 超進化でクレスト付与＋FFで超進化フォロワー召喚。クレストでそれが「1ターンに2回攻撃」を得て、フォロワー2体を破壊すると超進化追撃で相手リーダーに2点。超進化前提
+  { id: "10864110", leaderDamage: 2, evolveEffectLeaderDamage: 2, requiresEvolve: true, requiresSuperEvolve: true, condition: "超進化 / 超進化追撃×2（フォロワー2体破壊）" },
 ];
