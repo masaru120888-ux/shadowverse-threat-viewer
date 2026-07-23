@@ -72,14 +72,13 @@
       </section>
 
       <nav class="tab-bar" aria-label="モード切替">
-        <button class="tab is-active" type="button">
+        <button class="tab is-active" type="button" data-mode="lethal">
           <span class="tab-label" data-i18n="tabLethal">リーサルチェッカー</span>
         </button>
-        <button class="tab is-coming-soon" type="button" disabled aria-disabled="true">
+        <button class="tab" type="button" data-mode="heal">
           <span class="tab-label" data-i18n="tabHeal">ヒールチェッカー</span>
-          <span class="tab-badge" data-i18n="tabSoon">近日登場</span>
         </button>
-        <button class="tab is-coming-soon" type="button" disabled aria-disabled="true">
+        <button class="tab is-coming-soon" type="button" disabled aria-disabled="true" data-mode="board">
           <span class="tab-label" data-i18n="tabBoard">盤面脅威チェッカー</span>
           <span class="tab-badge" data-i18n="tabSoon">近日登場</span>
         </button>
@@ -104,7 +103,7 @@
           <div class="class-buttons" id="format-buttons"></div>
         </section>
 
-        <section class="class-control" aria-labelledby="damage-mode-title">
+        <section class="class-control" id="damage-mode-section" aria-labelledby="damage-mode-title">
           <div>
             <h2 id="damage-mode-title" data-i18n="damageModeControl">ダメージ表示</h2>
             <p data-i18n="damageModeHelp">単体カードまたはPP内の複数カード最大打点を表示します。</p>
@@ -123,7 +122,7 @@
           </div>
         </section>
 
-        <section class="turn-control" aria-labelledby="health-control-title">
+        <section class="turn-control" id="health-section" aria-labelledby="health-control-title">
           <div>
             <h2 id="health-control-title" data-i18n="healthControl">自分の体力</h2>
             <p data-i18n="healthHelp">相手のリーダー打点がこの体力以上ならリーサル候補として表示します。</p>

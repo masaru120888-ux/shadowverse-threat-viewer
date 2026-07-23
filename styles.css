@@ -16,6 +16,9 @@
   --inset-bg: rgba(0, 0, 0, 0.12);
   --btn-bg: rgba(0, 0, 0, 0.18);
   --lethal-bg: rgba(221, 113, 104, 0.18);
+  --green: #5fca7d;
+  --green-grad: linear-gradient(135deg, #7fe0a0 0%, #2fa85a 100%);
+  --heal-bg: rgba(95, 202, 125, 0.16);
   --radius: 4px;
   --radius-sm: 3px;
   --cut: 9px;
@@ -51,6 +54,9 @@
   --inset-bg: #f0f3f8;
   --btn-bg: #f1f4f9;
   --lethal-bg: rgba(209, 47, 47, 0.09);
+  --green: #1f9d4d;
+  --green-grad: linear-gradient(135deg, #3fb96a 0%, #157a39 100%);
+  --heal-bg: rgba(31, 157, 77, 0.10);
   --gold-2: #c79a2f;
   --gold-grad: linear-gradient(135deg, #c79a2f 0%, #9a6f12 100%);
   --gold-line: rgba(166, 121, 27, 0.5);
@@ -568,6 +574,47 @@ input {
 .threat-card.is-lethal .damage-line {
   color: var(--damage);
   font-size: 1.16rem;
+}
+
+/* ── ヒールチェッカー（回復カード）── */
+.threat-card.is-heal {
+  border-color: var(--green);
+  background: var(--heal-bg);
+  box-shadow: 0 0 0 1px rgba(95, 202, 125, 0.42), 0 10px 24px rgba(95, 202, 125, 0.12);
+}
+
+:root.light-mode .threat-card.is-heal {
+  box-shadow: 0 0 0 1px rgba(31, 157, 77, 0.30), 0 8px 22px rgba(31, 157, 77, 0.10);
+}
+
+.threat-card.is-heal::before {
+  width: 4px;
+  background: var(--green-grad);
+  opacity: 1;
+}
+
+.threat-card.is-heal strong {
+  color: var(--green);
+  font-size: 1.15rem;
+}
+
+.damage-line.heal {
+  color: var(--green);
+}
+
+/* 回復モードでは打点向けの入力/サマリー枠を隠す */
+body[data-mode="heal"] #health-section,
+body[data-mode="heal"] #damage-mode-section {
+  display: none;
+}
+
+body[data-mode="heal"] .lethal-panel {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body[data-mode="heal"] .lethal-panel > article:nth-child(3),
+body[data-mode="heal"] .lethal-panel > article:nth-child(4) {
+  display: none;
 }
 
 .combo-card {

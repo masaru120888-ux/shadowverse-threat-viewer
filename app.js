@@ -34,6 +34,8 @@ applyThemeClass();
 let enemyClass = null;
 let format = "rotation";
 let damageMode = "single";
+// 表示中のチェッカー種別。lethal = リーサル打点、heal = 相手の回復量。
+let mode = "lethal";
 let turnsPlayed = 1;
 let currentHealth = 20;
 let evolvePoints = 2;
@@ -86,6 +88,12 @@ const ui = {
     noThreats: "この条件で表示できるリーダー打点カードはありません。",
     none: "なし",
     lethal: "リーサル",
+    heal: "回復",
+    healLabel: "回復量",
+    maxHeal: "相手の最大回復量",
+    healCount: "回復カード枚数",
+    healZone: "回復カード",
+    noHeals: "この条件で表示できる回復カードはありません。",
     themeButton: "☀️",
     languageButton: "English",
     introEyebrow: "相手リーサル確認",
@@ -140,6 +148,12 @@ const ui = {
     noThreats: "No leader-damage cards are visible for this condition.",
     none: "None",
     lethal: "Lethal",
+    heal: "heal",
+    healLabel: "Heal",
+    maxHeal: "Enemy Max Heal",
+    healCount: "Heal Cards",
+    healZone: "Healing Cards",
+    noHeals: "No healing cards are visible for this condition.",
     themeButton: "🌙",
     languageButton: "日本語",
     tabLethal: "Lethal Checker",
@@ -171,8 +185,9 @@ const fields = {
 };
 
 function classEntries() {
+  const hasContent = mode === "heal" ? hasHeal : hasLeaderDamage;
   return Object.entries(cardData.classes).filter(([key]) => key !== "neutral").filter(([key]) =>
-    cardData.cards.some((card) => card.classKey === key && hasLeaderDamage(card) && formatAllows(card)),
+    cardData.cards.some((card) => card.classKey === key && hasContent(card) && formatAllows(card)),
   );
 }
 
@@ -182,6 +197,45 @@ function formatAllows(card) {
 
 function hasLeaderDamage(card) {
   return card.leaderDamage > 0 || card.evolveEffectLeaderDamage > 0 || !!card.xDamage;
+}
+
+// カードの効果テキストから「自分のリーダーの回復量」を推定する。
+// PP/EP 回復（「PPを2回復」等）はリーダー限定パターンなので拾わない。
+// 「◯回復ではなく△回復」等のアップグレードは可能性ベースで最大値を採用する。
+function healBreakdown(card) {
+  const ja = card.ja?.effect || "";
+  const en = card.en?.effect || "";
+  let amount = 0;
+  let xHeal = false;
+
+  // 日本語（正規表現が安定）: 「…自分のリーダーを N 回復」「フォロワーすべてと自分のリーダーを N 回復」
+  for (const match of ja.matchAll(/リーダー(?:を|は)(\d+)回復/g)) {
+    amount = Math.max(amount, Number(match[1]));
+  }
+  if (/リーダー(?:を|は)X回復/.test(ja)) xHeal = true;
+
+  // 英語フォールバック: 「Restore N defense to your leader / to all allies」
+  for (const match of en.matchAll(/Restore (\d+) defense to (?:your leader|all allies)/gi)) {
+    amount = Math.max(amount, Number(match[1]));
+  }
+  if (/Restore X defense to (?:your leader|all allies)/i.test(en)) xHeal = true;
+
+  // 回復するカードに限り、「◯回復ではなく△回復」「Restore △ defense instead」を最大値として反映
+  if (amount > 0 || xHeal) {
+    for (const match of ja.matchAll(/ではなく(\d+)回復/g)) {
+      amount = Math.max(amount, Number(match[1]));
+    }
+    for (const match of en.matchAll(/Restore (\d+) defense instead/gi)) {
+      amount = Math.max(amount, Number(match[1]));
+    }
+  }
+
+  return { amount, xHeal };
+}
+
+function hasHeal(card) {
+  const heal = healBreakdown(card);
+  return heal.amount > 0 || heal.xHeal;
 }
 
 function baseThreats() {
@@ -227,6 +281,42 @@ function availableThreats() {
 
 function resolveThreatDamage(card) {
   return threatVariants(card).sort((a, b) => b.leaderDamage - a.leaderDamage)[0] || null;
+}
+
+// 相手が現在のターン/PPで到達できる回復カードを、リーサル判定と同じゲートで絞り込む。
+function baseHeals() {
+  if (turnsPlayed == null) return [];
+  const enemyMaxPp = Math.min(11, turnsPlayed);
+  return cardData.cards
+    .filter((card) => card.classKey === enemyClass || card.classKey === "neutral")
+    .filter(formatAllows)
+    .filter(hasHeal)
+    .filter((card) => {
+      if (card.unlockTurn > turnsPlayed) return false;
+      const displayName = card.displayCard?.ja?.name || card.displayCard?.en?.name;
+      const requiredPP = displayName ? (displayCardPPOverride.get(displayName) ?? card.effectiveCost) : card.effectiveCost;
+      return requiredPP <= enemyMaxPp;
+    });
+}
+
+// 回復量の多い順に並べ、同名カードは1枚にまとめる。
+function availableHeals() {
+  const seenNames = new Set();
+  return baseHeals()
+    .map((card) => ({ ...card, heal: healBreakdown(card) }))
+    .sort((a, b) => {
+      if (b.heal.amount !== a.heal.amount) return b.heal.amount - a.heal.amount;
+      if (!!b.heal.xHeal !== !!a.heal.xHeal) return (b.heal.xHeal ? 1 : 0) - (a.heal.xHeal ? 1 : 0);
+      if (a.effectiveCost !== b.effectiveCost) return a.effectiveCost - b.effectiveCost;
+      if (a.cost !== b.cost) return a.cost - b.cost;
+      return a[lang].name.localeCompare(b[lang].name);
+    })
+    .filter((card) => {
+      const name = card[lang]?.name || card.en?.name || "";
+      if (seenNames.has(name)) return false;
+      seenNames.add(name);
+      return true;
+    });
 }
 
 function canSuperEvolve() {
@@ -483,6 +573,36 @@ function renderThreatCard(card) {
   `;
 }
 
+function formatHeal(heal) {
+  if (heal.amount > 0) {
+    return `${heal.amount}${heal.xHeal ? "+" : ""} ${ui[lang].heal}`;
+  }
+  return `X ${ui[lang].heal}`;
+}
+
+function renderHealCard(card) {
+  const selectedCard = card[lang];
+  const displayName = selectedCard.name;
+  const healText = formatHeal(card.heal);
+  return `
+    <article class="threat-card is-heal">
+      ${cardArtMarkup(card, displayName, "single")}
+      <div class="threat-copy">
+        <strong>${displayName}</strong>
+        <p class="card-effect">${selectedCard.effect}</p>
+        <button class="detail-button" type="button">${lang === "ja" ? "詳細" : "Details"}</button>
+        <div class="threat-meta">
+          <span>${ui[lang].cost}: ${card.cost}</span>
+          <span>${ui[lang].condition}: ${card.condition}</span>
+        </div>
+      </div>
+      <div class="threat-damage" aria-label="${ui[lang].healLabel} ${healText}">
+        <span class="damage-line heal"><small>${ui[lang].healLabel}</small>${healText}</span>
+      </div>
+    </article>
+  `;
+}
+
 function renderCombo(combo) {
   const names = combo.cards.map((card) => card.displayCard?.[lang]?.name || card[lang].name).join(" + ");
   let runningDamage = 0;
@@ -532,13 +652,7 @@ function ensureSelectedClassHasCards() {
 function render() {
   ensureSelectedClassHasCards();
   const text = ui[lang];
-  const singleThreats = damageMode === "combo" ? baseThreats() : availableThreats();
-  const threats = damageMode === "combo" ? comboThreats(singleThreats) : singleThreats;
-  const inputComplete = turnsPlayed != null && currentHealth != null;
-  const enemyMaxPp = inputComplete ? Math.min(11, turnsPlayed) : 0;
-  const stormDamage = Math.max(0, ...threats.map((card) => card.stormDamage));
-  const burnDamage = Math.max(0, ...threats.map((card) => card.burnDamage));
-  const visibleLeaderDamage = Math.max(0, ...threats.map((card) => card.leaderDamage));
+  document.body.dataset.mode = mode;
 
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach((node) => {
@@ -547,10 +661,31 @@ function render() {
 
   fields.language.textContent = text.languageButton;
   fields.theme.textContent = theme === "dark" ? "☀️" : "🌙";
-  fields.turnInput.value = inputComplete ? String(turnsPlayed) : "";
-  fields.turnOutput.textContent = inputComplete ? turnsPlayed : "";
-  fields.healthInput.value = inputComplete ? String(currentHealth) : "";
-  fields.healthOutput.textContent = inputComplete ? currentHealth : "";
+  fields.turnInput.value = turnsPlayed != null ? String(turnsPlayed) : "";
+  fields.turnOutput.textContent = turnsPlayed != null ? turnsPlayed : "";
+  fields.healthInput.value = currentHealth != null ? String(currentHealth) : "";
+  fields.healthOutput.textContent = currentHealth != null ? currentHealth : "";
+
+  renderClassButtons();
+  renderFormatButtons();
+  renderDamageModeButtons();
+
+  if (mode === "heal") {
+    renderHealMode();
+  } else {
+    renderLethalMode();
+  }
+}
+
+function renderLethalMode() {
+  const text = ui[lang];
+  const singleThreats = damageMode === "combo" ? baseThreats() : availableThreats();
+  const threats = damageMode === "combo" ? comboThreats(singleThreats) : singleThreats;
+  const inputComplete = turnsPlayed != null && currentHealth != null;
+  const stormDamage = Math.max(0, ...threats.map((card) => card.stormDamage));
+  const burnDamage = Math.max(0, ...threats.map((card) => card.burnDamage));
+  const visibleLeaderDamage = Math.max(0, ...threats.map((card) => card.leaderDamage));
+
   fields.stormDamage.textContent = inputComplete ? formatDamage(stormDamage) : "";
   fields.burnDamage.textContent = inputComplete ? formatDamage(burnDamage) : "";
   fields.maxThreat.textContent = inputComplete ? formatDamage(visibleLeaderDamage) : "";
@@ -559,14 +694,10 @@ function render() {
       ? `${text.lethal}: ${formatDamage(visibleLeaderDamage)}`
       : text.none
     : "";
-  
+
   const hasLethal = inputComplete && visibleLeaderDamage >= currentHealth;
-  if (hasLethal) {
-    fields.enemyLethal.parentElement.classList.add("is-lethal");
-  } else {
-    fields.enemyLethal.parentElement.classList.remove("is-lethal");
-  }
-  
+  fields.enemyLethal.parentElement.classList.toggle("is-lethal", hasLethal);
+
   fields.enemyThreatTotal.textContent = inputComplete
     ? `${text.leaderDamage}: ${formatDamage(visibleLeaderDamage)} / HP ${currentHealth}`
     : "";
@@ -574,10 +705,34 @@ function render() {
     threats.length > 0
       ? threats.map(damageMode === "combo" ? renderCombo : renderThreatCard).join("")
       : `<p class="empty-threat">${text.noThreats}</p>`;
+}
 
-  renderClassButtons();
-  renderFormatButtons();
-  renderDamageModeButtons();
+function renderHealMode() {
+  const text = ui[lang];
+  const heals = availableHeals();
+  const inputComplete = turnsPlayed != null;
+  const maxHeal = heals.reduce((max, card) => Math.max(max, card.heal.amount), 0);
+  const anyX = heals.some((card) => card.heal.xHeal);
+  const maxHealText = maxHeal > 0
+    ? `${maxHeal}${anyX ? "+" : ""} ${text.heal}`
+    : anyX
+      ? `X ${text.heal}`
+      : text.none;
+
+  // 回復モードでは打点用サマリーの見出しを回復向けに差し替える（3・4枠はCSSで非表示）。
+  fields.stormDamage.previousElementSibling.textContent = text.maxHeal;
+  fields.burnDamage.previousElementSibling.textContent = text.healCount;
+  fields.stormDamage.textContent = inputComplete ? maxHealText : "";
+  fields.burnDamage.textContent = inputComplete ? String(heals.length) : "";
+  fields.enemyLethal.parentElement.classList.remove("is-lethal");
+
+  const zoneTitle = document.querySelector("#enemy-threat-title");
+  if (zoneTitle) zoneTitle.textContent = text.healZone;
+  fields.enemyThreatTotal.textContent = inputComplete ? `${text.healCount}: ${heals.length}` : "";
+  fields.enemyThreats.innerHTML =
+    heals.length > 0
+      ? heals.map(renderHealCard).join("")
+      : `<p class="empty-threat">${text.noHeals}</p>`;
 }
 
 fields.enemyThreats.addEventListener("click", (event) => {
@@ -587,6 +742,19 @@ fields.enemyThreats.addEventListener("click", (event) => {
   if (!p) return;
   const expanded = p.classList.toggle("expanded");
   btn.textContent = expanded ? (lang === "ja" ? "閉じる" : "Close") : (lang === "ja" ? "詳細" : "Details");
+});
+
+const tabBar = document.querySelector(".tab-bar");
+tabBar?.addEventListener("click", (event) => {
+  const button = event.target.closest(".tab[data-mode]");
+  if (!button || button.disabled) return;
+  const nextMode = button.dataset.mode;
+  if (nextMode === mode || (nextMode !== "lethal" && nextMode !== "heal")) return;
+  mode = nextMode;
+  tabBar.querySelectorAll(".tab").forEach((tab) => {
+    tab.classList.toggle("is-active", tab === button);
+  });
+  render();
 });
 
 fields.turnInput.addEventListener("input", (event) => {
