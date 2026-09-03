@@ -1,5 +1,5 @@
 window.SHADOWVERSE_CARD_DATA = {
-  "generatedAt": "2026-09-03T14:36:36.629Z",
+  "generatedAt": "2026-09-03T14:40:23.498Z",
   "classes": {
     "neutral": {
       "ja": "ニュートラル",
@@ -11800,9 +11800,9 @@ window.SHADOWVERSE_CARD_DATA = {
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
       "tokenDamage": 0,
-      "leaderDamage": 0,
+      "leaderDamage": 3,
       "stormDamage": 0,
-      "burnDamage": 0,
+      "burnDamage": 3,
       "condition": "Base",
       "displayCard": null,
       "ja": {
@@ -13859,11 +13859,11 @@ window.SHADOWVERSE_CARD_DATA = {
       "unlockTurn": 1,
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
-      "evolveEffectLeaderDamage": 0,
+      "evolveEffectLeaderDamage": 1,
       "tokenDamage": 0,
-      "leaderDamage": 0,
+      "leaderDamage": 1,
       "stormDamage": 0,
-      "burnDamage": 0,
+      "burnDamage": 1,
       "condition": "Base",
       "displayCard": null,
       "ja": {
@@ -14365,9 +14365,9 @@ window.SHADOWVERSE_CARD_DATA = {
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
       "tokenDamage": 0,
-      "leaderDamage": 0,
+      "leaderDamage": 3,
       "stormDamage": 0,
-      "burnDamage": 0,
+      "burnDamage": 3,
       "condition": "Base",
       "displayCard": null,
       "ja": {
@@ -14552,11 +14552,11 @@ window.SHADOWVERSE_CARD_DATA = {
       "unlockTurn": 2,
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
-      "evolveEffectLeaderDamage": 0,
+      "evolveEffectLeaderDamage": 2,
       "tokenDamage": 0,
-      "leaderDamage": 0,
+      "leaderDamage": 2,
       "stormDamage": 0,
-      "burnDamage": 0,
+      "burnDamage": 2,
       "condition": "Base",
       "displayCard": null,
       "ja": {
@@ -14608,9 +14608,9 @@ window.SHADOWVERSE_CARD_DATA = {
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
       "tokenDamage": 3,
-      "leaderDamage": 0,
+      "leaderDamage": 3,
       "stormDamage": 0,
-      "burnDamage": 0,
+      "burnDamage": 3,
       "condition": "Enhance 4",
       "displayCard": null,
       "ja": {
@@ -14779,11 +14779,20 @@ window.SHADOWVERSE_CARD_DATA = {
       "evolveLeaderBonus": 0,
       "evolveEffectLeaderDamage": 0,
       "tokenDamage": 0,
-      "leaderDamage": 0,
+      "leaderDamage": 1,
       "stormDamage": 0,
-      "burnDamage": 0,
-      "condition": "Base",
-      "displayCard": null,
+      "burnDamage": 1,
+      "condition": "Base / Creates Crest / Specific Effect",
+      "displayCard": {
+        "ja": {
+          "name": "Crest / Specific Effect",
+          "imageHash": ""
+        },
+        "en": {
+          "name": "Crest / Specific Effect",
+          "imageHash": ""
+        }
+      },
       "ja": {
         "name": "闇の賞金稼ぎ・バルト",
         "effect": "【ファンファーレ】自分は『クレスト：闇の賞金稼ぎ・バルト』を持つ。",
@@ -15587,11 +15596,11 @@ window.SHADOWVERSE_CARD_DATA = {
       "unlockTurn": 5,
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
-      "evolveEffectLeaderDamage": 0,
+      "evolveEffectLeaderDamage": 3,
       "tokenDamage": 7,
-      "leaderDamage": 0,
+      "leaderDamage": 3,
       "stormDamage": 0,
-      "burnDamage": 0,
+      "burnDamage": 3,
       "condition": "Base",
       "displayCard": null,
       "ja": {
@@ -15812,11 +15821,11 @@ window.SHADOWVERSE_CARD_DATA = {
       "unlockTurn": 5,
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
-      "evolveEffectLeaderDamage": 0,
+      "evolveEffectLeaderDamage": 1,
       "tokenDamage": 1,
-      "leaderDamage": 0,
+      "leaderDamage": 1,
       "stormDamage": 0,
-      "burnDamage": 0,
+      "burnDamage": 1,
       "condition": "Base",
       "displayCard": null,
       "ja": {
@@ -16136,11 +16145,11 @@ window.SHADOWVERSE_CARD_DATA = {
       "unlockTurn": 6,
       "requiresEvolve": false,
       "evolveLeaderBonus": 0,
-      "evolveEffectLeaderDamage": 0,
+      "evolveEffectLeaderDamage": 3,
       "tokenDamage": 3,
-      "leaderDamage": 0,
+      "leaderDamage": 3,
       "stormDamage": 0,
-      "burnDamage": 0,
+      "burnDamage": 3,
       "condition": "Base",
       "displayCard": null,
       "ja": {
