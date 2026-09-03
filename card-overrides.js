@@ -36,9 +36,14 @@ window.SHADOWVERSE_CARD_OVERRIDES = [
   // マーウィン — 進化でクレスト付与、最大5点
   { id: "10364120", leaderDamage: 5, burnDamage: 5, crestBreakdown: "5/4/3/2/1" },
 
+  // 怠惰なる波揺花 — リーダー打点は【覚醒】（最大PP7）条件。自動検出は覚醒を見ないためターン2から出ていた
+  { id: "10543310", unlockTurn: 7, condition: "覚醒" },
+  // サンダーレイジ — 同上（アンリミテッドのみ）
+  { id: "10341310", unlockTurn: 7, condition: "覚醒" },
+
   // === クロニクルオブデスティニー（第8弾 / set8）打点補正 ===
-  // ダークナイト・マーシャ — FF/進化時それぞれリーダーすべてに1。自動検出が「リーダーすべて」を拾えず0点になっていた。基本1 / 進化2
-  { id: "10852120", leaderDamage: 1, burnDamage: 1, evolveEffectLeaderDamage: 2, condition: "進化" },
+  // ダークナイト・マーシャ — FF/進化時それぞれリーダーすべてに1。進化時はFFを再実行するため合計2
+  { id: "10852120", evolveEffectLeaderDamage: 2, condition: "進化" },
   // 焦がれし炎将・マーズ — FFでナイト3体召喚→兵士が出るたび自身+1/+0で疾走4点（自動は素の攻撃力1のみ）。進化6 / 超進化8（追加ナイト込み）
   { id: "10824120", leaderDamage: 4, stormDamage: 4, stormBreakdownMax: [8, 6, 4], condition: "疾走" },
   // 早鐘の歓喜・アルフィード — 疾走は進化時のみ。素出しは打点なし。進化で攻撃力1+2=3点
@@ -51,4 +56,30 @@ window.SHADOWVERSE_CARD_OVERRIDES = [
   { id: "10814120", leaderDamage: 0, stormDamage: 0, burnDamage: 0, evolveEffectLeaderDamage: 0, displayCard: null, condition: "" },
   // 飛躍の姉妹・ベルディリア＆カステル — 超進化でクレスト付与＋FFで超進化フォロワー召喚。クレストでそれが「1ターンに2回攻撃」を得て、フォロワー2体を破壊すると超進化追撃で相手リーダーに2点。超進化前提
   { id: "10864110", leaderDamage: 2, evolveEffectLeaderDamage: 2, requiresEvolve: true, requiresSuperEvolve: true, condition: "超進化 / 超進化追撃×2（フォロワー2体破壊）" },
+
+  // === アズヴォルト・レヴナント（第9弾 / set9）打点補正 ===
+  // 『戦慄の海賊旗』はカウントダウン・アミュレット。ラストワードの2点は「置いたターンの打点」
+  // ではないため、旗を出すだけのフォロワー／スペルはリーサル候補から外す。
+  { id: "10921110", leaderDamage: 0, burnDamage: 0, displayCard: null, condition: "" }, // 海域の斥候
+  { id: "10922110", leaderDamage: 0, burnDamage: 0, displayCard: null, condition: "" }, // 渦潮の砲手
+  { id: "10923310", leaderDamage: 0, burnDamage: 0, displayCard: null, condition: "" }, // アージュドール
+  { id: "10923110", leaderDamage: 0, burnDamage: 0, displayCard: null, condition: "" }, // 波濤の副船長
+  // 逆行の咎人・バルバロス — 疾走4点は確定。旗のカウント-5で追加の2点が入り得るが盤面依存なのでバーンには数えない
+  { id: "10924110", burnDamage: 0, condition: "疾走" },
+  // 煙管の咎人・マガチヨ — 疾走は【超進化時】のみ。ターン6未満では打点0
+  { id: "10914110", requiresSuperEvolve: true, condition: "超進化" },
+  // 鉄鎖の繋がり — リーダーすべてに1、エンハンス4で2回＝2点。自動検出はフォロワー打点3を拾って3点になっていた
+  { id: "10952310", leaderDamage: 2, burnDamage: 2, effectiveCost: 4, condition: "エンハンス4" },
+  // 激烈の副総長 — FFで3点、超進化時にさらに1点で合計4点
+  { id: "10953110", evolveEffectLeaderDamage: 4, condition: "超進化" },
+  // ナイフストリンガー — FFで人形2体を出し、人形が出るたび1点＝2点
+  { id: "10972120", leaderDamage: 2, burnDamage: 2, evolveEffectLeaderDamage: 2 },
+  // 翼天の変貌・オルメリオ — 『ホーリーファルコン』はアミュレット破壊時の3番目の能力でしか出ず、
+  // 直接打点として数えられない
+  { id: "10964120", leaderDamage: 0, stormDamage: 0, displayCard: null, condition: "" },
+  // 竜の咎人系 — 疾走は「直前の自分のターンにフォロワーがリーダーを攻撃していた」条件付き
+  { id: "10941110", condition: "疾走（前ターンにリーダーを攻撃）" }, // 寸裂の盗人
+  { id: "10944110", condition: "疾走（前ターンにリーダーを攻撃）" }, // 穿孔の咎人・アンテマリア
+  // 鋳鉄の腹心 — 疾走はデッキに重複カードがない場合のみ
+  { id: "10973110", condition: "疾走（デッキに重複なし）" },
 ];
