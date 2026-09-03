@@ -135,8 +135,10 @@ function enhanceCost(text) {
 }
 
 function repeatedSegments(text) {
-  return [...text.matchAll(/Do this (\d+) times:\s*"([^"]+)"/gi)].map((match) => ({
-    count: Number(match[1]),
+  // 「Do it N times instead」（エンハンス等での回数増加）は最大回数として扱う。
+  const instead = firstNumber(/Do it (\d+) times instead/i, text);
+  return [...text.matchAll(/Do this (\d+) times?:\s*"([^"]+)"/gi)].map((match) => ({
+    count: Math.max(Number(match[1]), instead),
     text: match[2],
   }));
 }
@@ -153,7 +155,9 @@ function directLeaderDamage(text, includeYourLeader = false) {
     /(\d+) damage to a random enemy(?! follower)/gi,
     /Deal (\d+) damage to all enemies/gi,
     /Deal (\d+) damage split between all enemies/gi,
+    /(\d+) damage to [^.。"]{0,60}both leaders/gi,
     /相手のリーダーに(\d+)ダメージ/g,
+    /リーダーすべてに(\d+)ダメージ/g,
     /相手の場のフォロワーか相手のリーダーからランダム\d*枚に(\d+)ダメージ/g,
     /相手すべてに(\d+)ダメージ/g,
     /相手すべてに(?:割りふって)?(\d+)ダメージ/g,
